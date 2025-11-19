@@ -8,7 +8,7 @@ const services = [
     description:
       'Expert guidance through every step of buying or selling your property. We handle negotiations, paperwork, and ensure the best deal for you.',
     icon: (
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
         <polyline points="9 22 9 12 15 12 15 22" />
       </svg>
@@ -18,7 +18,7 @@ const services = [
     title: 'Property Valuation',
     description: 'Accurate market analysis and valuations with the latest neighborhood data so you can price with confidence.',
     icon: (
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
         <circle cx="12" cy="10" r="3" />
       </svg>
@@ -28,7 +28,7 @@ const services = [
     title: 'Investment Consulting',
     description: 'Strategic advice for income properties, 1031 exchanges, and portfolio diversification tailored to your goals.',
     icon: (
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
         <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
       </svg>
     )
@@ -37,32 +37,11 @@ const services = [
     title: 'Property Management',
     description: 'Tenant screening, rent collection, and maintenance coordination handled by our dedicated management team.',
     icon: (
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
         <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
         <line x1="16" y1="2" x2="16" y2="6" />
         <line x1="8" y1="2" x2="8" y2="6" />
         <line x1="3" y1="10" x2="21" y2="10" />
-      </svg>
-    )
-  },
-  {
-    title: '24/7 Support',
-    description: 'Questions pop up anytime. Our concierge-style support team is available day and night.',
-    icon: (
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-      </svg>
-    )
-  },
-  {
-    title: 'Legal Assistance',
-    description: 'We partner with trusted attorneys to review contracts, disclosures, and closing documents.',
-    icon: (
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-        <polyline points="14 2 14 8 20 8" />
-        <line x1="16" y1="13" x2="8" y2="13" />
-        <line x1="16" y1="17" x2="8" y2="17" />
       </svg>
     )
   }
@@ -86,24 +65,6 @@ const testimonials = [
     role: 'First-Time Buyer',
     initials: 'ER',
     text: 'As a first-time buyer, I was nervous about the process. They guided me through every step and answered every question.'
-  },
-  {
-    name: 'Robert Wilson',
-    role: 'Investor',
-    initials: 'RW',
-    text: 'Invested in multiple properties through them. Their market insights and investment advice have been invaluable.'
-  },
-  {
-    name: 'Lisa Thompson',
-    role: 'Home Buyer',
-    initials: 'LT',
-    text: 'The attention to detail and personalized service exceeded all expectations. They truly care about their clients.'
-  },
-  {
-    name: 'Michael Chen',
-    role: 'Relocating Professional',
-    initials: 'MC',
-    text: 'Relocated from another state and they made finding a home so easy with virtual tours and proactive communication.'
   }
 ]
 
@@ -137,7 +98,7 @@ const sortOptions = [
 const agentProfile = {
   name: 'Raman Dhiman',
   designation: 'Broker',
-  brokerage: 'RE/MAX Gold Realty Inc., Brokerage',
+  brokerage: 'RE/MAX Gold Realty Inc.',
   serviceArea: 'Serving Brampton • Mississauga • GTA',
   licenseNote: 'Each Office Independently Owned and Operated.',
   phone: '647-618-7512',
@@ -224,10 +185,10 @@ function App() {
   const primaryPhoneLink = formatPhoneLink(primaryPhone)
   const logoUrl = realtorDetails.logo || realtorDetails.logoUrl
   const navItems = [
-    { href: '#listings', label: 'Listings' },
+    { href: '#listings', label: 'Properties' },
+    { href: '#valuation', label: 'Valuation' },
     { href: '#services', label: 'Services' },
     { href: '#about', label: 'About' },
-    { href: '#testimonials', label: 'Testimonials' },
     { href: '#contact', label: 'Contact' }
   ]
 
@@ -257,7 +218,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setNavScrolled(window.scrollY > 80)
+      setNavScrolled(window.scrollY > 50)
     }
     handleScroll()
     window.addEventListener('scroll', handleScroll)
@@ -290,7 +251,7 @@ function App() {
           }
         })
       },
-      { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.15 }
     )
 
     const elements = document.querySelectorAll('.fade-in-up')
@@ -379,37 +340,38 @@ function App() {
   return (
     <div className="app">
       <div className="nav-top-bar">
-        <div className="nav-brokerage">{realtorDetails.brokerage}</div>
-        <div className="nav-top-links">
-          {primaryPhone && (
-            <a href={primaryPhoneLink} aria-label="Call Raman Dhiman">
-              📞 {primaryPhone}
-            </a>
-          )}
-          {realtorDetails.email && (
-            <>
-              <span>•</span>
-              <a href={`mailto:${realtorDetails.email}`} aria-label="Email Raman Dhiman">
-                ✉️ {realtorDetails.email}
+        <div className="container">
+          <div className="nav-brokerage">{realtorDetails.brokerage}</div>
+          <div className="nav-top-links">
+            {primaryPhone && (
+              <a href={primaryPhoneLink} aria-label="Call Raman Dhiman">
+                <span style={{ marginRight: '0.5rem' }}>📞</span> {primaryPhone}
               </a>
-            </>
-          )}
+            )}
+            {realtorDetails.email && (
+              <a href={`mailto:${realtorDetails.email}`} aria-label="Email Raman Dhiman">
+                <span style={{ marginRight: '0.5rem' }}>✉️</span> {realtorDetails.email}
+              </a>
+            )}
+          </div>
         </div>
       </div>
+      
       <nav className={`navbar ${navScrolled ? 'navbar-scrolled' : ''}`}>
         <div className="container">
           <div className="nav-content">
-            <div className="nav-brand">
+            <a href="#" className="nav-brand">
               {logoUrl ? (
                 <img src={logoUrl} alt={`${realtorDetails.name} logo`} className="brand-logo" />
               ) : (
                 <div className="brand-icon">RD</div>
               )}
-              <div>
-                <div className="brand-title">{realtorDetails.name}</div>
+              <div className="brand-info">
+                <h1>{realtorDetails.name}</h1>
                 <div className="brand-tagline">{realtorDetails.designation}</div>
               </div>
-            </div>
+            </a>
+
             <button
               className={`nav-toggle ${menuOpen ? 'open' : ''}`}
               type="button"
@@ -420,6 +382,7 @@ function App() {
               <span />
               <span />
             </button>
+
             <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
               {navItems.map((item) => (
                 <a
@@ -431,131 +394,94 @@ function App() {
                 </a>
               ))}
             </div>
+            
             <div className="nav-cta">
               {primaryPhone && (
-                <a className="btn btn-primary btn-pill" href={primaryPhoneLink}>
-                  Call Raman
+                <a className="btn btn-primary" href={primaryPhoneLink}>
+                  Call Now
                 </a>
               )}
-              <a className="btn btn-outline btn-pill" href="#contact">
-                Book a Meeting
+              <a className="btn btn-outline-dark" href="#contact">
+                Book Consult
               </a>
             </div>
           </div>
         </div>
       </nav>
 
-      <header className="hero fade-in-up">
-        <div className="hero-overlay" />
-        <div className="container">
-          <div className="hero-content">
-            <p className="hero-tagline">{realtorDetails.brokerage}</p>
-            <h1 className="hero-title">Move with confidence with {realtorDetails.name}</h1>
-            <p className="hero-subtitle">
+      <header className="hero">
+        <div className="hero-bg">
+          <div className="hero-overlay" />
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1920" alt="Luxury Home" />
+        </div>
+        <div className="hero-container">
+          <div className="hero-content fade-in-up">
+            <div className="hero-subtitle">Experience Excellence</div>
+            <h1 className="hero-title">Move with Confidence</h1>
+            <p className="hero-description">
               {realtorDetails.serviceArea || 'Personalized guidance for buyers, sellers, and investors across the GTA.'}
             </p>
             <div className="hero-actions">
               <a href="#listings" className="btn btn-primary">
                 View Listings
               </a>
-              {primaryPhone && (
-                <a href={primaryPhoneLink} className="btn btn-outline">
-                  Call {realtorDetails.name.split(' ')[0]}
-                </a>
-              )}
+              <a href="#contact" className="btn btn-outline">
+                Contact Me
+              </a>
             </div>
-            <div className="hero-agent-card">
-              <div className="agent-name">{realtorDetails.name}</div>
-              <div className="agent-title">{realtorDetails.designation}</div>
-              {primaryPhone && (
-                <div className="agent-contact">
-                  <span>Direct:</span> <a href={primaryPhoneLink}>{primaryPhone}</a>
-                </div>
-              )}
-              {realtorDetails.officePhone && (
-                <div className="agent-contact">
-                  <span>Office:</span>{' '}
-                  <a href={formatPhoneLink(realtorDetails.officePhone)}>{realtorDetails.officePhone}</a>
-                </div>
-              )}
-              {realtorDetails.licenseNote && <p className="agent-license">{realtorDetails.licenseNote}</p>}
-            </div>
+          </div>
+
+          <div className="hero-lead-form fade-in-up">
+            <h3>Find Your Dream Home</h3>
+            <p>Let us do the searching for you.</p>
+            <form onSubmit={handleContactSubmit}>
+              <input type="text" className="form-input" placeholder="Your Name" required />
+              <input type="email" className="form-input" placeholder="Your Email" required />
+              <input type="tel" className="form-input" placeholder="Your Phone" />
+              <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Get Started</button>
+            </form>
           </div>
         </div>
       </header>
 
       <main>
-        <section id="listings" className="listings-section fade-in-up">
+        <section id="listings" className="section-bg-light fade-in-up">
           <div className="container">
             <div className="section-header">
-              <span className="section-tag">Featured Properties</span>
-              <h2>Curated homes for modern living</h2>
-              <p>Explore luxury homes, investment properties, and hidden gems across the city.</p>
+              <span className="section-tag">Exclusive Properties</span>
+              <h2>Featured Listings</h2>
+              <p>Curated selection of the finest homes for sale in the area.</p>
             </div>
 
-            <div className="search-filters">
-              <div className="search-bar">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <div className="search-bar-container">
+              <div className="search-input-group">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <circle cx="11" cy="11" r="8" />
                   <path d="m21 21-4.35-4.35" />
                 </svg>
                 <input
                   type="text"
-                  placeholder="Search by title, address, or features..."
+                  placeholder="Search by address, neighborhood, or feature..."
                   value={searchTerm}
                   onChange={(event) => setSearchTerm(event.target.value)}
                 />
               </div>
-              <div className="filter-controls">
+              
+              <div className="filter-group">
                 <select value={typeFilter} onChange={(event) => setTypeFilter(event.target.value)} className="filter-select">
                   <option value="">All Types</option>
                   {propertyTypes.map((type) => (
-                    <option key={type} value={type}>
-                      {type}
-                    </option>
-                  ))}
-                </select>
-                <select value={bedroomsFilter} onChange={(event) => setBedroomsFilter(event.target.value)} className="filter-select">
-                  {bedroomOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
+                    <option key={type} value={type}>{type}</option>
                   ))}
                 </select>
                 <select value={priceFilter} onChange={(event) => setPriceFilter(event.target.value)} className="filter-select">
                   {priceOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
+                    <option key={option.value} value={option.value}>{option.label}</option>
                   ))}
                 </select>
-                <select value={sortOption} onChange={(event) => setSortOption(event.target.value)} className="filter-select">
-                  {sortOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-                <button type="button" className="btn-clear" onClick={handleClearFilters}>
-                  Clear Filters
+                <button type="button" className="btn btn-secondary" onClick={handleClearFilters} style={{ padding: '0.875rem 1.5rem' }}>
+                  Clear
                 </button>
-              </div>
-              <div className="results-count">
-                <span>
-                  {filteredListings.length > 0 ? (
-                    <>
-                      Showing <strong>{filteredListings.length}</strong> properties
-                    </>
-                  ) : (
-                    <strong>{resultsText}</strong>
-                  )}
-                </span>
-                {usingFallbackData && (
-                  <div className="info-state">
-                    Showing offline fallback data. Start a local server (for example, <code>npm run dev</code> or
-                    <code>npx serve dist</code>) so the latest <code>public/listings.json</code> file can be loaded.
-                  </div>
-                )}
               </div>
             </div>
 
@@ -564,11 +490,7 @@ function App() {
               <div className="error-state">
                 <p>{error}</p>
                 {isFileProtocol && (
-                  <p>
-                    Browsers block `fetch` when a site is opened directly from the file system. Please run{' '}
-                    <code>npm run dev</code> (or serve the <code>dist</code> folder with any static server) so the data
-                    file can be requested over HTTP.
-                  </p>
+                  <p>Please run <code>npm run dev</code> to view listings.</p>
                 )}
               </div>
             )}
@@ -577,52 +499,38 @@ function App() {
               {!loading && filteredListings.length === 0 && <p className="empty-state">{resultsText}</p>}
               {filteredListings.map((listing) => (
                 <article key={listing.id} className="listing-card fade-in-up" onClick={() => setSelectedListing(listing)}>
-                  <img
-                    src={listing.image}
-                    alt={listing.title}
-                    className="listing-image"
-                    onError={(event) => {
-                      event.currentTarget.src = 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800'
-                    }}
-                  />
+                  <div className="listing-image-container">
+                    <div className="listing-tag">{listing.type}</div>
+                    <div className="listing-status">For Sale</div>
+                    <img
+                      src={listing.image}
+                      alt={listing.title}
+                      className="listing-image"
+                      onError={(event) => {
+                        event.currentTarget.src = 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800'
+                      }}
+                    />
+                  </div>
                   <div className="listing-content">
-                    <div className="listing-header">
-                      <div className="listing-price">{formatPrice(listing.price)}</div>
-                      <span className="listing-type">{listing.type}</span>
-                    </div>
+                    <div className="listing-price">{formatPrice(listing.price)}</div>
                     <h3 className="listing-title">{listing.title}</h3>
                     <div className="listing-address">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                         <circle cx="12" cy="10" r="3" />
                       </svg>
                       {listing.address}
                     </div>
-                    <p className="listing-description">{listing.description}</p>
-                    <div className="listing-details">
-                      <div className="listing-detail">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                          <polyline points="9 22 9 12 15 12 15 22" />
-                        </svg>
-                        <span>{listing.bedrooms} Bed</span>
-                      </div>
-                      <div className="listing-detail">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                          <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                          <line x1="9" y1="3" x2="9" y2="21" />
-                        </svg>
-                        <span>{listing.bathrooms} Bath</span>
-                      </div>
-                      <div className="listing-detail">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                          <line x1="16" y1="2" x2="16" y2="6" />
-                          <line x1="8" y1="2" x2="8" y2="6" />
-                          <line x1="3" y1="10" x2="21" y2="10" />
-                        </svg>
-                        <span>{formatNumber(listing.sqft)} sqft</span>
-                      </div>
+                  </div>
+                  <div className="listing-meta">
+                    <div className="meta-item">
+                      <span>{listing.bedrooms}</span> Beds
+                    </div>
+                    <div className="meta-item">
+                      <span>{listing.bathrooms}</span> Baths
+                    </div>
+                    <div className="meta-item">
+                      <span>{formatNumber(listing.sqft)}</span> SqFt
                     </div>
                   </div>
                 </article>
@@ -631,12 +539,28 @@ function App() {
           </div>
         </section>
 
-        <section id="services" className="services-section fade-in-up">
+        <section id="valuation" className="valuation-section fade-in-up">
+          <div className="hero-bg" style={{ opacity: 0.15 }}>
+             <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?w=1920" alt="Background" />
+          </div>
+          <div className="container valuation-content">
+             <div className="section-header">
+                <span className="section-tag">Sellers</span>
+                <h2>What is your home worth?</h2>
+                <p>Get a complimentary, comprehensive home valuation report including recent sales in your area.</p>
+             </div>
+             <a href="#contact" className="btn btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>
+                Request Free Valuation
+             </a>
+          </div>
+        </section>
+
+        <section id="services" className="fade-in-up">
           <div className="container">
             <div className="section-header">
-              <span className="section-tag">Our Services</span>
-              <h2>Full-service real estate, modernized</h2>
-              <p>We handle everything from pricing strategy and marketing through closing day (and beyond).</p>
+              <span className="section-tag">Our Expertise</span>
+              <h2>Full-Service Real Estate</h2>
+              <p>We handle everything from pricing strategy and marketing through closing day and beyond.</p>
             </div>
             <div className="services-grid">
               {services.map((service) => (
@@ -650,95 +574,40 @@ function App() {
           </div>
         </section>
 
-        <section id="about" className="about-section fade-in-up">
+        <section id="about" className="section-bg-light fade-in-up">
           <div className="container">
-            <div className="about-content">
-              <div className="about-text">
+            <div className="section-header">
                 <span className="section-tag">About Us</span>
-                <h2>Your trusted real estate partner</h2>
-                <p className="lead">
-                  With over 15 years of experience, we have built a reputation for excellence, integrity, and results. Our
-                  team combines deep market expertise with modern technology to deliver an elevated buying and selling
-                  experience.
+                <h2>Your Trusted Partner</h2>
+                <p className="lead" style={{ maxWidth: '800px', margin: '0 auto' }}>
+                  With over 15 years of experience, we have built a reputation for excellence, integrity, and results. 
+                  We combine deep market expertise with modern technology.
                 </p>
-
-                <div className="about-features">
-                  {[
-                    {
-                      title: 'Proven Track Record',
-                      text: 'Closed 500+ transactions with a 98% satisfaction rate.',
-                      icon: (
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                          <polyline points="22 4 12 14.01 9 11.01" />
-                        </svg>
-                      )
-                    },
-                    {
-                      title: 'Expert Team',
-                      text: 'Certified agents with deep neighborhood knowledge.',
-                      icon: (
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                          <circle cx="9" cy="7" r="4" />
-                          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                        </svg>
-                      )
-                    },
-                    {
-                      title: 'Full Transparency',
-                      text: 'Clear communication and honest guidance at every step.',
-                      icon: (
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                        </svg>
-                      )
-                    },
-                    {
-                      title: 'Market Leadership',
-                      text: 'Consistently ranked among the top agencies in the region.',
-                      icon: (
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-                        </svg>
-                      )
-                    }
-                  ].map((feature) => (
-                    <div key={feature.title} className="about-feature">
-                      <div className="feature-icon">{feature.icon}</div>
-                      <div>
-                        <h4>{feature.title}</h4>
-                        <p>{feature.text}</p>
-                      </div>
-                    </div>
-                  ))}
+            </div>
+            
+            <div className="stats">
+              {[
+                { label: 'Active Listings', value: listings.length ? `${listings.length}` : '0' },
+                { label: 'Happy Clients', value: '500+' },
+                { label: 'Years Experience', value: '15+' },
+                { label: 'Satisfaction Rate', value: '98%' }
+              ].map((stat) => (
+                <div key={stat.label} className="stat-item">
+                  <div className="stat-number" data-value={stat.value}>
+                    {stat.value}
+                  </div>
+                  <div className="stat-label">{stat.label}</div>
                 </div>
-
-                <div className="stats">
-                  {[
-                    { label: 'Active Listings', value: listings.length ? `${listings.length}` : '0' },
-                    { label: 'Happy Clients', value: '500+' },
-                    { label: 'Years Experience', value: '15+' },
-                    { label: 'Satisfaction Rate', value: '98%' }
-                  ].map((stat) => (
-                    <div key={stat.label} className="stat-item">
-                      <div className="stat-number" data-value={stat.value}>
-                        {stat.value}
-                      </div>
-                      <div className="stat-label">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        <section id="testimonials" className="testimonials-section fade-in-up">
+        <section id="testimonials" className="fade-in-up">
           <div className="container">
             <div className="section-header">
               <span className="section-tag">Testimonials</span>
-              <h2>What our clients say</h2>
-              <p>We are proud to partner with amazing clients and deliver exceptional results.</p>
+              <h2>Client Success Stories</h2>
             </div>
             <div className="testimonials-grid">
               {testimonials.map((testimonial) => (
@@ -747,8 +616,8 @@ function App() {
                   <p className="testimonial-text">"{testimonial.text}"</p>
                   <div className="testimonial-author">
                     <div className="author-avatar">{testimonial.initials}</div>
-                    <div>
-                      <div className="author-name">{testimonial.name}</div>
+                    <div className="author-info">
+                      <h4>{testimonial.name}</h4>
                       <div className="author-role">{testimonial.role}</div>
                     </div>
                   </div>
@@ -761,15 +630,15 @@ function App() {
         <section id="contact" className="contact-section fade-in-up">
           <div className="container">
             <div className="section-header">
-              <span className="section-tag">Contact</span>
-              <h2>Let us open the door for you</h2>
+              <span className="section-tag">Get in Touch</span>
+              <h2>Let's Discuss Your Goals</h2>
               <p>Call, email, or send us a note and our team will respond within one business day.</p>
             </div>
             <div className="contact-wrapper">
               <div className="contact-info">
                 <div className="contact-item">
                   <div className="contact-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                     </svg>
                   </div>
@@ -777,44 +646,29 @@ function App() {
                     <h3>Phone</h3>
                     <ul className="contact-list">
                       {primaryPhone && (
-                        <li>
-                          <span>Direct:</span> <a href={primaryPhoneLink}>{primaryPhone}</a>
-                        </li>
+                        <li><a href={primaryPhoneLink}>{primaryPhone}</a></li>
                       )}
                       {realtorDetails.officePhone && (
-                        <li>
-                          <span>Office:</span>{' '}
-                          <a href={formatPhoneLink(realtorDetails.officePhone)}>{realtorDetails.officePhone}</a>
-                        </li>
-                      )}
-                      {realtorDetails.officePhoneAlt && (
-                        <li>
-                          <span>Office 2:</span>{' '}
-                          <a href={formatPhoneLink(realtorDetails.officePhoneAlt)}>{realtorDetails.officePhoneAlt}</a>
-                        </li>
+                        <li><a href={formatPhoneLink(realtorDetails.officePhone)}>Office: {realtorDetails.officePhone}</a></li>
                       )}
                     </ul>
-                    <span className="contact-note">Always available for calls or WhatsApp</span>
                   </div>
                 </div>
                 <div className="contact-item">
                   <div className="contact-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                       <polyline points="22,6 12,13 2,6" />
                     </svg>
                   </div>
                   <div>
                     <h3>Email</h3>
-                    <p>
-                      <a href={`mailto:${realtorDetails.email}`}>{realtorDetails.email}</a>
-                    </p>
-                    <span className="contact-note">We respond within 24 hours</span>
+                    <p><a href={`mailto:${realtorDetails.email}`}>{realtorDetails.email}</a></p>
                   </div>
                 </div>
                 <div className="contact-item">
                   <div className="contact-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                       <circle cx="12" cy="10" r="3" />
                     </svg>
@@ -822,13 +676,11 @@ function App() {
                   <div>
                     <h3>Address</h3>
                     <p>{realtorDetails.address}</p>
-                    <span className="contact-note">Visit our boutique office</span>
                   </div>
                 </div>
               </div>
 
               <div className="contact-form-wrapper">
-                <h3>Send us a message</h3>
                 <form className="contact-form" onSubmit={handleContactSubmit}>
                   <div className="form-row">
                     <div className="form-group">
@@ -840,34 +692,19 @@ function App() {
                       <input id="form-email" name="email" type="email" required />
                     </div>
                   </div>
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="form-phone">Phone</label>
-                      <input id="form-phone" name="phone" type="tel" />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="form-subject">Subject</label>
-                      <select id="form-subject" name="subject" required defaultValue="">
-                        <option value="" disabled>
-                          Select a subject
-                        </option>
-                        <option value="buying">Buying a Property</option>
-                        <option value="selling">Selling a Property</option>
-                        <option value="renting">Renting</option>
-                        <option value="investment">Investment Consultation</option>
-                        <option value="other">Other Inquiry</option>
-                      </select>
-                    </div>
+                  <div className="form-group">
+                    <label htmlFor="form-phone">Phone</label>
+                    <input id="form-phone" name="phone" type="tel" />
                   </div>
                   <div className="form-group">
                     <label htmlFor="form-message">Message</label>
-                    <textarea id="form-message" name="message" rows="5" required />
+                    <textarea id="form-message" name="message" rows="4" required />
                   </div>
                   <button type="submit" className="btn btn-primary">
                     Send Message
                   </button>
                   {formStatus === 'success' && (
-                    <div className="form-message-success">Thank you! Your message has been sent successfully.</div>
+                    <div className="form-message-success">Message sent successfully!</div>
                   )}
                 </form>
               </div>
@@ -878,14 +715,45 @@ function App() {
 
       <footer className="footer">
         <div className="container">
-          <div className="footer-content">
-            <div className="footer-logo">
-              <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M16 2L4 8V24L16 30L28 24V8L16 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <span>{realtorDetails.name}</span>
+          <div className="footer-grid">
+            <div className="footer-col">
+              <div className="footer-logo">
+                <span>{realtorDetails.name}</span>
+              </div>
+              <p className="footer-text">
+                Dedicated to providing exceptional service and expertise for all your real estate needs.
+              </p>
+              <p className="footer-text">{realtorDetails.brokerage}</p>
             </div>
-            <p>&copy; {new Date().getFullYear()} {realtorDetails.name}. All rights reserved.</p>
+            <div className="footer-col">
+              <h3>Quick Links</h3>
+              <ul className="footer-links">
+                <li><a href="#listings">Properties</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+            </div>
+            <div className="footer-col">
+              <h3>Services</h3>
+              <ul className="footer-links">
+                <li><a href="#valuation">Home Valuation</a></li>
+                <li><a href="#">Buying a Home</a></li>
+                <li><a href="#">Selling a Home</a></li>
+                <li><a href="#">Property Management</a></li>
+              </ul>
+            </div>
+            <div className="footer-col">
+              <h3>Contact</h3>
+              <ul className="footer-links">
+                <li>{primaryPhone}</li>
+                <li>{realtorDetails.email}</li>
+                <li>{realtorDetails.address}</li>
+              </ul>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <p>&copy; {new Date().getFullYear()} {realtorDetails.name}. {realtorDetails.licenseNote} All rights reserved.</p>
           </div>
         </div>
       </footer>
@@ -907,7 +775,7 @@ function App() {
             <div className="modal-header">
               <h2 className="modal-title">{selectedListing.title}</h2>
               <div className="modal-address">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                   <circle cx="12" cy="10" r="3" />
                 </svg>
@@ -931,10 +799,6 @@ function App() {
               <div className="modal-detail-item">
                 <div className="modal-detail-label">Type</div>
                 <div className="modal-detail-value">{selectedListing.type}</div>
-              </div>
-              <div className="modal-detail-item">
-                <div className="modal-detail-label">Year Built</div>
-                <div className="modal-detail-value">{selectedListing.yearBuilt}</div>
               </div>
             </div>
             <div className="modal-description">
@@ -961,4 +825,3 @@ function App() {
 }
 
 export default App
-
