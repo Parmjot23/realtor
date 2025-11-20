@@ -1029,11 +1029,26 @@ section {
 
   /* Navigation */
   .nav-content {
-    height: 70px;
+    height: 64px;
+    padding: 0.5rem 0;
+  }
+  
+  .brand-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .brand-info h1 {
+    font-size: 1.05rem;
+  }
+  
+  .brand-tagline {
+    font-size: 0.7rem;
   }
   
   .nav-links.open {
-    top: 70px;
+    top: 64px;
     padding: 1.5rem;
   }
 
@@ -1041,15 +1056,53 @@ section {
   .hero {
     min-height: auto;
     height: auto;
-    padding: 6rem 0 4rem; /* More top padding for nav */
+    padding: 4rem 0 3rem;
+  }
+  
+  .hero-container {
+    padding: 0 16px;
+    gap: 1.5rem;
   }
   
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+  }
+  
+  .hero-description {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .hero-actions .btn {
+    width: 100%;
   }
   
   .hero-lead-form {
     padding: 1.5rem;
+    margin-top: 2rem;
+    max-width: 100%;
+  }
+  
+  .hero-lead-form h3 {
+    font-size: 1.35rem;
+  }
+  
+  .hero-lead-form p {
+    font-size: 0.9rem;
+  }
+  
+  .hero-lead-form .form-input {
+    padding: 0.75rem;
   }
 
   /* Stats */
@@ -1134,26 +1187,67 @@ section {
   }
   
   .modal-content {
-    max-height: 90vh;
+    max-height: 95vh;
     border-radius: 16px 16px 0 0;
     grid-template-columns: 1fr;
-    grid-template-rows: 250px 1fr;
+    grid-template-rows: auto;
+    overflow-y: auto;
   }
   
   .modal-image-col {
-    height: 100%;
+    height: 250px;
+    position: relative;
+  }
+  
+  .modal-close {
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.25rem;
   }
   
   .modal-info-col {
     padding: 1.5rem;
+    gap: 1.5rem;
+  }
+  
+  .modal-header {
+    padding-bottom: 1rem;
   }
   
   .modal-title {
+    font-size: 1.35rem;
+  }
+  
+  .modal-price {
     font-size: 1.5rem;
+  }
+  
+  .modal-address {
+    font-size: 0.95rem;
   }
   
   .modal-stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+  
+  .modal-stat-value {
+    font-size: 1.1rem;
+  }
+  
+  .modal-stat-label {
+    font-size: 0.75rem;
+  }
+  
+  .modal-form-container {
+    padding: 1.5rem;
+  }
+  
+  .modal-form-container h4 {
+    font-size: 1.1rem;
   }
 }
 
