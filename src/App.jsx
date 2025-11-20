@@ -68,6 +68,82 @@ const testimonials = [
   }
 ]
 
+const propertyCategories = [
+  { label: 'Residential', description: 'Detached, Semi, and Townhomes', anchor: '#listings', image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800' },
+  { label: 'Condos', description: 'High-rise & Boutique living', anchor: '#listings', image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800' },
+  { label: 'Commercial', description: 'Retail, Office & Industrial', anchor: '#listings', image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800' },
+  { label: 'Pre-Construction', description: 'VIP Access & Incentives', anchor: '#preconstruction', image: 'https://images.unsplash.com/photo-1590247813693-5541d1c609fd?w=800' }
+]
+
+const calculatorTools = [
+  {
+    title: 'Mortgage Calculator',
+    description: 'Estimate your monthly payments and compare scenarios.',
+    tag: 'Popular'
+  },
+  {
+    title: 'Land Transfer Tax',
+    description: 'See Ontario & Toronto LTT with first-time buyer rebates.',
+    tag: 'Ontario'
+  },
+  {
+    title: 'CMHC Insurance',
+    description: 'Understand default insurance premiums for high-ratio mortgages.',
+    tag: 'CMHC'
+  }
+]
+
+const visitorTools = [
+  {
+    title: 'New Listing Alert',
+    text: 'Get listings that match your criteria the moment they hit MLS.',
+    action: 'Create Alert'
+  },
+  {
+    title: 'School Rankings',
+    text: 'Access Fraser Institute & EQAO scores to select the right neighbourhood.',
+    action: 'View Rankings'
+  },
+  {
+    title: 'Market Watch Report',
+    text: 'Monthly TRREB stats delivered to your inbox.',
+    action: 'Download Report'
+  }
+]
+
+const buyerGuides = [
+  'Buyer’s Guide PDF',
+  'First-Time Buyer Checklist',
+  'RRSP Home Buyer’s Plan',
+  'Mortgage For Your Home',
+  'GST/HST New Housing Rebate'
+]
+
+const sellerGuides = [
+  'Seller’s Guide PDF',
+  'Preparing Your Home',
+  'Listing Strategy Call',
+  'Market Evaluation Request'
+]
+
+const usefulLinks = [
+  'Equifax Canada',
+  'Land Registry',
+  'Land Transfer Tax MPAC',
+  'Bank of Canada',
+  'Government of Ontario',
+  'Region of Peel'
+]
+
+const cityLinks = [
+  'City of Mississauga',
+  'City of Toronto',
+  'City of Cambridge',
+  'City of Kitchener',
+  'City of Brampton',
+  'Halton Region'
+]
+
 const bedroomOptions = [
   { label: 'Any Bedrooms', value: '' },
   { label: 'Studio', value: '0' },
@@ -179,6 +255,12 @@ function App() {
   const [navScrolled, setNavScrolled] = useState(false)
   const [usingFallbackData, setUsingFallbackData] = useState(true)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeTab, setActiveTab] = useState('overview')
+  
+  // Mortgage calculator state
+  const [downPayment, setDownPayment] = useState(20)
+  const [interestRate, setInterestRate] = useState(6.5)
+  const [loanTerm, setLoanTerm] = useState(30)
   const isFileProtocol = typeof window !== 'undefined' && window.location.protocol === 'file:'
   const realtorDetails = { ...agentProfile, ...(realtor || {}) }
   const primaryPhone = realtorDetails.phone || realtorDetails.phonePrimary
@@ -262,7 +344,7 @@ function App() {
 
   const propertyTypes = useMemo(() => {
     const values = Array.from(new Set(listings.map((listing) => listing.type))).sort()
-    return ['House', 'Condo', 'Townhouse', 'Loft', 'Studio', 'Penthouse', 'Duplex', ...values]
+    return ['House', 'Condo', 'Condos', 'Townhouse', 'Loft', 'Studio', 'Penthouse', 'Duplex', 'Commercial', 'Pre-Construction', ...values]
       .filter((value, index, array) => array.indexOf(value) === index)
       .sort()
   }, [listings])
@@ -330,6 +412,21 @@ function App() {
     setFormStatus('success')
     event.target.reset()
     setTimeout(() => setFormStatus('idle'), 4000)
+  }
+
+  const calculateMortgage = (price) => {
+    const downPaymentAmount = (price * downPayment) / 100
+    const loanAmount = price - downPaymentAmount
+    const monthlyRate = interestRate / 100 / 12
+    const numberOfPayments = loanTerm * 12
+    
+    if (monthlyRate === 0) return loanAmount / numberOfPayments
+    
+    const monthlyPayment =
+      loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) /
+      (Math.pow(1 + monthlyRate, numberOfPayments) - 1)
+    
+    return monthlyPayment
   }
 
   const resultsText =
@@ -455,6 +552,133 @@ function App() {
       </header>
 
       <main>
+        <section className="discovery-bar fade-in-up">
+          <div className="container">
+            <div className="discovery-grid">
+              {propertyCategories.map((category) => (
+                <a 
+                  key={category.label} 
+                  href={category.anchor} 
+                  className="discovery-card"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    const filterValue = category.label === 'Residential' ? 'House' : category.label === 'Condos' ? 'Condo' : category.label
+                    if (category.label !== 'Pre-Construction') {
+                      setTypeFilter(filterValue)
+                      document.getElementById('listings').scrollIntoView({ behavior: 'smooth' })
+                    } else {
+                      document.getElementById('preconstruction').scrollIntoView({ behavior: 'smooth' })
+                    }
+                  }}
+                  style={{ 
+                    backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.7)), url('${category.image}')`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                  }}
+                >
+                  <div className="discovery-title">{category.label}</div>
+                  <p>{category.description}</p>
+                  <span>Explore →</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="visitor-tools-section fade-in-up">
+          <div className="container visitor-layout">
+            <div className="visitor-column">
+              <span className="section-tag">Visitor Tools</span>
+              <h2>Everything you need to make the right move</h2>
+              <div className="visitor-tool-cards">
+                {visitorTools.map((tool) => (
+                  <article key={tool.title} className="visitor-card">
+                    <h3>{tool.title}</h3>
+                    <p>{tool.text}</p>
+                    <button type="button" className="text-link">{tool.action} →</button>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <div className="visitor-column resources-panel">
+              <div>
+                <h3>Buyer Resources</h3>
+                <ul>
+                  {buyerGuides.map((guide) => (
+                    <li key={guide}>{guide}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3>Seller Resources</h3>
+                <ul>
+                  {sellerGuides.map((guide) => (
+                    <li key={guide}>{guide}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3>Useful Links</h3>
+                <div className="useful-links-grid">
+                  {usefulLinks.map((link) => (
+                    <a key={link} href="#">{link}</a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="preconstruction" className="preconstruction-highlight fade-in-up">
+          <div className="container preconstruction-content">
+            <div>
+              <span className="section-tag">VIP Access</span>
+              <h2>Pre-Construction Opportunities</h2>
+              <p>
+                Gain first access to platinum launches across the GTA with extended deposit structures,
+                capped levies, and exclusive incentives tailored for investors and first-time buyers.
+              </p>
+              <div className="preconstruction-actions">
+                <a href="#contact" className="btn btn-primary">Book a VIP Preview</a>
+                <a href="#listings" className="btn btn-outline-dark">View Projects</a>
+              </div>
+            </div>
+            <div className="preconstruction-stats">
+              <div>
+                <strong>25+</strong>
+                <span>Active Projects</span>
+              </div>
+              <div>
+                <strong>12</strong>
+                <span>Builder Partnerships</span>
+              </div>
+              <div>
+                <strong>$50K+</strong>
+                <span>Average Incentives</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="calculators" className="calculators-section fade-in-up">
+          <div className="container">
+            <div className="section-header">
+              <span className="section-tag">Calculators & Tools</span>
+              <h2>Plan every step with confidence</h2>
+              <p>From mortgage planning to land transfer tax, use our calculators to budget smarter.</p>
+            </div>
+            <div className="calculators-grid">
+              {calculatorTools.map((tool) => (
+                <article key={tool.title} className="calculator-card">
+                  <div className="calculator-badge">{tool.tag}</div>
+                  <h3>{tool.title}</h3>
+                  <p>{tool.description}</p>
+                  <button type="button" className="btn btn-outline-dark">Launch Tool</button>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
         <section id="listings" className="section-bg-light fade-in-up">
           <div className="container">
             <div className="section-header">
@@ -637,6 +861,23 @@ function App() {
           </div>
         </section>
 
+        <section className="city-links-section fade-in-up">
+          <div className="container">
+            <div className="section-header">
+              <span className="section-tag">Communities</span>
+              <h2>Neighbourhoods We Serve</h2>
+              <p>Local insight across Peel, Halton, Waterloo, and the GTA core.</p>
+            </div>
+            <div className="city-links-grid">
+              {cityLinks.map((city) => (
+                <a key={city} href="#listings" className="city-link">
+                  {city}
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="contact" className="contact-section fade-in-up">
           <div className="container">
             <div className="section-header">
@@ -799,60 +1040,204 @@ function App() {
                 </div>
               </div>
 
-              <div className="modal-stats-grid">
-                <div className="modal-stat">
-                  <span className="modal-stat-value">{selectedListing.bedrooms}</span>
-                  <span className="modal-stat-label">Beds</span>
-                </div>
-                <div className="modal-stat">
-                  <span className="modal-stat-value">{selectedListing.bathrooms}</span>
-                  <span className="modal-stat-label">Baths</span>
-                </div>
-                <div className="modal-stat">
-                  <span className="modal-stat-value">{formatNumber(selectedListing.sqft)}</span>
-                  <span className="modal-stat-label">SqFt</span>
-                </div>
-                <div className="modal-stat">
-                  <span className="modal-stat-value">{selectedListing.type}</span>
-                  <span className="modal-stat-label">Type</span>
-                </div>
+              <div className="modal-tabs">
+                <button 
+                  className={`tab-btn ${activeTab === 'overview' ? 'active' : ''}`}
+                  onClick={() => setActiveTab('overview')}
+                >
+                  Overview
+                </button>
+                <button 
+                  className={`tab-btn ${activeTab === 'calculator' ? 'active' : ''}`}
+                  onClick={() => setActiveTab('calculator')}
+                >
+                  Calculator
+                </button>
+                <button 
+                  className={`tab-btn ${activeTab === 'contact' ? 'active' : ''}`}
+                  onClick={() => setActiveTab('contact')}
+                >
+                  Contact
+                </button>
               </div>
 
-              <div className="modal-description">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem', color: 'var(--secondary-color)' }}>Property Overview</h3>
-                <p>{selectedListing.description}</p>
-              </div>
-
-              {selectedListing.features && (
-                <div className="modal-features-container">
-                  <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem', color: 'var(--secondary-color)' }}>Key Features</h3>
-                  <div className="modal-features">
-                    {selectedListing.features.map((feature) => (
-                      <span key={feature} className="feature-tag">
-                        {feature}
-                      </span>
-                    ))}
+              {activeTab === 'overview' && (
+                <>
+                  <div className="modal-stats-grid">
+                    <div className="modal-stat">
+                      <span className="modal-stat-value">{selectedListing.bedrooms}</span>
+                      <span className="modal-stat-label">Beds</span>
+                    </div>
+                    <div className="modal-stat">
+                      <span className="modal-stat-value">{selectedListing.bathrooms}</span>
+                      <span className="modal-stat-label">Baths</span>
+                    </div>
+                    <div className="modal-stat">
+                      <span className="modal-stat-value">{formatNumber(selectedListing.sqft)}</span>
+                      <span className="modal-stat-label">SqFt</span>
+                    </div>
+                    <div className="modal-stat">
+                      <span className="modal-stat-value">{selectedListing.type}</span>
+                      <span className="modal-stat-label">Type</span>
+                    </div>
                   </div>
+
+                  <div className="modal-description">
+                    <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem', color: 'var(--secondary-color)' }}>Property Overview</h3>
+                    <p>{selectedListing.description}</p>
+                  </div>
+
+                  {selectedListing.features && (
+                    <div className="modal-features-container">
+                      <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem', color: 'var(--secondary-color)' }}>Key Features</h3>
+                      <div className="modal-features">
+                        {selectedListing.features.map((feature) => (
+                          <span key={feature} className="feature-tag">
+                            {feature}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+
+              {activeTab === 'calculator' && (
+                <div className="mortgage-calculator">
+                  <h3 style={{ marginBottom: '1.5rem', fontSize: '1.25rem', color: 'var(--secondary-color)' }}>Mortgage Calculator</h3>
+                  
+                  <div className="calculator-result">
+                    <div className="result-label">Estimated Monthly Payment</div>
+                    <div className="result-value">{formatPrice(calculateMortgage(selectedListing.price))}<span>/mo</span></div>
+                  </div>
+
+                  <div className="calculator-inputs">
+                    <div className="calculator-input-group">
+                      <label>Down Payment: {downPayment}%</label>
+                      <input
+                        type="range"
+                        min="0"
+                        max="50"
+                        step="5"
+                        value={downPayment}
+                        onChange={(e) => setDownPayment(Number(e.target.value))}
+                        className="range-slider"
+                      />
+                      <div className="input-value">{formatPrice((selectedListing.price * downPayment) / 100)}</div>
+                    </div>
+
+                    <div className="calculator-input-group">
+                      <label>Interest Rate: {interestRate}%</label>
+                      <input
+                        type="range"
+                        min="3"
+                        max="10"
+                        step="0.5"
+                        value={interestRate}
+                        onChange={(e) => setInterestRate(Number(e.target.value))}
+                        className="range-slider"
+                      />
+                    </div>
+
+                    <div className="calculator-input-group">
+                      <label>Loan Term: {loanTerm} years</label>
+                      <input
+                        type="range"
+                        min="10"
+                        max="30"
+                        step="5"
+                        value={loanTerm}
+                        onChange={(e) => setLoanTerm(Number(e.target.value))}
+                        className="range-slider"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="calculator-breakdown">
+                    <div className="breakdown-item">
+                      <span>Home Price:</span>
+                      <strong>{formatPrice(selectedListing.price)}</strong>
+                    </div>
+                    <div className="breakdown-item">
+                      <span>Down Payment ({downPayment}%):</span>
+                      <strong>{formatPrice((selectedListing.price * downPayment) / 100)}</strong>
+                    </div>
+                    <div className="breakdown-item">
+                      <span>Loan Amount:</span>
+                      <strong>{formatPrice(selectedListing.price - (selectedListing.price * downPayment) / 100)}</strong>
+                    </div>
+                    <div className="breakdown-item">
+                      <span>Total Interest:</span>
+                      <strong>{formatPrice((calculateMortgage(selectedListing.price) * loanTerm * 12) - (selectedListing.price - (selectedListing.price * downPayment) / 100))}</strong>
+                    </div>
+                  </div>
+
+                  <p className="calculator-disclaimer">
+                    * This is an estimate only. Actual payments may vary based on property taxes, insurance, HOA fees, and other factors.
+                  </p>
                 </div>
               )}
 
-              <div className="modal-form-container">
-                <h4>Interested in this property?</h4>
-                <form onSubmit={handleContactSubmit} className="contact-form" style={{ gap: '1rem' }}>
-                   <div className="form-row" style={{ gap: '1rem' }}>
-                      <input type="text" placeholder="Name" className="form-input" style={{ margin: 0, padding: '0.75rem' }} required />
-                      <input type="tel" placeholder="Phone" className="form-input" style={{ margin: 0, padding: '0.75rem' }} required />
-                   </div>
-                   <textarea 
-                      className="form-input" 
-                      placeholder="I'm interested in this property..." 
-                      rows="3" 
-                      style={{ margin: 0, padding: '0.75rem' }} 
-                      defaultValue={`Hi, I'm interested in ${selectedListing.address}. Please contact me.`}
-                   />
-                   <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Schedule Viewing</button>
-                </form>
-              </div>
+              {activeTab === 'contact' && (
+                <div className="modal-form-container">
+                  <h4>Interested in this property?</h4>
+                  <form onSubmit={handleContactSubmit} className="contact-form" style={{ gap: '1rem' }}>
+                     <div className="form-row" style={{ gap: '1rem' }}>
+                        <input type="text" placeholder="Name" className="form-input" style={{ margin: 0, padding: '0.75rem' }} required />
+                        <input type="tel" placeholder="Phone" className="form-input" style={{ margin: 0, padding: '0.75rem' }} required />
+                     </div>
+                     <textarea 
+                        className="form-input" 
+                        placeholder="I'm interested in this property..." 
+                        rows="3" 
+                        style={{ margin: 0, padding: '0.75rem' }} 
+                        defaultValue={`Hi, I'm interested in ${selectedListing.address}. Please contact me.`}
+                     />
+                     <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Schedule Viewing</button>
+                     {formStatus === 'success' && (
+                       <div className="form-message-success">Thank you! We'll contact you soon.</div>
+                     )}
+                  </form>
+                  
+                  <div className="share-section">
+                    <h4 style={{ marginTop: '2rem', marginBottom: '1rem' }}>Share This Property</h4>
+                    <div className="share-buttons">
+                      <button 
+                        className="share-btn"
+                        onClick={() => {
+                          navigator.clipboard.writeText(window.location.href)
+                          alert('Link copied to clipboard!')
+                        }}
+                      >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                        </svg>
+                        Copy Link
+                      </button>
+                      <button 
+                        className="share-btn"
+                        onClick={() => window.open(`mailto:?subject=${selectedListing.title}&body=Check out this property: ${selectedListing.address}`, '_blank')}
+                      >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                          <polyline points="22,6 12,13 2,6" />
+                        </svg>
+                        Email
+                      </button>
+                      <button 
+                        className="share-btn"
+                        onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank')}
+                      >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg>
+                        Share
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
