@@ -393,6 +393,16 @@ function App() {
                   {item.label}
                 </a>
               ))}
+              <div className="mobile-cta-container">
+                {primaryPhone && (
+                  <a className="btn btn-primary" href={primaryPhoneLink}>
+                    Call Now
+                  </a>
+                )}
+                <a className="btn btn-outline-dark" href="#contact">
+                  Book Consult
+                </a>
+              </div>
             </div>
             
             <div className="nav-cta">
@@ -764,59 +774,86 @@ function App() {
             <button type="button" className="modal-close" onClick={() => setSelectedListing(null)}>
               &times;
             </button>
-            <img
-              src={selectedListing.image}
-              alt={selectedListing.title}
-              className="modal-image"
-              onError={(event) => {
-                event.currentTarget.src = 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800'
-              }}
-            />
-            <div className="modal-header">
-              <h2 className="modal-title">{selectedListing.title}</h2>
-              <div className="modal-address">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-                {selectedListing.address}
-              </div>
-              <div className="modal-price">{formatPrice(selectedListing.price)}</div>
+            
+            <div className="modal-image-col">
+              <img
+                src={selectedListing.image}
+                alt={selectedListing.title}
+                className="modal-image"
+                onError={(event) => {
+                  event.currentTarget.src = 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800'
+                }}
+              />
             </div>
-            <div className="modal-details-grid">
-              <div className="modal-detail-item">
-                <div className="modal-detail-label">Bedrooms</div>
-                <div className="modal-detail-value">{selectedListing.bedrooms}</div>
-              </div>
-              <div className="modal-detail-item">
-                <div className="modal-detail-label">Bathrooms</div>
-                <div className="modal-detail-value">{selectedListing.bathrooms}</div>
-              </div>
-              <div className="modal-detail-item">
-                <div className="modal-detail-label">Square Feet</div>
-                <div className="modal-detail-value">{formatNumber(selectedListing.sqft)}</div>
-              </div>
-              <div className="modal-detail-item">
-                <div className="modal-detail-label">Type</div>
-                <div className="modal-detail-value">{selectedListing.type}</div>
-              </div>
-            </div>
-            <div className="modal-description">
-              <h3>Property Overview</h3>
-              <p>{selectedListing.description}</p>
-            </div>
-            {selectedListing.features && (
-              <div className="modal-features">
-                <h3>Key Features</h3>
-                <div className="features-grid">
-                  {selectedListing.features.map((feature) => (
-                    <span key={feature} className="feature-tag">
-                      {feature}
-                    </span>
-                  ))}
+
+            <div className="modal-info-col">
+              <div className="modal-header">
+                <h2 className="modal-title">{selectedListing.title}</h2>
+                <div className="modal-price">{formatPrice(selectedListing.price)}</div>
+                <div className="modal-address">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  {selectedListing.address}
                 </div>
               </div>
-            )}
+
+              <div className="modal-stats-grid">
+                <div className="modal-stat">
+                  <span className="modal-stat-value">{selectedListing.bedrooms}</span>
+                  <span className="modal-stat-label">Beds</span>
+                </div>
+                <div className="modal-stat">
+                  <span className="modal-stat-value">{selectedListing.bathrooms}</span>
+                  <span className="modal-stat-label">Baths</span>
+                </div>
+                <div className="modal-stat">
+                  <span className="modal-stat-value">{formatNumber(selectedListing.sqft)}</span>
+                  <span className="modal-stat-label">SqFt</span>
+                </div>
+                <div className="modal-stat">
+                  <span className="modal-stat-value">{selectedListing.type}</span>
+                  <span className="modal-stat-label">Type</span>
+                </div>
+              </div>
+
+              <div className="modal-description">
+                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem', color: 'var(--secondary-color)' }}>Property Overview</h3>
+                <p>{selectedListing.description}</p>
+              </div>
+
+              {selectedListing.features && (
+                <div className="modal-features-container">
+                  <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem', color: 'var(--secondary-color)' }}>Key Features</h3>
+                  <div className="modal-features">
+                    {selectedListing.features.map((feature) => (
+                      <span key={feature} className="feature-tag">
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="modal-form-container">
+                <h4>Interested in this property?</h4>
+                <form onSubmit={handleContactSubmit} className="contact-form" style={{ gap: '1rem' }}>
+                   <div className="form-row" style={{ gap: '1rem' }}>
+                      <input type="text" placeholder="Name" className="form-input" style={{ margin: 0, padding: '0.75rem' }} required />
+                      <input type="tel" placeholder="Phone" className="form-input" style={{ margin: 0, padding: '0.75rem' }} required />
+                   </div>
+                   <textarea 
+                      className="form-input" 
+                      placeholder="I'm interested in this property..." 
+                      rows="3" 
+                      style={{ margin: 0, padding: '0.75rem' }} 
+                      defaultValue={`Hi, I'm interested in ${selectedListing.address}. Please contact me.`}
+                   />
+                   <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Schedule Viewing</button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       )}
