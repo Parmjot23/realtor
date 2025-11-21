@@ -1,0 +1,25 @@
+
+> realtor-react@0.0.0 build
+> vite build
+
+[36mvite v7.2.2 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32m✓[39m 26 modules transformed.
+[31m✗[39m Build failed in 321ms
+[31merror during build:
+[31msrc/data/content.js (31:12): Expression expected[31m
+file: [36mC:/Users/parmj/realtor-1/src/data/content.js:31:12[31m
+[33m
+29:             'Expert guidance through every step of buying or selling your property. We handle negotiations, paperwork...
+30:         icon: (
+31:             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hi...
+                ^
+32:                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+33:                 <polyline points="9 22 9 12 15 12 15 22" />
+[31m
+    at getRollupError (file:///C:/Users/parmj/realtor-1/node_modules/rollup/dist/es/shared/parseAst.js:401:41)
+    at ParseError.initialise (file:///C:/Users/parmj/realtor-1/node_modules/rollup/dist/es/shared/node-entry.js:14460:28)
+    at convertNode (file:///C:/Users/parmj/realtor-1/node_modules/rollup/dist/es/shared/node-entry.js:16343:10)
+    at convertProgram (file:///C:/Users/parmj/realtor-1/node_modules/rollup/dist/es/shared/node-entry.js:15583:12)
+    at Module.setSource (file:///C:/Users/parmj/realtor-1/node_modules/rollup/dist/es/shared/node-entry.js:17340:24)
+    at async ModuleLoader.addModuleSource (file:///C:/Users/parmj/realtor-1/node_modules/rollup/dist/es/shared/node-entry.js:21363:13)[39m
