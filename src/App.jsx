@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import fallbackData from './data/listings-fallback.json'
 import { CalculatorModal } from './components/Calculators'
+import { generatePDF } from './utils/pdfGenerator'
 import './App.css'
 
 const services = [
@@ -98,32 +99,35 @@ const visitorTools = [
     {
         title: 'New Listing Alert',
         text: 'Get listings that match your criteria the moment they hit MLS.',
-        action: 'Create Alert'
+        action: 'Create Alert',
+        href: '#contact'
     },
     {
         title: 'School Rankings',
         text: 'Access Fraser Institute & EQAO scores to select the right neighbourhood.',
-        action: 'View Rankings'
+        action: 'View Rankings',
+        href: 'https://www.compareschoolrankings.org/'
     },
     {
         title: 'Market Watch Report',
         text: 'Monthly TRREB stats delivered to your inbox.',
-        action: 'Download Report'
+        action: 'Download Report',
+        href: 'https://trreb.ca/market-data/market-watch/'
     }
 ]
 
 const buyerGuides = [
-    { label: 'Buyer’s Guide PDF', href: 'https://www.cmhc-schl.gc.ca/sites/cmhc/professionals/housing-research/housing-research-data/housing-information-centre/housing-information-centre-publications/homebuying-step-by-step-guide-en.pdf' },
-    { label: 'First-Time Buyer Checklist', href: 'https://assets.cmhc-schl.gc.ca/sf/project/cmhc/pubsandreports/pdf/68470.pdf' },
+    { label: 'Buyer’s Guide PDF', pdfType: 'buyerGuide' },
+    { label: 'First-Time Buyer Checklist', pdfType: 'buyerChecklist' },
     { label: 'RRSP Home Buyer’s Plan', href: 'https://www.canada.ca/en/revenue-agency/services/tax/individuals/topics/rrsps-related-plans/what-home-buyers-plan.html' },
     { label: 'Mortgage For Your Home', href: '#calculators' },
     { label: 'GST/HST New Housing Rebate', href: 'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-home-construction/new-housing-rebate.html' }
 ]
 
 const sellerGuides = [
-    { label: 'Seller’s Guide PDF', href: '#contact' },
-    { label: 'Preparing Your Home', href: '#contact' },
-    { label: 'Listing Strategy Call', href: '#contact' },
+    { label: 'Seller’s Guide PDF', pdfType: 'sellerGuide' },
+    { label: 'Preparing Your Home', pdfType: 'prepHome' },
+    { label: 'Listing Strategy Guide', pdfType: 'listingStrategy' },
     { label: 'Market Evaluation Request', href: '#valuation' }
 ]
 
@@ -137,12 +141,12 @@ const usefulLinks = [
 ]
 
 const cityLinks = [
-    'City of Mississauga',
-    'City of Toronto',
-    'City of Cambridge',
-    'City of Kitchener',
-    'City of Brampton',
-    'Halton Region'
+    { label: 'City of Mississauga', href: 'https://www.mississauga.ca/' },
+    { label: 'City of Toronto', href: 'https://www.toronto.ca/' },
+    { label: 'City of Cambridge', href: 'https://www.cambridge.ca/' },
+    { label: 'City of Kitchener', href: 'https://www.kitchener.ca/' },
+    { label: 'City of Brampton', href: 'https://www.brampton.ca/' },
+    { label: 'Halton Region', href: 'https://www.halton.ca/' }
 ]
 
 const bedroomOptions = [
@@ -597,7 +601,14 @@ function App() {
                                     <article key={tool.title} className="visitor-card">
                                         <h3>{tool.title}</h3>
                                         <p>{tool.text}</p>
-                                        <button type="button" className="text-link">{tool.action} →</button>
+                                        <a
+                                            href={tool.href}
+                                            className="text-link"
+                                            target={tool.href?.startsWith('http') ? '_blank' : '_self'}
+                                            rel={tool.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                                        >
+                                            {tool.action} →
+                                        </a>
                                     </article>
                                 ))}
                             </div>
@@ -608,14 +619,24 @@ function App() {
                                 <ul className="resource-list">
                                     {buyerGuides.map((guide) => (
                                         <li key={guide.label}>
-                                            <a
-                                                href={guide.href}
-                                                target={guide.href.startsWith('http') ? "_blank" : "_self"}
-                                                rel={guide.href.startsWith('http') ? "noopener noreferrer" : ""}
-                                                className="resource-link"
-                                            >
-                                                {guide.label}
-                                            </a>
+                                            {guide.pdfType ? (
+                                                <button
+                                                    onClick={() => generatePDF(guide.pdfType, realtorDetails)}
+                                                    className="resource-link"
+                                                    style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', textAlign: 'left', font: 'inherit', width: '100%' }}
+                                                >
+                                                    {guide.label}
+                                                </button>
+                                            ) : (
+                                                <a
+                                                    href={guide.href}
+                                                    target={guide.href?.startsWith('http') ? "_blank" : "_self"}
+                                                    rel={guide.href?.startsWith('http') ? "noopener noreferrer" : ""}
+                                                    className="resource-link"
+                                                >
+                                                    {guide.label}
+                                                </a>
+                                            )}
                                         </li>
                                     ))}
                                 </ul>
@@ -625,12 +646,22 @@ function App() {
                                 <ul className="resource-list">
                                     {sellerGuides.map((guide) => (
                                         <li key={guide.label}>
-                                            <a
-                                                href={guide.href}
-                                                className="resource-link"
-                                            >
-                                                {guide.label}
-                                            </a>
+                                            {guide.pdfType ? (
+                                                <button
+                                                    onClick={() => generatePDF(guide.pdfType, realtorDetails)}
+                                                    className="resource-link"
+                                                    style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', textAlign: 'left', font: 'inherit', width: '100%' }}
+                                                >
+                                                    {guide.label}
+                                                </button>
+                                            ) : (
+                                                <a
+                                                    href={guide.href}
+                                                    className="resource-link"
+                                                >
+                                                    {guide.label}
+                                                </a>
+                                            )}
                                         </li>
                                     ))}
                                 </ul>
@@ -901,8 +932,14 @@ function App() {
                         </div>
                         <div className="city-links-grid">
                             {cityLinks.map((city) => (
-                                <a key={city} href="#listings" className="city-link">
-                                    {city}
+                                <a
+                                    key={city.label}
+                                    href={city.href}
+                                    className="city-link"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {city.label}
                                 </a>
                             ))}
                         </div>
