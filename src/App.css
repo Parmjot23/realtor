@@ -2034,6 +2034,68 @@ section {
   }
 }
 
+@media (max-width: 600px) {
+  .modal {
+    padding: 1rem;
+    align-items: flex-start;
+  }
+
+  .modal-content {
+    grid-template-columns: 1fr;
+    max-height: calc(100vh - 2rem);
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .modal-image-col {
+    height: 220px;
+  }
+
+  .modal-info-col {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .modal-close {
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.25rem;
+  }
+
+  .modal-title,
+  .modal-price {
+    font-size: 1.6rem;
+  }
+
+  .modal-address {
+    font-size: 1rem;
+  }
+
+  .modal-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .modal-stat-value {
+    font-size: 1.1rem;
+  }
+
+  .modal-description {
+    font-size: 0.95rem;
+  }
+
+  .modal-tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    flex: 1 1 100%;
+  }
+}
+
 /* --- Calculator Modals --- */
 .calculator-modal-overlay {
   position: fixed;
