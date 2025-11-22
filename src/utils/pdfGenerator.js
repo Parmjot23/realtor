@@ -372,7 +372,9 @@ const generateBuyerChecklist = (doc, guide, agentInfo) => {
         doc.setFont('helvetica', 'normal');
 
         section.content.forEach(line => {
-            const splitText = doc.splitTextToSize(line, pageWidth - margin * 2 - 25);
+            // Remove the square box character as we draw it manually
+            const cleanLine = line.replace(/^□\s*/, '');
+            const splitText = doc.splitTextToSize(cleanLine, pageWidth - margin * 2 - 25);
 
             // Checkbox
             doc.setDrawColor(180, 180, 180);
