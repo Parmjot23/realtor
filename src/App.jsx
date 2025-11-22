@@ -614,7 +614,7 @@ function App() {
                             </div>
                         </div>
                         <div className="visitor-column resources-panel">
-                            <div>
+                            <div className="resource-card">
                                 <h3>Buyer Resources</h3>
                                 <ul className="resource-list">
                                     {buyerGuides.map((guide) => (
@@ -641,7 +641,7 @@ function App() {
                                     ))}
                                 </ul>
                             </div>
-                            <div>
+                            <div className="resource-card">
                                 <h3>Seller Resources</h3>
                                 <ul className="resource-list">
                                     {sellerGuides.map((guide) => (
@@ -666,7 +666,7 @@ function App() {
                                     ))}
                                 </ul>
                             </div>
-                            <div>
+                            <div className="resource-card">
                                 <h3>Useful Links</h3>
                                 <div className="useful-links-grid">
                                     {usefulLinks.map((link) => (
