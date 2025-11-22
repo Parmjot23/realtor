@@ -245,6 +245,54 @@ const fetchListingsData = async () => {
     throw lastError ?? new Error('Unable to load listings data')
 }
 
+const calculateLTT = (price, address) => {
+    const calculateTieredTax = (amount) => {
+        let tax = 0;
+        if (amount > 2000000) {
+            tax += (amount - 2000000) * 0.025;
+            amount = 2000000;
+        }
+        if (amount > 400000) {
+            tax += (amount - 400000) * 0.02;
+            amount = 400000;
+        }
+        if (amount > 250000) {
+            tax += (amount - 250000) * 0.015;
+            amount = 250000;
+        }
+        if (amount > 55000) {
+            tax += (amount - 55000) * 0.01;
+            amount = 55000;
+        }
+        if (amount > 0) {
+            tax += amount * 0.005;
+        }
+        return tax;
+    };
+
+    const ontarioTax = calculateTieredTax(price);
+    let torontoTax = 0;
+
+    if (address && address.toLowerCase().includes('toronto')) {
+        torontoTax = calculateTieredTax(price);
+    }
+
+    return { ontario: ontarioTax, toronto: torontoTax, total: ontarioTax + torontoTax };
+};
+
+const calculateCMHC = (price, downPaymentPercent) => {
+    if (downPaymentPercent >= 20) return 0;
+
+    const loanAmount = price - (price * downPaymentPercent / 100);
+    let rate = 0;
+
+    if (downPaymentPercent >= 15) rate = 0.0280;
+    else if (downPaymentPercent >= 10) rate = 0.0310;
+    else if (downPaymentPercent >= 5) rate = 0.0400;
+
+    return loanAmount * rate;
+};
+
 function App() {
     const [realtor, setRealtor] = useState(fallbackData.realtor)
     const [listings, setListings] = useState(fallbackData.listings || [])
