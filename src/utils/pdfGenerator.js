@@ -2,6 +2,7 @@ import { jsPDF } from 'jspdf';
 
 const brandColor = '#0f172a'; // Primary dark color
 const accentColor = '#c2a372'; // Gold/Secondary color
+const softBackground = '#f6f7fb';
 
 const guides = {
     buyerGuide: {
@@ -199,6 +200,12 @@ export const generatePDF = (type, agentInfo) => {
 
     if (!guide) return;
 
+    // Enhanced layout for the First-Time Buyer Checklist
+    if (type === 'buyerChecklist') {
+        generateBuyerChecklist(doc, guide, agentInfo);
+        return;
+    }
+
     const pageWidth = doc.internal.pageSize.width;
     const margin = 20;
     let yPos = 20;
@@ -269,5 +276,118 @@ export const generatePDF = (type, agentInfo) => {
     }
 
     // Save
+    doc.save(`${guide.title.replace(/\s+/g, '_')}.pdf`);
+};
+
+const generateBuyerChecklist = (doc, guide, agentInfo) => {
+    const pageWidth = doc.internal.pageSize.width;
+    const margin = 18;
+    let yPos = 18;
+
+    // Background
+    doc.setFillColor(softBackground);
+    doc.rect(0, 0, pageWidth, doc.internal.pageSize.height, 'F');
+
+    // Header band
+    doc.setFillColor(brandColor);
+    doc.roundedRect(margin, yPos, pageWidth - margin * 2, 22, 5, 5, 'F');
+    doc.setTextColor('#ffffff');
+    doc.setFontSize(16);
+    doc.setFont('helvetica', 'bold');
+    doc.text(guide.title, margin + 10, yPos + 14);
+
+    // Presented by
+    yPos += 32;
+    doc.setTextColor(brandColor);
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'medium');
+    doc.text('Presented by', margin, yPos);
+    doc.setFont('helvetica', 'bold');
+    doc.text(agentInfo?.name || 'Premium Real Estate', margin + 28, yPos);
+    yPos += 6;
+    doc.setFont('helvetica', 'normal');
+    const contactLine = [agentInfo?.phone, agentInfo?.email].filter(Boolean).join('  •  ');
+    if (contactLine) {
+        doc.text(contactLine, margin, yPos);
+        yPos += 8;
+    }
+
+    // Intro note
+    const introText = 'A quick roadmap for confident first-time buyers. Check off each milestone as you move from planning to move-in.';
+    doc.setFontSize(10);
+    doc.setTextColor(70, 70, 70);
+    const wrappedIntro = doc.splitTextToSize(introText, pageWidth - margin * 2);
+    doc.text(wrappedIntro, margin, yPos);
+    yPos += wrappedIntro.length * 5 + 6;
+
+    // Section cards
+    guide.sections.forEach(section => {
+        // Estimate card height
+        doc.setFontSize(11);
+        doc.setFont('helvetica', 'normal');
+        const lineHeights = section.content.map(line => doc.splitTextToSize(line, pageWidth - margin * 2 - 18).length * 5 + 2);
+        const cardHeight = 18 + lineHeights.reduce((a, b) => a + b, 0);
+
+        if (yPos + cardHeight > 280) {
+            doc.addPage();
+            yPos = 18;
+        }
+
+        // Card background
+        doc.setFillColor('#ffffff');
+        doc.setDrawColor(230, 230, 230);
+        doc.roundedRect(margin, yPos, pageWidth - margin * 2, cardHeight, 5, 5, 'FD');
+
+        // Title bar
+        doc.setFillColor(accentColor);
+        doc.roundedRect(margin, yPos, pageWidth - margin * 2, 12, 5, 5, 'F');
+        doc.setTextColor('#ffffff');
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'bold');
+        doc.text(section.title, margin + 6, yPos + 8);
+
+        // Content
+        let contentY = yPos + 18;
+        doc.setTextColor(50, 50, 50);
+        doc.setFontSize(11);
+        doc.setFont('helvetica', 'normal');
+
+        section.content.forEach(line => {
+            const splitText = doc.splitTextToSize(line, pageWidth - margin * 2 - 18);
+            doc.text('□', margin + 6, contentY);
+            doc.text(splitText, margin + 14, contentY);
+            contentY += splitText.length * 5 + 6;
+        });
+
+        yPos = contentY + 4;
+    });
+
+    // Helpful reminder box
+    if (yPos + 40 > 280) {
+        doc.addPage();
+        yPos = 18;
+    }
+
+    doc.setFillColor('#ffffff');
+    doc.setDrawColor(220, 220, 220);
+    doc.roundedRect(margin, yPos, pageWidth - margin * 2, 36, 5, 5, 'FD');
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(brandColor);
+    doc.text('Need a walkthrough?', margin + 6, yPos + 12);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(60, 60, 60);
+    const reminderText = 'Lean on your realtor for timelines, negotiation strategy, and trusted partners for financing, inspections, and closing.';
+    const wrappedReminder = doc.splitTextToSize(reminderText, pageWidth - margin * 2 - 12);
+    doc.text(wrappedReminder, margin + 6, yPos + 20);
+    yPos += 42;
+
+    // Footer
+    const footerText = `${agentInfo?.name || 'Premium Real Estate'} | ${agentInfo?.phone || ''} | ${agentInfo?.email || ''}`.trim();
+    doc.setTextColor(120, 120, 120);
+    doc.setFontSize(10);
+    doc.text(footerText, margin, 290);
+    doc.text('Page 1 of 1', pageWidth - margin - 20, 290);
+
     doc.save(`${guide.title.replace(/\s+/g, '_')}.pdf`);
 };
