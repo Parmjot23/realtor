@@ -1289,10 +1289,6 @@ function App() {
                                             <strong>{formatPrice(selectedListing.price - (selectedListing.price * downPayment) / 100 + calculateCMHC(selectedListing.price, downPayment))}</strong>
                                         </div>
                                         <div className="breakdown-item">
-                                            <span>Land Transfer Tax:</span>
-                                            <strong>{formatPrice(calculateLTT(selectedListing.price, selectedListing.address).total)}</strong>
-                                        </div>
-                                        <div className="breakdown-item">
                                             <span>Total Interest:</span>
                                             <strong>{formatPrice((calculateMortgage(selectedListing.price) * loanTerm * 12) - (selectedListing.price - (selectedListing.price * downPayment) / 100 + calculateCMHC(selectedListing.price, downPayment)))}</strong>
                                         </div>
