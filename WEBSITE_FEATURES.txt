@@ -1,0 +1,44 @@
+Real Estate Website Feature Overview
+====================================
+
+Navigation & Global Contact
+- Top bar keeps brokerage name plus quick call and email links visible on every page for fast outreach.
+- Sticky navigation highlights Raman Dhiman’s branding, jump links to key sections (Properties, Valuation, Services, About, Contact), and mobile-friendly toggles with CTA buttons for “Call Now” and “Book Consult.”
+
+Hero & Lead Capture
+- Full-width hero with luxury imagery, “Move with Confidence” headline, and service-area tagline.
+- Dual calls-to-action link visitors to listings or the contact section.
+- Inline lead form collects name, email, and phone to start a personalized search.
+
+Property Discovery
+- Category cards (Residential, Condos, Commercial, Pre-Construction) filter listings or scroll visitors to the right section while showing evocative photography.
+- Visitor tools offer MLS alerts, school rankings, and market reports, paired with downloadable buyer and seller resource libraries and quick links to financial/government sites.
+
+Pre-Construction Highlight
+- Dedicated VIP section advertising early access to GTA launches with stats on active projects, builder partnerships, and incentive averages, plus buttons for booking previews or browsing projects.
+
+Interactive Calculators
+- Launchable tools for Mortgage payments, Land Transfer Tax (with first-time buyer rebates and Toronto/ONT breakdowns), and CMHC insurance premiums, each presented in a modal for focused use.
+
+Featured Listings
+- Search bar with type/price filters and quick reset.
+- Grid of property cards showing price, address, beds/baths/sqft, property type tags, and sold/for-sale status with fallback imagery.
+- Click-to-open modal reveals rich descriptions, key feature chips, and tabs for overview, mortgage affordability, or direct contact.
+- Built-in affordability tab recalculates estimated monthly payments, CMHC premiums, and total interest using adjustable down payment, rate, and term inputs.
+- Contact tab offers quick inquiry form plus share buttons (copy link, email, Facebook) for social follow-up.
+
+Seller Valuation CTA
+- Banner invites homeowners to request a complimentary valuation report with recent sales comparisons, linking directly to the contact form.
+
+Services, About, and Social Proof
+- Services grid covers Property Sales, Valuation, Investment Consulting, and Property Management with concise icons and descriptions.
+- About section spotlights experience metrics (active listings, happy clients, years, satisfaction).
+- Testimonials grid shares five-star client quotes and initials.
+
+Communities Served
+- Region grid links out to municipal sites across Mississauga, Toronto, Cambridge, Kitchener, Brampton, and Halton for local context.
+
+Contact & Follow-Up
+- Contact panel lists phone, office numbers, email, and office address with click-to-call/mail links.
+- Structured contact form for name/email/phone/message provides success confirmation on submit.
+- Footer reiterates quick links, services, contact info, brokerage note, and current-year copyright.
