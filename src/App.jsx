@@ -841,11 +841,16 @@ function App() {
 
                         <div className="listings-grid">
                             {!loading && filteredListings.length === 0 && <p className="empty-state">{resultsText}</p>}
-                            {filteredListings.map((listing) => (
-                                <article key={listing.id} className="listing-card fade-in-up" onClick={() => setSelectedListing(listing)}>
-                                    <div className="listing-image-container">
-                                        <div className="listing-tag">{listing.type}</div>
-                                        <div className="listing-status">For Sale</div>
+                            {filteredListings.map((listing) => {
+                                const status = listing.status || 'For Sale'
+
+                                return (
+                                    <article key={listing.id} className="listing-card fade-in-up" onClick={() => setSelectedListing(listing)}>
+                                        <div className="listing-image-container">
+                                            <div className="listing-tag">{listing.type}</div>
+                                            <div className={`listing-status ${status.toLowerCase() === 'sold' ? 'sold' : ''}`}>
+                                                {status}
+                                            </div>
                                         <img
                                             src={listing.image}
                                             alt={listing.title}
@@ -854,8 +859,8 @@ function App() {
                                                 event.currentTarget.src = 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800'
                                             }}
                                         />
-                                    </div>
-                                    <div className="listing-content">
+                                        </div>
+                                        <div className="listing-content">
                                         <div className="listing-price">{formatPrice(listing.price)}</div>
                                         <h3 className="listing-title">{listing.title}</h3>
                                         <div className="listing-address">
@@ -877,8 +882,9 @@ function App() {
                                             <span>{formatNumber(listing.sqft)}</span> SqFt
                                         </div>
                                     </div>
-                                </article>
-                            ))}
+                                    </article>
+                                )
+                            })}
                         </div>
                     </div>
                 </section>

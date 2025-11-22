@@ -706,6 +706,10 @@ section {
   z-index: 2;
 }
 
+.listing-status.sold {
+  background: #475569;
+}
+
 .listing-content {
   padding: 1.5rem 1.5rem 1rem;
 }
