@@ -3,6 +3,8 @@ import { jsPDF } from 'jspdf';
 const brandColor = '#0f172a'; // Primary dark color
 const accentColor = '#c2a372'; // Gold/Secondary color
 const softBackground = '#f6f7fb';
+const headingFont = 'times';
+const bodyFont = 'helvetica';
 
 const guides = {
     buyerGuide: {
@@ -213,7 +215,7 @@ export const generatePDF = (type, agentInfo) => {
     // --- Header ---
     doc.setFontSize(22);
     doc.setTextColor(brandColor);
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(headingFont, 'bold');
     doc.text(guide.title, margin, yPos);
 
     yPos += 10;
@@ -221,6 +223,7 @@ export const generatePDF = (type, agentInfo) => {
     // Subheader / Brand
     doc.setFontSize(12);
     doc.setTextColor(accentColor);
+    doc.setFont(bodyFont, 'bold');
     doc.text("Presented by " + (agentInfo?.name || "Premium Real Estate"), margin, yPos);
 
     yPos += 15;
@@ -238,14 +241,14 @@ export const generatePDF = (type, agentInfo) => {
         // Section Title
         doc.setFontSize(14);
         doc.setTextColor(brandColor);
-        doc.setFont('helvetica', 'bold');
+        doc.setFont(headingFont, 'bold');
         doc.text(section.title, margin, yPos);
         yPos += 8;
 
         // Section Content
         doc.setFontSize(11);
         doc.setTextColor(60, 60, 60);
-        doc.setFont('helvetica', 'normal');
+        doc.setFont(bodyFont, 'normal');
 
         section.content.forEach(line => {
             const splitText = doc.splitTextToSize(line, pageWidth - (margin * 2));
@@ -281,31 +284,32 @@ export const generatePDF = (type, agentInfo) => {
 
 const generateBuyerChecklist = (doc, guide, agentInfo) => {
     const pageWidth = doc.internal.pageSize.width;
+    const pageHeight = doc.internal.pageSize.height;
     const margin = 18;
     let yPos = 18;
 
     // Background
     doc.setFillColor(softBackground);
-    doc.rect(0, 0, pageWidth, doc.internal.pageSize.height, 'F');
+    doc.rect(0, 0, pageWidth, pageHeight, 'F');
 
     // Header band
     doc.setFillColor(brandColor);
-    doc.roundedRect(margin, yPos, pageWidth - margin * 2, 22, 5, 5, 'F');
+    doc.roundedRect(margin, yPos, pageWidth - margin * 2, 24, 6, 6, 'F');
     doc.setTextColor('#ffffff');
-    doc.setFontSize(16);
-    doc.setFont('helvetica', 'bold');
-    doc.text(guide.title, margin + 10, yPos + 14);
+    doc.setFontSize(17);
+    doc.setFont(headingFont, 'bold');
+    doc.text(guide.title, margin + 12, yPos + 16);
 
     // Presented by
     yPos += 32;
     doc.setTextColor(brandColor);
     doc.setFontSize(11);
-    doc.setFont('helvetica', 'medium');
+    doc.setFont(bodyFont, 'normal');
     doc.text('Presented by', margin, yPos);
-    doc.setFont('helvetica', 'bold');
-    doc.text(agentInfo?.name || 'Premium Real Estate', margin + 28, yPos);
+    doc.setFont(bodyFont, 'bold');
+    doc.text(agentInfo?.name || 'Premium Real Estate', margin + 30, yPos);
     yPos += 6;
-    doc.setFont('helvetica', 'normal');
+    doc.setFont(bodyFont, 'normal');
     const contactLine = [agentInfo?.phone, agentInfo?.email].filter(Boolean).join('  •  ');
     if (contactLine) {
         doc.text(contactLine, margin, yPos);
@@ -316,6 +320,7 @@ const generateBuyerChecklist = (doc, guide, agentInfo) => {
     const introText = 'A quick roadmap for confident first-time buyers. Check off each milestone as you move from planning to move-in.';
     doc.setFontSize(10);
     doc.setTextColor(70, 70, 70);
+    doc.setFont(bodyFont, 'normal');
     const wrappedIntro = doc.splitTextToSize(introText, pageWidth - margin * 2);
     doc.text(wrappedIntro, margin, yPos);
     yPos += wrappedIntro.length * 5 + 6;
@@ -324,11 +329,11 @@ const generateBuyerChecklist = (doc, guide, agentInfo) => {
     guide.sections.forEach(section => {
         // Estimate card height
         doc.setFontSize(11);
-        doc.setFont('helvetica', 'normal');
-        const lineHeights = section.content.map(line => doc.splitTextToSize(line, pageWidth - margin * 2 - 18).length * 5 + 2);
-        const cardHeight = 18 + lineHeights.reduce((a, b) => a + b, 0);
+        doc.setFont(bodyFont, 'normal');
+        const lineHeights = section.content.map(line => doc.splitTextToSize(line, pageWidth - margin * 2 - 22).length * 5 + 3);
+        const cardHeight = 22 + lineHeights.reduce((a, b) => a + b, 0);
 
-        if (yPos + cardHeight > 280) {
+        if (yPos + cardHeight > pageHeight - 24) {
             doc.addPage();
             yPos = 18;
         }
@@ -336,34 +341,35 @@ const generateBuyerChecklist = (doc, guide, agentInfo) => {
         // Card background
         doc.setFillColor('#ffffff');
         doc.setDrawColor(230, 230, 230);
-        doc.roundedRect(margin, yPos, pageWidth - margin * 2, cardHeight, 5, 5, 'FD');
+        doc.roundedRect(margin, yPos, pageWidth - margin * 2, cardHeight, 6, 6, 'FD');
 
         // Title bar
         doc.setFillColor(accentColor);
-        doc.roundedRect(margin, yPos, pageWidth - margin * 2, 12, 5, 5, 'F');
+        doc.roundedRect(margin, yPos, pageWidth - margin * 2, 14, 6, 6, 'F');
         doc.setTextColor('#ffffff');
         doc.setFontSize(12);
-        doc.setFont('helvetica', 'bold');
-        doc.text(section.title, margin + 6, yPos + 8);
+        doc.setFont(headingFont, 'bold');
+        doc.text(section.title, margin + 8, yPos + 10);
 
         // Content
-        let contentY = yPos + 18;
-        doc.setTextColor(50, 50, 50);
+        let contentY = yPos + 22;
+        doc.setTextColor(45, 45, 45);
         doc.setFontSize(11);
-        doc.setFont('helvetica', 'normal');
+        doc.setFont(bodyFont, 'normal');
 
         section.content.forEach(line => {
-            const splitText = doc.splitTextToSize(line, pageWidth - margin * 2 - 18);
-            doc.text('□', margin + 6, contentY);
-            doc.text(splitText, margin + 14, contentY);
-            contentY += splitText.length * 5 + 6;
+            const splitText = doc.splitTextToSize(line, pageWidth - margin * 2 - 22);
+            doc.setDrawColor(205, 205, 205);
+            doc.rect(margin + 7, contentY - 4, 6, 6, 'S');
+            doc.text(splitText, margin + 18, contentY);
+            contentY += splitText.length * 5 + 7;
         });
 
-        yPos = contentY + 4;
+        yPos = contentY + 6;
     });
 
     // Helpful reminder box
-    if (yPos + 40 > 280) {
+    if (yPos + 40 > pageHeight - 18) {
         doc.addPage();
         yPos = 18;
     }
@@ -372,22 +378,38 @@ const generateBuyerChecklist = (doc, guide, agentInfo) => {
     doc.setDrawColor(220, 220, 220);
     doc.roundedRect(margin, yPos, pageWidth - margin * 2, 36, 5, 5, 'FD');
     doc.setFontSize(11);
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(headingFont, 'bold');
     doc.setTextColor(brandColor);
     doc.text('Need a walkthrough?', margin + 6, yPos + 12);
-    doc.setFont('helvetica', 'normal');
+    doc.setFont(bodyFont, 'normal');
     doc.setTextColor(60, 60, 60);
     const reminderText = 'Lean on your realtor for timelines, negotiation strategy, and trusted partners for financing, inspections, and closing.';
     const wrappedReminder = doc.splitTextToSize(reminderText, pageWidth - margin * 2 - 12);
     doc.text(wrappedReminder, margin + 6, yPos + 20);
-    yPos += 42;
+    yPos += 44;
 
-    // Footer
-    const footerText = `${agentInfo?.name || 'Premium Real Estate'} | ${agentInfo?.phone || ''} | ${agentInfo?.email || ''}`.trim();
-    doc.setTextColor(120, 120, 120);
-    doc.setFontSize(10);
-    doc.text(footerText, margin, 290);
-    doc.text('Page 1 of 1', pageWidth - margin - 20, 290);
+    // Footer with page numbers
+    const pageCount = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
+        doc.setFont(bodyFont, 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(120, 120, 120);
+
+        const footerText = `${agentInfo?.name || 'Premium Real Estate'} | ${agentInfo?.phone || ''} | ${agentInfo?.email || ''}`
+            .replace(/\s+\|\s+\|\s+/g, '')
+            .replace(/^\s*\|\s*/, '')
+            .trim();
+        const footerY = pageHeight - 12;
+
+        if (footerText) {
+            doc.text(footerText, margin, footerY);
+        }
+
+        const pageNumber = `Page ${i} of ${pageCount}`;
+        const pageNumberX = pageWidth - margin - doc.getTextWidth(pageNumber);
+        doc.text(pageNumber, pageNumberX, footerY);
+    }
 
     doc.save(`${guide.title.replace(/\s+/g, '_')}.pdf`);
 };
