@@ -2,7 +2,7 @@ import { jsPDF } from 'jspdf';
 
 const brandColor = '#0f172a'; // Primary dark color
 const accentColor = '#c2a372'; // Gold/Secondary color
-const softBackground = '#f6f7fb';
+const softBackground = '#fdfbf7'; // Premium warm paper tone
 const headingFont = 'times';
 const bodyFont = 'helvetica';
 
@@ -282,15 +282,22 @@ export const generatePDF = (type, agentInfo) => {
     doc.save(`${guide.title.replace(/\s+/g, '_')}.pdf`);
 };
 
+
+
 const generateBuyerChecklist = (doc, guide, agentInfo) => {
     const pageWidth = doc.internal.pageSize.width;
     const pageHeight = doc.internal.pageSize.height;
-    const margin = 20; // Increased margin
+    const margin = 20;
     let yPos = 20;
 
-    // Background
+    // Background - Premium Paper Look
     doc.setFillColor(softBackground);
     doc.rect(0, 0, pageWidth, pageHeight, 'F');
+
+    // Decorative Page Border
+    doc.setDrawColor(accentColor);
+    doc.setLineWidth(0.5);
+    doc.rect(10, 10, pageWidth - 20, pageHeight - 20, 'S');
 
     // Header band
     doc.setFillColor(brandColor);
