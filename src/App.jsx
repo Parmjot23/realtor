@@ -309,7 +309,6 @@ function App() {
             setNavScrolled(window.scrollY > 50)
         }
         handleScroll()
-        window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
@@ -422,7 +421,8 @@ function App() {
 
     const calculateMortgage = (price) => {
         const downPaymentAmount = (price * downPayment) / 100
-        const loanAmount = price - downPaymentAmount
+        const cmhcFee = calculateCMHC(price, downPayment)
+        const loanAmount = price - downPaymentAmount + cmhcFee
         const monthlyRate = interestRate / 100 / 12
         const numberOfPayments = loanTerm * 12
 
@@ -1230,13 +1230,23 @@ function App() {
                                             <span>Down Payment ({downPayment}%):</span>
                                             <strong>{formatPrice((selectedListing.price * downPayment) / 100)}</strong>
                                         </div>
+                                        {calculateCMHC(selectedListing.price, downPayment) > 0 && (
+                                            <div className="breakdown-item">
+                                                <span>CMHC Insurance:</span>
+                                                <strong>{formatPrice(calculateCMHC(selectedListing.price, downPayment))}</strong>
+                                            </div>
+                                        )}
                                         <div className="breakdown-item">
                                             <span>Loan Amount:</span>
-                                            <strong>{formatPrice(selectedListing.price - (selectedListing.price * downPayment) / 100)}</strong>
+                                            <strong>{formatPrice(selectedListing.price - (selectedListing.price * downPayment) / 100 + calculateCMHC(selectedListing.price, downPayment))}</strong>
+                                        </div>
+                                        <div className="breakdown-item">
+                                            <span>Land Transfer Tax:</span>
+                                            <strong>{formatPrice(calculateLTT(selectedListing.price, selectedListing.address).total)}</strong>
                                         </div>
                                         <div className="breakdown-item">
                                             <span>Total Interest:</span>
-                                            <strong>{formatPrice((calculateMortgage(selectedListing.price) * loanTerm * 12) - (selectedListing.price - (selectedListing.price * downPayment) / 100))}</strong>
+                                            <strong>{formatPrice((calculateMortgage(selectedListing.price) * loanTerm * 12) - (selectedListing.price - (selectedListing.price * downPayment) / 100 + calculateCMHC(selectedListing.price, downPayment)))}</strong>
                                         </div>
                                     </div>
 
