@@ -149,6 +149,29 @@ const cityLinks = [
     { label: 'Halton Region', href: 'https://www.halton.ca/' }
 ]
 
+const gtaAreas = [
+    {
+        title: 'Toronto Core',
+        description: 'Downtown, Midtown, North York, Etobicoke, and Scarborough.',
+        tag: 'Urban + Transit'
+    },
+    {
+        title: 'West GTA',
+        description: 'Brampton, Mississauga, Caledon, and surrounding Peel communities.',
+        tag: 'Family-Focused'
+    },
+    {
+        title: 'Halton & Hamilton',
+        description: 'Oakville, Burlington, Milton, and emerging pockets across Halton.',
+        tag: 'Lakefront + Growth'
+    },
+    {
+        title: 'Durham & York',
+        description: 'Markham, Vaughan, Richmond Hill, Pickering, Ajax, Whitby, and Oshawa.',
+        tag: 'Commuter-Friendly'
+    }
+]
+
 const bedroomOptions = [
     { label: 'Any Bedrooms', value: '' },
     { label: 'Studio', value: '0' },
@@ -996,6 +1019,53 @@ function App() {
                                     {city.label}
                                 </a>
                             ))}
+                        </div>
+                    </div>
+                </section>
+
+                <section className="gta-map-section fade-in-up" id="gta">
+                    <div className="container">
+                        <div className="section-header">
+                            <span className="section-tag">Coverage</span>
+                            <h2>We Cover the Entire GTA</h2>
+                            <p>From lakefront condos to family suburbs, our team circles the Greater Toronto Area with local expertise.</p>
+                        </div>
+
+                        <div className="gta-map-grid">
+                            <div className="gta-map-card">
+                                <div className="map-badge">Full GTA</div>
+                                <div className="map-visual">
+                                    <iframe
+                                        title="Greater Toronto Area Map"
+                                        className="gta-map-embed"
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115759.60683880196!2d-79.51814077362439!3d43.71815566222261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b34d16d514a8d%3A0x18b4558d58e77e7c!2sToronto%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sus!4v1583018339155!5m2!1sen!2sus"
+                                        allowFullScreen=""
+                                        loading="lazy"
+                                        referrerPolicy="no-referrer-when-downgrade"
+                                    />
+                                    <div className="map-overlay">
+                                        <div className="coverage-ring" />
+                                        <div className="coverage-ring secondary" />
+                                        <div className="map-label">Greater Toronto Area</div>
+                                    </div>
+                                </div>
+                                <div className="map-footnote">Proximity-based tours and neighbourhood deep-dives wherever you need us.</div>
+                            </div>
+
+                            <div className="gta-area-list">
+                                {gtaAreas.map((area) => (
+                                    <article key={area.title} className="gta-area-card">
+                                        <div className="area-top">
+                                            <div className="area-icon" aria-hidden="true">⦿</div>
+                                            <div>
+                                                <h3>{area.title}</h3>
+                                                <span className="area-tag">{area.tag}</span>
+                                            </div>
+                                        </div>
+                                        <p>{area.description}</p>
+                                    </article>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </section>
