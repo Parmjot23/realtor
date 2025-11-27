@@ -1049,7 +1049,6 @@ function App() {
                                         <div className="map-label">Greater Toronto Area</div>
                                     </div>
                                 </div>
-                                <div className="map-footnote">Proximity-based tours and neighbourhood deep-dives wherever you need us.</div>
                             </div>
 
                             <div className="gta-area-list">
