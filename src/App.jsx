@@ -51,22 +51,28 @@ const services = [
 
 const testimonials = [
     {
-        name: 'Sarah Mitchell',
-        role: 'Home Buyer',
-        initials: 'SM',
-        text: 'Exceptional service from start to finish! The team helped us find our dream home and made the entire process seamless.'
+        name: 'Mandeep Arora',
+        role: 'Client',
+        initials: 'MA',
+        text: 'I had amazing experience working with Rama! From start to finish he was very detail oriented, be it finding the open houses, inspection and deal negotiation. He has very good knowledge of areas in and around Brampton, and yes he also helped us in the mortgage. We found our dream home in 2024 and we couldn\'t be happier! Highly recommend him.'
     },
     {
-        name: 'James Davis',
-        role: 'Property Seller',
-        initials: 'JD',
-        text: 'Sold our property above asking price in just two weeks. Their marketing strategy and negotiation skills are outstanding.'
+        name: 'Janine Speirs',
+        role: 'Real Estate Agent',
+        initials: 'JS',
+        text: 'I had the pleasure of working with Raman on a recent transaction where I represented the sellers and he represented the buyers. Throughout the entire process, Raman demonstrated exceptional professionalism, clear communication, and a collaborative spirit. He was proactive, respectful, and always worked diligently to ensure a smooth experience for everyone involved.'
     },
     {
-        name: 'Emily Rodriguez',
-        role: 'First-Time Buyer',
-        initials: 'ER',
-        text: 'As a first-time buyer, I was nervous about the process. They guided me through every step and answered every question.'
+        name: 'A S',
+        role: 'Client',
+        initials: 'AS',
+        text: 'Raman helped me purchase and sell a home in a at a very good price in a rather tight market (bottom of the barrel Oct 2024). He also connected us with a mortgage broker and suggested best course of action every step of the way. He is the expert you want on your side, highly recommended!'
+    },
+    {
+        name: 'Jaspreet Kaur Sekhon',
+        role: 'Client',
+        initials: 'JK',
+        text: 'Best ever experience. Help you find your dream house 😊'
     }
 ]
 
@@ -209,7 +215,8 @@ const agentProfile = {
     officePhone: '905-456-1010',
     officePhoneAlt: '905-673-8900',
     email: 'realtor.rdhiman@gmail.com',
-    address: '2720 North Park Drive #50, Brampton, ON L6S 0E9'
+    address: '2720 N Park Dr Unit 201, Brampton, ON L6S 0E9',
+    photo: '/realtor-profile.png'
 }
 
 const formatPhoneLink = (value) => (value ? `tel:${value.replace(/\D/g, '')}` : undefined)
@@ -596,7 +603,7 @@ function App() {
             <header className="hero">
                 <div className="hero-bg">
                     <div className="hero-overlay" />
-                    <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1920" alt="Luxury Home" />
+                    <img src="/modern-canadian-house.png" alt="Modern Urban Canadian Home" />
                 </div>
                 <div className="hero-container">
                     <div className="hero-content fade-in-up">
@@ -874,37 +881,37 @@ function App() {
                                             <div className={`listing-status ${status.toLowerCase() === 'sold' ? 'sold' : ''}`}>
                                                 {status}
                                             </div>
-                                        <img
-                                            src={listing.image}
-                                            alt={listing.title}
-                                            className="listing-image"
-                                            onError={(event) => {
-                                                event.currentTarget.src = 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800'
-                                            }}
-                                        />
+                                            <img
+                                                src={listing.image}
+                                                alt={listing.title}
+                                                className="listing-image"
+                                                onError={(event) => {
+                                                    event.currentTarget.src = 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800'
+                                                }}
+                                            />
                                         </div>
                                         <div className="listing-content">
-                                        <div className="listing-price">{formatPrice(listing.price)}</div>
-                                        <h3 className="listing-title">{listing.title}</h3>
-                                        <div className="listing-address">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                                                <circle cx="12" cy="10" r="3" />
-                                            </svg>
-                                            {listing.address}
+                                            <div className="listing-price">{formatPrice(listing.price)}</div>
+                                            <h3 className="listing-title">{listing.title}</h3>
+                                            <div className="listing-address">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                                    <circle cx="12" cy="10" r="3" />
+                                                </svg>
+                                                {listing.address}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="listing-meta">
-                                        <div className="meta-item">
-                                            <span>{listing.bedrooms}</span> Beds
+                                        <div className="listing-meta">
+                                            <div className="meta-item">
+                                                <span>{listing.bedrooms}</span> Beds
+                                            </div>
+                                            <div className="meta-item">
+                                                <span>{listing.bathrooms}</span> Baths
+                                            </div>
+                                            <div className="meta-item">
+                                                <span>{formatNumber(listing.sqft)}</span> SqFt
+                                            </div>
                                         </div>
-                                        <div className="meta-item">
-                                            <span>{listing.bathrooms}</span> Baths
-                                        </div>
-                                        <div className="meta-item">
-                                            <span>{formatNumber(listing.sqft)}</span> SqFt
-                                        </div>
-                                    </div>
                                     </article>
                                 )
                             })}
@@ -949,29 +956,36 @@ function App() {
 
                 <section id="about" className="section-bg-light fade-in-up">
                     <div className="container">
-                        <div className="section-header">
-                            <span className="section-tag">About Us</span>
-                            <h2>Your Trusted Partner</h2>
-                            <p className="lead" style={{ maxWidth: '800px', margin: '0 auto' }}>
-                                With over 15 years of experience, we have built a reputation for excellence, integrity, and results.
-                                We combine deep market expertise with modern technology.
-                            </p>
-                        </div>
-
-                        <div className="stats">
-                            {[
-                                { label: 'Active Listings', value: listings.length ? `${listings.length}` : '0' },
-                                { label: 'Happy Clients', value: '500+' },
-                                { label: 'Years Experience', value: '15+' },
-                                { label: 'Satisfaction Rate', value: '98%' }
-                            ].map((stat) => (
-                                <div key={stat.label} className="stat-item">
-                                    <div className="stat-number" data-value={stat.value}>
-                                        {stat.value}
-                                    </div>
-                                    <div className="stat-label">{stat.label}</div>
+                        <div className="about-grid">
+                            <div className="about-image-col">
+                                <img src={realtorDetails.photo} alt={realtorDetails.name} className="about-image" />
+                            </div>
+                            <div className="about-content-col">
+                                <div className="section-header" style={{ textAlign: 'left', margin: '0 0 2rem', maxWidth: '100%' }}>
+                                    <span className="section-tag">About Us</span>
+                                    <h2>Your Trusted Partner</h2>
+                                    <p className="lead">
+                                        With over 15 years of experience, we have built a reputation for excellence, integrity, and results.
+                                        We combine deep market expertise with modern technology.
+                                    </p>
                                 </div>
-                            ))}
+
+                                <div className="stats">
+                                    {[
+                                        { label: 'Active Listings', value: listings.length ? `${listings.length}` : '0' },
+                                        { label: 'Happy Clients', value: '500+' },
+                                        { label: 'Years Experience', value: '15+' },
+                                        { label: 'Satisfaction Rate', value: '98%' }
+                                    ].map((stat) => (
+                                        <div key={stat.label} className="stat-item">
+                                            <div className="stat-number" data-value={stat.value}>
+                                                {stat.value}
+                                            </div>
+                                            <div className="stat-label">{stat.label}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>

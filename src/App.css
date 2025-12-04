@@ -118,7 +118,7 @@ h6 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 80px;
+  height: 100px;
 }
 
 .nav-brand {
@@ -130,13 +130,13 @@ h6 {
 }
 
 .brand-logo {
-  height: 50px;
+  height: 75px;
   width: auto;
 }
 
 .brand-icon {
-  width: 48px;
-  height: 48px;
+  width: 72px;
+  height: 72px;
   background: var(--secondary-color);
   color: var(--primary-color);
   display: flex;
@@ -2721,6 +2721,7 @@ section {
     font-size: 1.6rem;
   }
 
+
   .modal-address {
     font-size: 1rem;
   }
@@ -2747,3 +2748,49 @@ section {
     flex: 1 1 100%;
   }
 }
+  /* --- About Section --- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-image-col {
+    position: relative;
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  .about-image-col::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--primary-color);
+    z-index: 0;
+  }
+
+  .about-image {
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+    box-shadow: var(--shadow-xl);
+    position: relative;
+    z-index: 1;
+    display: block;
+  }
+
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .about-image-col {
+      max-width: 300px;
+      margin: 0 auto;
+    }
+  }

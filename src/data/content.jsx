@@ -10,7 +10,8 @@ export const agentProfile = {
     officePhone: '905-456-1010',
     officePhoneAlt: '905-673-8900',
     email: 'realtor.rdhiman@gmail.com',
-    address: '2720 North Park Drive #50, Brampton, ON L6S 0E9'
+    address: '2720 N Park Dr Unit 201, Brampton, ON L6S 0E9',
+    photo: '/realtor-profile.png'
 }
 
 export const navItems = [
@@ -69,22 +70,28 @@ export const services = [
 
 export const testimonials = [
     {
-        name: 'Sarah Mitchell',
-        role: 'Home Buyer',
-        initials: 'SM',
-        text: 'Exceptional service from start to finish! The team helped us find our dream home and made the entire process seamless.'
+        name: 'Mandeep Arora',
+        role: 'Client',
+        initials: 'MA',
+        text: 'I had amazing experience working with Rama! From start to finish he was very detail oriented, be it finding the open houses, inspection and deal negotiation. He has very good knowledge of areas in and around Brampton, and yes he also helped us in the mortgage. We found our dream home in 2024 and we couldn\'t be happier! Highly recommend him.'
     },
     {
-        name: 'James Davis',
-        role: 'Property Seller',
-        initials: 'JD',
-        text: 'Sold our property above asking price in just two weeks. Their marketing strategy and negotiation skills are outstanding.'
+        name: 'Janine Speirs',
+        role: 'Real Estate Agent',
+        initials: 'JS',
+        text: 'I had the pleasure of working with Raman on a recent transaction where I represented the sellers and he represented the buyers. Throughout the entire process, Raman demonstrated exceptional professionalism, clear communication, and a collaborative spirit. He was proactive, respectful, and always worked diligently to ensure a smooth experience for everyone involved.'
     },
     {
-        name: 'Emily Rodriguez',
-        role: 'First-Time Buyer',
-        initials: 'ER',
-        text: 'As a first-time buyer, I was nervous about the process. They guided me through every step and answered every question.'
+        name: 'A S',
+        role: 'Client',
+        initials: 'AS',
+        text: 'Raman helped me purchase and sell a home in a at a very good price in a rather tight market (bottom of the barrel Oct 2024). He also connected us with a mortgage broker and suggested best course of action every step of the way. He is the expert you want on your side, highly recommended!'
+    },
+    {
+        name: 'Jaspreet Kaur Sekhon',
+        role: 'Client',
+        initials: 'JK',
+        text: 'Best ever experience. Help you find your dream house 😊'
     }
 ]
 

@@ -9,8 +9,9 @@
     "officePhone": "905-456-1010",
     "officePhoneAlt": "905-673-8900",
     "email": "realtor.rdhiman@gmail.com",
-    "address": "2720 North Park Drive #50, Brampton, ON L6S 0E9",
-    "logo": "/images/REMAX%20logo.png"
+    "address": "2720 N Park Dr Unit 201, Brampton, ON L6S 0E9",
+    "logo": "/images/REMAX%20logo.png",
+    "photo": "/realtor-profile.png"
   },
   "listings": [
     {
@@ -25,7 +26,13 @@
       "yearBuilt": 2020,
       "description": "Stunning modern home with open floor plan, high-end finishes, and beautiful landscaping. Features a gourmet kitchen, spacious master suite, and outdoor entertainment area.",
       "image": "https://images.unsplash.com/photo-1600591367940-9c0c0dfd9ab6?w=800",
-      "features": ["Garage", "Fireplace", "Hardwood Floors", "Granite Countertops", "Walk-in Closet"],
+      "features": [
+        "Garage",
+        "Fireplace",
+        "Hardwood Floors",
+        "Granite Countertops",
+        "Walk-in Closet"
+      ],
       "status": "For Sale"
     },
     {
@@ -40,7 +47,13 @@
       "yearBuilt": 2018,
       "description": "Beautiful downtown condo with panoramic city views. Modern amenities, secure building, and walking distance to restaurants and shopping.",
       "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800",
-      "features": ["City View", "Balcony", "Modern Appliances", "Concierge", "Gym Access"],
+      "features": [
+        "City View",
+        "Balcony",
+        "Modern Appliances",
+        "Concierge",
+        "Gym Access"
+      ],
       "status": "Sold"
     },
     {
@@ -55,7 +68,13 @@
       "yearBuilt": 2015,
       "description": "Perfect family home in a quiet neighborhood. Large backyard, finished basement, and excellent schools nearby.",
       "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
-      "features": ["Large Yard", "Finished Basement", "2-Car Garage", "Updated Kitchen", "Master Suite"],
+      "features": [
+        "Large Yard",
+        "Finished Basement",
+        "2-Car Garage",
+        "Updated Kitchen",
+        "Master Suite"
+      ],
       "status": "For Sale"
     },
     {
@@ -70,7 +89,13 @@
       "yearBuilt": 1895,
       "description": "Beautifully restored Victorian home with original character and modern updates. Stunning architectural details throughout.",
       "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800",
-      "features": ["Historic Character", "Original Hardwood", "Updated Systems", "Large Porch", "Garden"],
+      "features": [
+        "Historic Character",
+        "Original Hardwood",
+        "Updated Systems",
+        "Large Porch",
+        "Garden"
+      ],
       "status": "Sold"
     },
     {
@@ -85,7 +110,13 @@
       "yearBuilt": 2019,
       "description": "Exclusive waterfront property with private dock and stunning lake views. Luxury finishes and outdoor living spaces.",
       "image": "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800",
-      "features": ["Waterfront", "Private Dock", "Lake View", "Outdoor Kitchen", "Home Theater"],
+      "features": [
+        "Waterfront",
+        "Private Dock",
+        "Lake View",
+        "Outdoor Kitchen",
+        "Home Theater"
+      ],
       "status": "For Sale"
     },
     {
@@ -100,7 +131,13 @@
       "yearBuilt": 2021,
       "description": "Stylish converted loft with exposed brick, high ceilings, and modern amenities. Perfect for urban professionals.",
       "image": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800",
-      "features": ["Exposed Brick", "High Ceilings", "Open Layout", "Modern Design", "Pet Friendly"],
+      "features": [
+        "Exposed Brick",
+        "High Ceilings",
+        "Open Layout",
+        "Modern Design",
+        "Pet Friendly"
+      ],
       "status": "For Sale"
     },
     {
@@ -115,7 +152,13 @@
       "yearBuilt": 2022,
       "description": "Ultra-luxury penthouse with breathtaking city views from every room. Features include private elevator access, rooftop terrace, and premium finishes throughout.",
       "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800",
-      "features": ["Private Elevator", "Rooftop Terrace", "City Views", "Wine Cellar", "Smart Home"],
+      "features": [
+        "Private Elevator",
+        "Rooftop Terrace",
+        "City Views",
+        "Wine Cellar",
+        "Smart Home"
+      ],
       "status": "For Sale"
     }
   ]
