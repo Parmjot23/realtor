@@ -37,6 +37,11 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 130px;
+}
+
 body {
   font-family: var(--font-body);
   color: var(--text-primary);
@@ -1249,7 +1254,7 @@ section {
 }
 
 .testimonial-text {
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-size: 1.25rem;
   font-style: italic;
   margin-bottom: 1.5rem;
@@ -1565,7 +1570,7 @@ section {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 80px;
+    top: 100%;
     left: 0;
     right: 0;
     background: white;
@@ -1600,6 +1605,10 @@ section {
 
 /* Small Screens (Mobile): 640px and below */
 @media (max-width: 640px) {
+  html {
+    scroll-padding-top: 80px;
+  }
+
   .container {
     padding: 0 16px;
   }
@@ -1634,7 +1643,8 @@ section {
 
   /* Navigation */
   .nav-content {
-    height: 64px;
+    height: auto;
+    min-height: 64px;
     padding: 0.5rem 0;
   }
 
@@ -1653,7 +1663,7 @@ section {
   }
 
   .nav-links.open {
-    top: 64px;
+    top: 100%;
     padding: 1.5rem;
   }
 
@@ -2876,8 +2886,66 @@ section {
 }
 
 @media (max-width: 640px) {
+  html {
+    scroll-padding-top: 80px;
+  }
+
   .footer-remax-logo {
     margin-left: auto;
     margin-right: auto;
+  }
+}
+
+/* --- Scroll to Top Button --- */
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--primary-color);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 900;
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+  background: var(--primary-dark);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-to-top svg {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.scroll-to-top:hover svg {
+  transform: translateY(-3px);
+}
+
+@media (max-width: 640px) {
+  .scroll-to-top {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
   }
 }

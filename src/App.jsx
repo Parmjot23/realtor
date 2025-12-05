@@ -78,9 +78,9 @@ const testimonials = [
 
 const propertyCategories = [
     { label: 'Residential', description: 'Detached, Semi, and Townhomes', anchor: '#listings', image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800' },
-    { label: 'Condos', description: 'High-rise & Boutique living', anchor: '#listings', image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800' },
     { label: 'Commercial', description: 'Retail, Office & Industrial', anchor: '#listings', image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800' },
-    { label: 'Pre-Construction', description: 'VIP Access & Incentives', anchor: '#preconstruction', image: '/pre-construction.png' }
+    { label: 'Pre-Construction', description: 'VIP Access & Incentives', anchor: '#preconstruction', image: '/pre-construction.png' },
+    { label: 'Condos', description: 'High-rise & Boutique living', anchor: '#listings', image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800' }
 ]
 
 const calculatorTools = [
@@ -340,6 +340,7 @@ function App() {
     const [menuOpen, setMenuOpen] = useState(false)
     const [activeTab, setActiveTab] = useState('overview')
     const [activeCalculator, setActiveCalculator] = useState(null)
+    const [showScrollTop, setShowScrollTop] = useState(false)
 
     // Mortgage calculator state
     const [downPayment, setDownPayment] = useState(20)
@@ -385,7 +386,9 @@ function App() {
     useEffect(() => {
         const handleScroll = () => {
             setNavScrolled(window.scrollY > 50)
+            setShowScrollTop(window.scrollY > 400)
         }
+        window.addEventListener('scroll', handleScroll)
         handleScroll()
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
@@ -511,6 +514,13 @@ function App() {
             (Math.pow(1 + monthlyRate, numberOfPayments) - 1)
 
         return monthlyPayment
+    }
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
     }
 
     const resultsText =
@@ -1459,6 +1469,17 @@ function App() {
                     />
                 )
             }
+
+            {/* Scroll to Top Button */}
+            <button
+                className={`scroll-to-top ${showScrollTop ? 'visible' : ''}`}
+                onClick={scrollToTop}
+                aria-label="Scroll to top"
+            >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 19V5M5 12l7-7 7 7" />
+                </svg>
+            </button>
         </div >
     )
 }
