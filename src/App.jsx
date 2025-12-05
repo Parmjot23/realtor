@@ -603,7 +603,7 @@ function App() {
             <header className="hero">
                 <div className="hero-bg">
                     <div className="hero-overlay" />
-                    <img src="/modern-canadian-house.png" alt="Modern Urban Canadian Home" />
+                    <img src="/modern-canadian-house-v2.png" alt="Modern Urban Canadian Home" />
                 </div>
                 <div className="hero-container">
                     <div className="hero-content fade-in-up">
@@ -622,18 +622,11 @@ function App() {
                         </div>
                     </div>
 
-                    <div className="hero-lead-form fade-in-up">
-                        <h3>Find Your Dream Home</h3>
-                        <p>Let us do the searching for you.</p>
-                        <form onSubmit={handleContactSubmit}>
-                            <input type="text" className="form-input" placeholder="Your Name" required />
-                            <input type="email" className="form-input" placeholder="Your Email" required />
-                            <input type="tel" className="form-input" placeholder="Your Phone" />
-                            <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Get Started</button>
-                        </form>
+                    <div className="hero-realtor-image-container fade-in-up">
+                        <img src={realtorDetails.photo} alt={realtorDetails.name} className="hero-realtor-image" />
                     </div>
                 </div>
-            </header>
+            </header >
 
             <main>
                 <section className="discovery-bar fade-in-up">
@@ -1180,6 +1173,7 @@ function App() {
                                 Dedicated to providing exceptional service and expertise for all your real estate needs.
                             </p>
                             <p className="footer-text">{realtorDetails.brokerage}</p>
+                            <img src="/remax-gold-logo.jpg" alt="RE/MAX Gold Logo" className="footer-remax-logo" />
                         </div>
                         <div className="footer-col">
                             <h3>Quick Links</h3>
@@ -1214,254 +1208,258 @@ function App() {
                 </div>
             </footer>
 
-            {selectedListing && (
-                <div className="modal" onClick={() => setSelectedListing(null)}>
-                    <div className="modal-content" onClick={(event) => event.stopPropagation()}>
-                        <button type="button" className="modal-close" onClick={() => setSelectedListing(null)}>
-                            &times;
-                        </button>
+            {
+                selectedListing && (
+                    <div className="modal" onClick={() => setSelectedListing(null)}>
+                        <div className="modal-content" onClick={(event) => event.stopPropagation()}>
+                            <button type="button" className="modal-close" onClick={() => setSelectedListing(null)}>
+                                &times;
+                            </button>
 
-                        <div className="modal-image-col">
-                            <img
-                                src={selectedListing.image}
-                                alt={selectedListing.title}
-                                className="modal-image"
-                                onError={(event) => {
-                                    event.currentTarget.src = 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800'
-                                }}
-                            />
-                        </div>
+                            <div className="modal-image-col">
+                                <img
+                                    src={selectedListing.image}
+                                    alt={selectedListing.title}
+                                    className="modal-image"
+                                    onError={(event) => {
+                                        event.currentTarget.src = 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800'
+                                    }}
+                                />
+                            </div>
 
-                        <div className="modal-info-col">
-                            <div className="modal-header">
-                                <h2 className="modal-title">{selectedListing.title}</h2>
-                                <div className="modal-price">{formatPrice(selectedListing.price)}</div>
-                                <div className="modal-address">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                                        <circle cx="12" cy="10" r="3" />
-                                    </svg>
-                                    {selectedListing.address}
+                            <div className="modal-info-col">
+                                <div className="modal-header">
+                                    <h2 className="modal-title">{selectedListing.title}</h2>
+                                    <div className="modal-price">{formatPrice(selectedListing.price)}</div>
+                                    <div className="modal-address">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                            <circle cx="12" cy="10" r="3" />
+                                        </svg>
+                                        {selectedListing.address}
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className="modal-tabs">
-                                <button
-                                    className={`tab-btn ${activeTab === 'overview' ? 'active' : ''}`}
-                                    onClick={() => setActiveTab('overview')}
-                                >
-                                    Overview
-                                </button>
-                                <button
-                                    className={`tab-btn ${activeTab === 'calculator' ? 'active' : ''}`}
-                                    onClick={() => setActiveTab('calculator')}
-                                >
-                                    Calculator
-                                </button>
-                                <button
-                                    className={`tab-btn ${activeTab === 'contact' ? 'active' : ''}`}
-                                    onClick={() => setActiveTab('contact')}
-                                >
-                                    Contact
-                                </button>
-                            </div>
+                                <div className="modal-tabs">
+                                    <button
+                                        className={`tab-btn ${activeTab === 'overview' ? 'active' : ''}`}
+                                        onClick={() => setActiveTab('overview')}
+                                    >
+                                        Overview
+                                    </button>
+                                    <button
+                                        className={`tab-btn ${activeTab === 'calculator' ? 'active' : ''}`}
+                                        onClick={() => setActiveTab('calculator')}
+                                    >
+                                        Calculator
+                                    </button>
+                                    <button
+                                        className={`tab-btn ${activeTab === 'contact' ? 'active' : ''}`}
+                                        onClick={() => setActiveTab('contact')}
+                                    >
+                                        Contact
+                                    </button>
+                                </div>
 
-                            {activeTab === 'overview' && (
-                                <>
-                                    <div className="modal-stats-grid">
-                                        <div className="modal-stat">
-                                            <span className="modal-stat-value">{selectedListing.bedrooms}</span>
-                                            <span className="modal-stat-label">Beds</span>
-                                        </div>
-                                        <div className="modal-stat">
-                                            <span className="modal-stat-value">{selectedListing.bathrooms}</span>
-                                            <span className="modal-stat-label">Baths</span>
-                                        </div>
-                                        <div className="modal-stat">
-                                            <span className="modal-stat-value">{formatNumber(selectedListing.sqft)}</span>
-                                            <span className="modal-stat-label">SqFt</span>
-                                        </div>
-                                        <div className="modal-stat">
-                                            <span className="modal-stat-value">{selectedListing.type}</span>
-                                            <span className="modal-stat-label">Type</span>
-                                        </div>
-                                    </div>
-
-                                    <div className="modal-description">
-                                        <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem', color: 'var(--secondary-color)' }}>Property Overview</h3>
-                                        <p>{selectedListing.description}</p>
-                                    </div>
-
-                                    {selectedListing.features && (
-                                        <div className="modal-features-container">
-                                            <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem', color: 'var(--secondary-color)' }}>Key Features</h3>
-                                            <div className="modal-features">
-                                                {selectedListing.features.map((feature) => (
-                                                    <span key={feature} className="feature-tag">
-                                                        {feature}
-                                                    </span>
-                                                ))}
+                                {activeTab === 'overview' && (
+                                    <>
+                                        <div className="modal-stats-grid">
+                                            <div className="modal-stat">
+                                                <span className="modal-stat-value">{selectedListing.bedrooms}</span>
+                                                <span className="modal-stat-label">Beds</span>
+                                            </div>
+                                            <div className="modal-stat">
+                                                <span className="modal-stat-value">{selectedListing.bathrooms}</span>
+                                                <span className="modal-stat-label">Baths</span>
+                                            </div>
+                                            <div className="modal-stat">
+                                                <span className="modal-stat-value">{formatNumber(selectedListing.sqft)}</span>
+                                                <span className="modal-stat-label">SqFt</span>
+                                            </div>
+                                            <div className="modal-stat">
+                                                <span className="modal-stat-value">{selectedListing.type}</span>
+                                                <span className="modal-stat-label">Type</span>
                                             </div>
                                         </div>
-                                    )}
-                                </>
-                            )}
 
-                            {activeTab === 'calculator' && (
-                                <div className="mortgage-calculator">
-                                    <h3 style={{ marginBottom: '1.5rem', fontSize: '1.25rem', color: 'var(--secondary-color)' }}>Mortgage Calculator</h3>
-
-                                    <div className="calculator-result">
-                                        <div className="result-label">Estimated Monthly Payment</div>
-                                        <div className="result-value">{formatPrice(calculateMortgage(selectedListing.price))}<span>/mo</span></div>
-                                    </div>
-
-                                    <div className="calculator-inputs">
-                                        <div className="calculator-input-group">
-                                            <label>Down Payment: {downPayment}%</label>
-                                            <input
-                                                type="range"
-                                                min="0"
-                                                max="50"
-                                                step="5"
-                                                value={downPayment}
-                                                onChange={(e) => setDownPayment(Number(e.target.value))}
-                                                className="range-slider"
-                                            />
-                                            <div className="input-value">{formatPrice((selectedListing.price * downPayment) / 100)}</div>
+                                        <div className="modal-description">
+                                            <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem', color: 'var(--secondary-color)' }}>Property Overview</h3>
+                                            <p>{selectedListing.description}</p>
                                         </div>
 
-                                        <div className="calculator-input-group">
-                                            <label>Interest Rate: {interestRate}%</label>
-                                            <input
-                                                type="range"
-                                                min="3"
-                                                max="10"
-                                                step="0.5"
-                                                value={interestRate}
-                                                onChange={(e) => setInterestRate(Number(e.target.value))}
-                                                className="range-slider"
-                                            />
+                                        {selectedListing.features && (
+                                            <div className="modal-features-container">
+                                                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem', color: 'var(--secondary-color)' }}>Key Features</h3>
+                                                <div className="modal-features">
+                                                    {selectedListing.features.map((feature) => (
+                                                        <span key={feature} className="feature-tag">
+                                                            {feature}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </>
+                                )}
+
+                                {activeTab === 'calculator' && (
+                                    <div className="mortgage-calculator">
+                                        <h3 style={{ marginBottom: '1.5rem', fontSize: '1.25rem', color: 'var(--secondary-color)' }}>Mortgage Calculator</h3>
+
+                                        <div className="calculator-result">
+                                            <div className="result-label">Estimated Monthly Payment</div>
+                                            <div className="result-value">{formatPrice(calculateMortgage(selectedListing.price))}<span>/mo</span></div>
                                         </div>
 
-                                        <div className="calculator-input-group">
-                                            <label>Loan Term: {loanTerm} years</label>
-                                            <input
-                                                type="range"
-                                                min="10"
-                                                max="30"
-                                                step="5"
-                                                value={loanTerm}
-                                                onChange={(e) => setLoanTerm(Number(e.target.value))}
-                                                className="range-slider"
-                                            />
-                                        </div>
-                                    </div>
+                                        <div className="calculator-inputs">
+                                            <div className="calculator-input-group">
+                                                <label>Down Payment: {downPayment}%</label>
+                                                <input
+                                                    type="range"
+                                                    min="0"
+                                                    max="50"
+                                                    step="5"
+                                                    value={downPayment}
+                                                    onChange={(e) => setDownPayment(Number(e.target.value))}
+                                                    className="range-slider"
+                                                />
+                                                <div className="input-value">{formatPrice((selectedListing.price * downPayment) / 100)}</div>
+                                            </div>
 
-                                    <div className="calculator-breakdown">
-                                        <div className="breakdown-item">
-                                            <span>Home Price:</span>
-                                            <strong>{formatPrice(selectedListing.price)}</strong>
+                                            <div className="calculator-input-group">
+                                                <label>Interest Rate: {interestRate}%</label>
+                                                <input
+                                                    type="range"
+                                                    min="3"
+                                                    max="10"
+                                                    step="0.5"
+                                                    value={interestRate}
+                                                    onChange={(e) => setInterestRate(Number(e.target.value))}
+                                                    className="range-slider"
+                                                />
+                                            </div>
+
+                                            <div className="calculator-input-group">
+                                                <label>Loan Term: {loanTerm} years</label>
+                                                <input
+                                                    type="range"
+                                                    min="10"
+                                                    max="30"
+                                                    step="5"
+                                                    value={loanTerm}
+                                                    onChange={(e) => setLoanTerm(Number(e.target.value))}
+                                                    className="range-slider"
+                                                />
+                                            </div>
                                         </div>
-                                        <div className="breakdown-item">
-                                            <span>Down Payment ({downPayment}%):</span>
-                                            <strong>{formatPrice((selectedListing.price * downPayment) / 100)}</strong>
-                                        </div>
-                                        {calculateCMHC(selectedListing.price, downPayment) > 0 && (
+
+                                        <div className="calculator-breakdown">
                                             <div className="breakdown-item">
-                                                <span>CMHC Insurance:</span>
-                                                <strong>{formatPrice(calculateCMHC(selectedListing.price, downPayment))}</strong>
+                                                <span>Home Price:</span>
+                                                <strong>{formatPrice(selectedListing.price)}</strong>
                                             </div>
-                                        )}
-                                        <div className="breakdown-item">
-                                            <span>Loan Amount:</span>
-                                            <strong>{formatPrice(selectedListing.price - (selectedListing.price * downPayment) / 100 + calculateCMHC(selectedListing.price, downPayment))}</strong>
+                                            <div className="breakdown-item">
+                                                <span>Down Payment ({downPayment}%):</span>
+                                                <strong>{formatPrice((selectedListing.price * downPayment) / 100)}</strong>
+                                            </div>
+                                            {calculateCMHC(selectedListing.price, downPayment) > 0 && (
+                                                <div className="breakdown-item">
+                                                    <span>CMHC Insurance:</span>
+                                                    <strong>{formatPrice(calculateCMHC(selectedListing.price, downPayment))}</strong>
+                                                </div>
+                                            )}
+                                            <div className="breakdown-item">
+                                                <span>Loan Amount:</span>
+                                                <strong>{formatPrice(selectedListing.price - (selectedListing.price * downPayment) / 100 + calculateCMHC(selectedListing.price, downPayment))}</strong>
+                                            </div>
+                                            <div className="breakdown-item">
+                                                <span>Total Interest:</span>
+                                                <strong>{formatPrice((calculateMortgage(selectedListing.price) * loanTerm * 12) - (selectedListing.price - (selectedListing.price * downPayment) / 100 + calculateCMHC(selectedListing.price, downPayment)))}</strong>
+                                            </div>
                                         </div>
-                                        <div className="breakdown-item">
-                                            <span>Total Interest:</span>
-                                            <strong>{formatPrice((calculateMortgage(selectedListing.price) * loanTerm * 12) - (selectedListing.price - (selectedListing.price * downPayment) / 100 + calculateCMHC(selectedListing.price, downPayment)))}</strong>
+
+                                        <p className="calculator-disclaimer">
+                                            * This is an estimate only. Actual payments may vary based on property taxes, insurance, HOA fees, and other factors.
+                                        </p>
+                                    </div>
+                                )}
+
+                                {activeTab === 'contact' && (
+                                    <div className="modal-form-container">
+                                        <h4>Interested in this property?</h4>
+                                        <form onSubmit={handleContactSubmit} className="contact-form" style={{ gap: '1rem' }}>
+                                            <div className="form-row" style={{ gap: '1rem' }}>
+                                                <input type="text" placeholder="Name" className="form-input" style={{ margin: 0, padding: '0.75rem' }} required />
+                                                <input type="tel" placeholder="Phone" className="form-input" style={{ margin: 0, padding: '0.75rem' }} required />
+                                            </div>
+                                            <textarea
+                                                className="form-input"
+                                                placeholder="I'm interested in this property..."
+                                                rows="3"
+                                                style={{ margin: 0, padding: '0.75rem' }}
+                                                defaultValue={`Hi, I'm interested in ${selectedListing.address}. Please contact me.`}
+                                            />
+                                            <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Schedule Viewing</button>
+                                            {formStatus === 'success' && (
+                                                <div className="form-message-success">Thank you! We'll contact you soon.</div>
+                                            )}
+                                        </form>
+
+                                        <div className="share-section">
+                                            <h4 style={{ marginTop: '2rem', marginBottom: '1rem' }}>Share This Property</h4>
+                                            <div className="share-buttons">
+                                                <button
+                                                    className="share-btn"
+                                                    onClick={() => {
+                                                        navigator.clipboard.writeText(window.location.href)
+                                                        alert('Link copied to clipboard!')
+                                                    }}
+                                                >
+                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                                                    </svg>
+                                                    Copy Link
+                                                </button>
+                                                <button
+                                                    className="share-btn"
+                                                    onClick={() => window.open(`mailto:?subject=${selectedListing.title}&body=Check out this property: ${selectedListing.address}`, '_blank')}
+                                                >
+                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                                        <polyline points="22,6 12,13 2,6" />
+                                                    </svg>
+                                                    Email
+                                                </button>
+                                                <button
+                                                    className="share-btn"
+                                                    onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank')}
+                                                >
+                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                                                    </svg>
+                                                    Share
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <p className="calculator-disclaimer">
-                                        * This is an estimate only. Actual payments may vary based on property taxes, insurance, HOA fees, and other factors.
-                                    </p>
-                                </div>
-                            )}
-
-                            {activeTab === 'contact' && (
-                                <div className="modal-form-container">
-                                    <h4>Interested in this property?</h4>
-                                    <form onSubmit={handleContactSubmit} className="contact-form" style={{ gap: '1rem' }}>
-                                        <div className="form-row" style={{ gap: '1rem' }}>
-                                            <input type="text" placeholder="Name" className="form-input" style={{ margin: 0, padding: '0.75rem' }} required />
-                                            <input type="tel" placeholder="Phone" className="form-input" style={{ margin: 0, padding: '0.75rem' }} required />
-                                        </div>
-                                        <textarea
-                                            className="form-input"
-                                            placeholder="I'm interested in this property..."
-                                            rows="3"
-                                            style={{ margin: 0, padding: '0.75rem' }}
-                                            defaultValue={`Hi, I'm interested in ${selectedListing.address}. Please contact me.`}
-                                        />
-                                        <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Schedule Viewing</button>
-                                        {formStatus === 'success' && (
-                                            <div className="form-message-success">Thank you! We'll contact you soon.</div>
-                                        )}
-                                    </form>
-
-                                    <div className="share-section">
-                                        <h4 style={{ marginTop: '2rem', marginBottom: '1rem' }}>Share This Property</h4>
-                                        <div className="share-buttons">
-                                            <button
-                                                className="share-btn"
-                                                onClick={() => {
-                                                    navigator.clipboard.writeText(window.location.href)
-                                                    alert('Link copied to clipboard!')
-                                                }}
-                                            >
-                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                                                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-                                                </svg>
-                                                Copy Link
-                                            </button>
-                                            <button
-                                                className="share-btn"
-                                                onClick={() => window.open(`mailto:?subject=${selectedListing.title}&body=Check out this property: ${selectedListing.address}`, '_blank')}
-                                            >
-                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                                                    <polyline points="22,6 12,13 2,6" />
-                                                </svg>
-                                                Email
-                                            </button>
-                                            <button
-                                                className="share-btn"
-                                                onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank')}
-                                            >
-                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                                                </svg>
-                                                Share
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
+                                )}
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
+                )
+            }
 
             {/* Calculator Modal */}
-            {activeCalculator && (
-                <CalculatorModal
-                    tool={activeCalculator}
-                    onClose={() => setActiveCalculator(null)}
-                />
-            )}
-        </div>
+            {
+                activeCalculator && (
+                    <CalculatorModal
+                        tool={activeCalculator}
+                        onClose={() => setActiveCalculator(null)}
+                    />
+                )
+            }
+        </div >
     )
 }
 
