@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import fallbackData from './data/listings-fallback.json'
 import { CalculatorModal } from './components/Calculators'
 import { generatePDF } from './utils/pdfGenerator'
 import './App.css'
+import ListingCard from './ListingCard'
 
 const services = [
     {
@@ -329,21 +330,23 @@ function App() {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
     const [searchTerm, setSearchTerm] = useState('')
+    const [showScrollTop, setShowScrollTop] = useState(false)
+    const [currentImageIndex, setCurrentImageIndex] = useState(0)
+    const [touchStart, setTouchStart] = useState(null)
+    const [touchEnd, setTouchEnd] = useState(null)
+
+    const [selectedListing, setSelectedListing] = useState(null)
+    const [showLightbox, setShowLightbox] = useState(false)
     const [typeFilter, setTypeFilter] = useState('')
     const [bedroomsFilter, setBedroomsFilter] = useState('')
     const [priceFilter, setPriceFilter] = useState('')
     const [sortOption, setSortOption] = useState('default')
-    const [selectedListing, setSelectedListing] = useState(null)
     const [formStatus, setFormStatus] = useState('idle')
     const [navScrolled, setNavScrolled] = useState(false)
     const [usingFallbackData, setUsingFallbackData] = useState(true)
     const [menuOpen, setMenuOpen] = useState(false)
     const [activeTab, setActiveTab] = useState('overview')
     const [activeCalculator, setActiveCalculator] = useState(null)
-    const [showScrollTop, setShowScrollTop] = useState(false)
-    const [currentImageIndex, setCurrentImageIndex] = useState(0)
-    const [touchStart, setTouchStart] = useState(null)
-    const [touchEnd, setTouchEnd] = useState(null)
 
     // Mortgage calculator state
     const [downPayment, setDownPayment] = useState(20)
@@ -881,48 +884,16 @@ function App() {
 
                         <div className="listings-grid">
                             {!loading && filteredListings.length === 0 && <p className="empty-state">{resultsText}</p>}
-                            {filteredListings.map((listing) => {
-                                const status = listing.status || 'For Sale'
-
-                                return (
-                                    <article key={listing.id} className="listing-card fade-in-up" onClick={() => { setCurrentImageIndex(0); setSelectedListing(listing); }}>
-                                        <div className="listing-image-container">
-                                            <div className={`listing-status ${status.toLowerCase() === 'sold' ? 'sold' : ''}`}>
-                                                {status}
-                                            </div>
-                                            <img
-                                                src={listing.image}
-                                                alt={listing.address}
-                                                className="listing-image"
-                                                onError={(event) => {
-                                                    event.currentTarget.src = 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800'
-                                                }}
-                                            />
-                                        </div>
-                                        <div className="listing-content">
-                                            <div className="listing-price">{formatPrice(listing.price)}</div>
-                                            <div className="listing-address">
-                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                                                    <circle cx="12" cy="10" r="3" />
-                                                </svg>
-                                                {listing.address}
-                                            </div>
-                                        </div>
-                                        <div className="listing-meta">
-                                            <div className="meta-item">
-                                                <span>{listing.bedrooms}</span> Beds
-                                            </div>
-                                            <div className="meta-item">
-                                                <span>{listing.bathrooms}</span> Baths
-                                            </div>
-                                            <div className="meta-item">
-                                                <span>{listing.sqft || 'N/A'}</span> SqFt
-                                            </div>
-                                        </div>
-                                    </article>
-                                )
-                            })}
+                            {filteredListings.map((listing) => (
+                                <ListingCard
+                                    key={listing.id}
+                                    listing={listing}
+                                    onClick={(l) => {
+                                        setCurrentImageIndex(0)
+                                        setSelectedListing(l)
+                                    }}
+                                />
+                            ))}
                         </div>
                     </div>
                 </section>
@@ -1232,21 +1203,7 @@ function App() {
                             </button>
 
                             <div className="modal-image-col"
-                                onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
-                                onTouchMove={(e) => setTouchEnd(e.touches[0].clientX)}
-                                onTouchEnd={() => {
-                                    if (!touchStart || !touchEnd) return
-                                    const distance = touchStart - touchEnd
-                                    const images = selectedListing.images || [selectedListing.image]
-                                    if (distance > 50 && currentImageIndex < images.length - 1) {
-                                        setCurrentImageIndex(prev => prev + 1)
-                                    }
-                                    if (distance < -50 && currentImageIndex > 0) {
-                                        setCurrentImageIndex(prev => prev - 1)
-                                    }
-                                    setTouchStart(null)
-                                    setTouchEnd(null)
-                                }}
+                                onClick={() => setShowLightbox(true)}
                             >
                                 <img
                                     src={(selectedListing.images && selectedListing.images[currentImageIndex]) || selectedListing.image}
@@ -1261,7 +1218,10 @@ function App() {
                                         <button
                                             type="button"
                                             className="carousel-btn carousel-prev"
-                                            onClick={() => setCurrentImageIndex(prev => prev > 0 ? prev - 1 : selectedListing.images.length - 1)}
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                setCurrentImageIndex(prev => prev > 0 ? prev - 1 : selectedListing.images.length - 1)
+                                            }}
                                             style={{
                                                 position: 'absolute',
                                                 left: '1rem',
@@ -1287,7 +1247,10 @@ function App() {
                                         <button
                                             type="button"
                                             className="carousel-btn carousel-next"
-                                            onClick={() => setCurrentImageIndex(prev => prev < selectedListing.images.length - 1 ? prev + 1 : 0)}
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                setCurrentImageIndex(prev => prev < selectedListing.images.length - 1 ? prev + 1 : 0)
+                                            }}
                                             style={{
                                                 position: 'absolute',
                                                 right: '1rem',
@@ -1726,6 +1689,66 @@ function App() {
                         tool={activeCalculator}
                         onClose={() => setActiveCalculator(null)}
                     />
+                )
+            }
+
+            {/* Lightbox Modal */}
+            {
+                showLightbox && selectedListing && (
+                    <div className="lightbox-overlay" onClick={() => setShowLightbox(false)}>
+                        <button className="lightbox-close" onClick={() => setShowLightbox(false)}>&times;</button>
+                        <div
+                            className="lightbox-content"
+                            onClick={(e) => e.stopPropagation()}
+                            onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
+                            onTouchMove={(e) => setTouchEnd(e.touches[0].clientX)}
+                            onTouchEnd={() => {
+                                if (!touchStart || !touchEnd) return
+                                const distance = touchStart - touchEnd
+                                const images = selectedListing.images || [selectedListing.image]
+                                if (distance > 50 && currentImageIndex < images.length - 1) {
+                                    setCurrentImageIndex(prev => prev + 1)
+                                }
+                                if (distance < -50 && currentImageIndex > 0) {
+                                    setCurrentImageIndex(prev => prev - 1)
+                                }
+                                setTouchStart(null)
+                                setTouchEnd(null)
+                            }}
+                        >
+                            <img
+                                src={(selectedListing.images && selectedListing.images[currentImageIndex]) || selectedListing.image}
+                                alt={selectedListing.address}
+                                className="lightbox-image"
+                            />
+
+                            {selectedListing.images && selectedListing.images.length > 1 && (
+                                <>
+                                    <button
+                                        className="lightbox-nav-btn lightbox-prev"
+                                        onClick={(e) => {
+                                            e.stopPropagation()
+                                            setCurrentImageIndex(prev => prev > 0 ? prev - 1 : selectedListing.images.length - 1)
+                                        }}
+                                    >
+                                        ‹
+                                    </button>
+                                    <button
+                                        className="lightbox-nav-btn lightbox-next"
+                                        onClick={(e) => {
+                                            e.stopPropagation()
+                                            setCurrentImageIndex(prev => prev < selectedListing.images.length - 1 ? prev + 1 : 0)
+                                        }}
+                                    >
+                                        ›
+                                    </button>
+                                    <div className="lightbox-counter">
+                                        {currentImageIndex + 1} / {selectedListing.images.length}
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    </div>
                 )
             }
 
