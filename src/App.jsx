@@ -880,13 +880,12 @@ function App() {
                                 return (
                                     <article key={listing.id} className="listing-card fade-in-up" onClick={() => setSelectedListing(listing)}>
                                         <div className="listing-image-container">
-                                            <div className="listing-tag">{listing.type}</div>
                                             <div className={`listing-status ${status.toLowerCase() === 'sold' ? 'sold' : ''}`}>
                                                 {status}
                                             </div>
                                             <img
                                                 src={listing.image}
-                                                alt={listing.title}
+                                                alt={listing.address}
                                                 className="listing-image"
                                                 onError={(event) => {
                                                     event.currentTarget.src = 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800'
@@ -895,7 +894,6 @@ function App() {
                                         </div>
                                         <div className="listing-content">
                                             <div className="listing-price">{formatPrice(listing.price)}</div>
-                                            <h3 className="listing-title">{listing.title}</h3>
                                             <div className="listing-address">
                                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
@@ -1283,12 +1281,12 @@ function App() {
                                                 <span className="modal-stat-label">Baths</span>
                                             </div>
                                             <div className="modal-stat">
-                                                <span className="modal-stat-value">{formatNumber(selectedListing.sqft)}</span>
+                                                <span className="modal-stat-value">{selectedListing.sqft}</span>
                                                 <span className="modal-stat-label">SqFt</span>
                                             </div>
                                             <div className="modal-stat">
-                                                <span className="modal-stat-value">{selectedListing.type}</span>
-                                                <span className="modal-stat-label">Type</span>
+                                                <span className="modal-stat-value">{selectedListing.rooms || 'N/A'}</span>
+                                                <span className="modal-stat-label">Rooms</span>
                                             </div>
                                         </div>
 
@@ -1297,18 +1295,159 @@ function App() {
                                             <p>{selectedListing.description}</p>
                                         </div>
 
-                                        {selectedListing.features && (
-                                            <div className="modal-features-container">
-                                                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem', color: 'var(--secondary-color)' }}>Key Features</h3>
-                                                <div className="modal-features">
-                                                    {selectedListing.features.map((feature) => (
-                                                        <span key={feature} className="feature-tag">
-                                                            {feature}
-                                                        </span>
-                                                    ))}
+                                        <div className="modal-details-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem', marginTop: '1rem', fontSize: '0.9rem' }}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                <span style={{ color: 'var(--text-light)' }}>Type:</span>
+                                                <span style={{ fontWeight: '500' }}>{selectedListing.propertyType} {selectedListing.style}</span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                <span style={{ color: 'var(--text-light)' }}>Status:</span>
+                                                <span style={{ fontWeight: '500', color: '#dc2626' }}>{selectedListing.status}</span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                <span style={{ color: 'var(--text-light)' }}>Sold Date:</span>
+                                                <span style={{ fontWeight: '500' }}>{selectedListing.soldDate || 'N/A'}</span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                <span style={{ color: 'var(--text-light)' }}>Approx Age:</span>
+                                                <span style={{ fontWeight: '500' }}>{selectedListing.approxAge || 'N/A'}</span>
+                                            </div>
+                                            {selectedListing.lotSize && (
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                    <span style={{ color: 'var(--text-light)' }}>Lot Size:</span>
+                                                    <span style={{ fontWeight: '500' }}>{selectedListing.lotSize}</span>
+                                                </div>
+                                            )}
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                <span style={{ color: 'var(--text-light)' }}>Taxes ({selectedListing.taxYear}):</span>
+                                                <span style={{ fontWeight: '500' }}>${selectedListing.taxes?.toLocaleString()}</span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                <span style={{ color: 'var(--text-light)' }}>Total Parking:</span>
+                                                <span style={{ fontWeight: '500' }}>{selectedListing.totalParkingSpaces} spaces</span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                <span style={{ color: 'var(--text-light)' }}>Garage:</span>
+                                                <span style={{ fontWeight: '500' }}>{selectedListing.garageType || 'N/A'} ({selectedListing.garageParkingSpaces})</span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                <span style={{ color: 'var(--text-light)' }}>Basement:</span>
+                                                <span style={{ fontWeight: '500' }}>{selectedListing.basement || 'N/A'}</span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                <span style={{ color: 'var(--text-light)' }}>Heating:</span>
+                                                <span style={{ fontWeight: '500' }}>{selectedListing.heatingType}, {selectedListing.heatingSource}</span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                <span style={{ color: 'var(--text-light)' }}>A/C:</span>
+                                                <span style={{ fontWeight: '500' }}>{selectedListing.ac || 'N/A'}</span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                <span style={{ color: 'var(--text-light)' }}>Exterior:</span>
+                                                <span style={{ fontWeight: '500' }}>{selectedListing.exterior || 'N/A'}</span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                <span style={{ color: 'var(--text-light)' }}>Laundry:</span>
+                                                <span style={{ fontWeight: '500' }}>{selectedListing.laundryLevel || 'N/A'}</span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                <span style={{ color: 'var(--text-light)' }}>Water:</span>
+                                                <span style={{ fontWeight: '500' }}>{selectedListing.water || 'N/A'}</span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                <span style={{ color: 'var(--text-light)' }}>Sewers:</span>
+                                                <span style={{ fontWeight: '500' }}>{selectedListing.sewers || 'N/A'}</span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                <span style={{ color: 'var(--text-light)' }}>Fronting On:</span>
+                                                <span style={{ fontWeight: '500' }}>{selectedListing.frontingOn || 'N/A'}</span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                <span style={{ color: 'var(--text-light)' }}>Cross Street:</span>
+                                                <span style={{ fontWeight: '500' }}>{selectedListing.crossStreet || 'N/A'}</span>
+                                            </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
+                                                <span style={{ color: 'var(--text-light)' }}>Area:</span>
+                                                <span style={{ fontWeight: '500' }}>{selectedListing.municipality}, {selectedListing.area}</span>
+                                            </div>
+                                        </div>
+
+                                        {selectedListing.extras && (
+                                            <div style={{ marginTop: '1rem', padding: '0.75rem', background: 'var(--bg-light)', borderRadius: '6px' }}>
+                                                <h4 style={{ marginBottom: '0.5rem', fontSize: '0.95rem', color: 'var(--secondary-color)' }}>Extras & Inclusions</h4>
+                                                <p style={{ fontSize: '0.85rem', color: 'var(--text-light)', lineHeight: '1.5' }}>{selectedListing.extras}</p>
+                                            </div>
+                                        )}
+
+                                        {selectedListing.rooms_info && selectedListing.rooms_info.length > 0 && (
+                                            <div style={{ marginTop: '1.25rem' }}>
+                                                <h4 style={{ marginBottom: '0.5rem', fontSize: '0.95rem', color: 'var(--secondary-color)' }}>Room Information</h4>
+                                                <div style={{ overflowX: 'auto' }}>
+                                                    <table style={{ width: '100%', fontSize: '0.8rem', borderCollapse: 'collapse' }}>
+                                                        <thead>
+                                                            <tr style={{ background: 'var(--bg-light)', textAlign: 'left' }}>
+                                                                <th style={{ padding: '0.5rem', borderBottom: '1px solid var(--border-color)' }}>Room</th>
+                                                                <th style={{ padding: '0.5rem', borderBottom: '1px solid var(--border-color)' }}>Level</th>
+                                                                <th style={{ padding: '0.5rem', borderBottom: '1px solid var(--border-color)' }}>Dimensions</th>
+                                                                <th style={{ padding: '0.5rem', borderBottom: '1px solid var(--border-color)' }}>Notes</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {selectedListing.rooms_info.map((room, index) => (
+                                                                <tr key={index} style={{ borderBottom: '1px solid var(--border-color)' }}>
+                                                                    <td style={{ padding: '0.5rem', fontWeight: '500' }}>{room.room}</td>
+                                                                    <td style={{ padding: '0.5rem' }}>{room.level}</td>
+                                                                    <td style={{ padding: '0.5rem' }}>{room.dimensions}</td>
+                                                                    <td style={{ padding: '0.5rem', color: 'var(--text-light)' }}>{room.notes || '-'}</td>
+                                                                </tr>
+                                                            ))}
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                         )}
+
+                                        {selectedListing.washrooms_info && selectedListing.washrooms_info.length > 0 && (
+                                            <div style={{ marginTop: '1.25rem' }}>
+                                                <h4 style={{ marginBottom: '0.5rem', fontSize: '0.95rem', color: 'var(--secondary-color)' }}>Washroom Information</h4>
+                                                <div style={{ overflowX: 'auto' }}>
+                                                    <table style={{ width: '100%', fontSize: '0.8rem', borderCollapse: 'collapse' }}>
+                                                        <thead>
+                                                            <tr style={{ background: 'var(--bg-light)', textAlign: 'left' }}>
+                                                                <th style={{ padding: '0.5rem', borderBottom: '1px solid var(--border-color)' }}># of Washrooms</th>
+                                                                <th style={{ padding: '0.5rem', borderBottom: '1px solid var(--border-color)' }}>Pieces</th>
+                                                                <th style={{ padding: '0.5rem', borderBottom: '1px solid var(--border-color)' }}>Level</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {selectedListing.washrooms_info.map((washroom, index) => (
+                                                                <tr key={index} style={{ borderBottom: '1px solid var(--border-color)' }}>
+                                                                    <td style={{ padding: '0.5rem', fontWeight: '500' }}>1</td>
+                                                                    <td style={{ padding: '0.5rem' }}>{washroom.pieces}</td>
+                                                                    <td style={{ padding: '0.5rem' }}>{washroom.level}</td>
+                                                                </tr>
+                                                            ))}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        <div style={{ marginTop: '1.25rem' }}>
+                                            <h4 style={{ marginBottom: '0.5rem', fontSize: '0.95rem', color: 'var(--secondary-color)' }}>Location</h4>
+                                            <div style={{ borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border-color)' }}>
+                                                <iframe
+                                                    title="Property Location"
+                                                    width="100%"
+                                                    height="200"
+                                                    style={{ border: 0 }}
+                                                    loading="lazy"
+                                                    allowFullScreen
+                                                    referrerPolicy="no-referrer-when-downgrade"
+                                                    src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${encodeURIComponent(selectedListing.address)}`}
+                                                />
+                                            </div>
+                                        </div>
                                     </>
                                 )}
 

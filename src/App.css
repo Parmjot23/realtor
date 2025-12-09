@@ -726,7 +726,28 @@ section {
 }
 
 .listing-status.sold {
-  background: #475569;
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: white;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 1.25rem;
+  border-radius: 2px;
+  box-shadow: 0 3px 12px rgba(185, 28, 28, 0.4);
+  text-transform: uppercase;
+  animation: soldPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes soldPulse {
+  0%, 100% { 
+    box-shadow: 0 3px 12px rgba(185, 28, 28, 0.4);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 5px 20px rgba(185, 28, 28, 0.6);
+    transform: scale(1.02);
+  }
 }
 
 .listing-content {
