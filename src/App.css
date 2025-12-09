@@ -740,11 +740,14 @@ section {
 }
 
 @keyframes soldPulse {
-  0%, 100% { 
+
+  0%,
+  100% {
     box-shadow: 0 3px 12px rgba(185, 28, 28, 0.4);
     transform: scale(1);
   }
-  50% { 
+
+  50% {
     box-shadow: 0 5px 20px rgba(185, 28, 28, 0.6);
     transform: scale(1.02);
   }
@@ -1972,13 +1975,13 @@ section {
 
 .modal-content {
   background: var(--bg-body);
-  width: 100%;
-  max-width: 1100px;
-  max-height: 90vh;
+  width: 95%;
+  max-width: 1600px;
+  max-height: 92vh;
   border-radius: 4px;
   box-shadow: var(--shadow-xl);
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1fr 1.2fr;
   overflow: hidden;
   position: relative;
   animation: slideUp 0.4s ease-out;
@@ -2022,11 +2025,11 @@ section {
 }
 
 .modal-info-col {
-  padding: 3rem;
+  padding: 2rem 2.5rem;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .modal-header {

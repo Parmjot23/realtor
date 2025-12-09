@@ -341,6 +341,9 @@ function App() {
     const [activeTab, setActiveTab] = useState('overview')
     const [activeCalculator, setActiveCalculator] = useState(null)
     const [showScrollTop, setShowScrollTop] = useState(false)
+    const [currentImageIndex, setCurrentImageIndex] = useState(0)
+    const [touchStart, setTouchStart] = useState(null)
+    const [touchEnd, setTouchEnd] = useState(null)
 
     // Mortgage calculator state
     const [downPayment, setDownPayment] = useState(20)
@@ -429,10 +432,8 @@ function App() {
     }, [loading, listings.length])
 
     const propertyTypes = useMemo(() => {
-        const values = Array.from(new Set(listings.map((listing) => listing.type))).sort()
-        return ['House', 'Condo', 'Condos', 'Townhouse', 'Loft', 'Studio', 'Penthouse', 'Duplex', 'Commercial', 'Pre-Construction', ...values]
-            .filter((value, index, array) => array.indexOf(value) === index)
-            .sort()
+        const values = Array.from(new Set(listings.map((listing) => listing.propertyType).filter(Boolean))).sort()
+        return values
     }, [listings])
 
     const filteredListings = useMemo(() => {
@@ -442,20 +443,26 @@ function App() {
             const query = searchTerm.toLowerCase()
             data = data.filter(
                 (listing) =>
-                    listing.title.toLowerCase().includes(query) ||
-                    listing.address.toLowerCase().includes(query) ||
-                    listing.description.toLowerCase().includes(query) ||
+                    (listing.title && listing.title.toLowerCase().includes(query)) ||
+                    (listing.address && listing.address.toLowerCase().includes(query)) ||
+                    (listing.description && listing.description.toLowerCase().includes(query)) ||
+                    (listing.propertyType && listing.propertyType.toLowerCase().includes(query)) ||
+                    (listing.municipality && listing.municipality.toLowerCase().includes(query)) ||
+                    (listing.community && listing.community.toLowerCase().includes(query)) ||
                     (listing.features && listing.features.some((feature) => feature.toLowerCase().includes(query)))
             )
         }
 
         if (typeFilter) {
-            data = data.filter((listing) => listing.type === typeFilter)
+            data = data.filter((listing) => listing.propertyType === typeFilter)
         }
 
         if (bedroomsFilter !== '') {
             const minBedrooms = Number(bedroomsFilter)
-            data = data.filter((listing) => listing.bedrooms >= minBedrooms)
+            data = data.filter((listing) => {
+                const beds = typeof listing.bedrooms === 'string' ? parseInt(listing.bedrooms) : listing.bedrooms
+                return beds >= minBedrooms
+            })
         }
 
         if (priceFilter) {
@@ -878,7 +885,7 @@ function App() {
                                 const status = listing.status || 'For Sale'
 
                                 return (
-                                    <article key={listing.id} className="listing-card fade-in-up" onClick={() => setSelectedListing(listing)}>
+                                    <article key={listing.id} className="listing-card fade-in-up" onClick={() => { setCurrentImageIndex(0); setSelectedListing(listing); }}>
                                         <div className="listing-image-container">
                                             <div className={`listing-status ${status.toLowerCase() === 'sold' ? 'sold' : ''}`}>
                                                 {status}
@@ -910,7 +917,7 @@ function App() {
                                                 <span>{listing.bathrooms}</span> Baths
                                             </div>
                                             <div className="meta-item">
-                                                <span>{formatNumber(listing.sqft)}</span> SqFt
+                                                <span>{listing.sqft || 'N/A'}</span> SqFt
                                             </div>
                                         </div>
                                     </article>
@@ -1224,15 +1231,128 @@ function App() {
                                 &times;
                             </button>
 
-                            <div className="modal-image-col">
+                            <div className="modal-image-col"
+                                onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
+                                onTouchMove={(e) => setTouchEnd(e.touches[0].clientX)}
+                                onTouchEnd={() => {
+                                    if (!touchStart || !touchEnd) return
+                                    const distance = touchStart - touchEnd
+                                    const images = selectedListing.images || [selectedListing.image]
+                                    if (distance > 50 && currentImageIndex < images.length - 1) {
+                                        setCurrentImageIndex(prev => prev + 1)
+                                    }
+                                    if (distance < -50 && currentImageIndex > 0) {
+                                        setCurrentImageIndex(prev => prev - 1)
+                                    }
+                                    setTouchStart(null)
+                                    setTouchEnd(null)
+                                }}
+                            >
                                 <img
-                                    src={selectedListing.image}
-                                    alt={selectedListing.title}
+                                    src={(selectedListing.images && selectedListing.images[currentImageIndex]) || selectedListing.image}
+                                    alt={selectedListing.address}
                                     className="modal-image"
                                     onError={(event) => {
                                         event.currentTarget.src = 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800'
                                     }}
                                 />
+                                {selectedListing.images && selectedListing.images.length > 1 && (
+                                    <>
+                                        <button
+                                            type="button"
+                                            className="carousel-btn carousel-prev"
+                                            onClick={() => setCurrentImageIndex(prev => prev > 0 ? prev - 1 : selectedListing.images.length - 1)}
+                                            style={{
+                                                position: 'absolute',
+                                                left: '1rem',
+                                                top: '50%',
+                                                transform: 'translateY(-50%)',
+                                                background: 'rgba(255,255,255,0.9)',
+                                                border: 'none',
+                                                borderRadius: '50%',
+                                                width: '44px',
+                                                height: '44px',
+                                                fontSize: '1.5rem',
+                                                cursor: 'pointer',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                                                zIndex: 5,
+                                                transition: 'all 0.2s'
+                                            }}
+                                        >
+                                            ‹
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="carousel-btn carousel-next"
+                                            onClick={() => setCurrentImageIndex(prev => prev < selectedListing.images.length - 1 ? prev + 1 : 0)}
+                                            style={{
+                                                position: 'absolute',
+                                                right: '1rem',
+                                                top: '50%',
+                                                transform: 'translateY(-50%)',
+                                                background: 'rgba(255,255,255,0.9)',
+                                                border: 'none',
+                                                borderRadius: '50%',
+                                                width: '44px',
+                                                height: '44px',
+                                                fontSize: '1.5rem',
+                                                cursor: 'pointer',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                                                zIndex: 5,
+                                                transition: 'all 0.2s'
+                                            }}
+                                        >
+                                            ›
+                                        </button>
+                                        <div style={{
+                                            position: 'absolute',
+                                            bottom: '1rem',
+                                            left: '50%',
+                                            transform: 'translateX(-50%)',
+                                            display: 'flex',
+                                            gap: '0.5rem',
+                                            zIndex: 5
+                                        }}>
+                                            {selectedListing.images.map((_, index) => (
+                                                <button
+                                                    key={index}
+                                                    type="button"
+                                                    onClick={() => setCurrentImageIndex(index)}
+                                                    style={{
+                                                        width: currentImageIndex === index ? '24px' : '10px',
+                                                        height: '10px',
+                                                        borderRadius: '5px',
+                                                        border: 'none',
+                                                        background: currentImageIndex === index ? 'var(--primary-color)' : 'rgba(255,255,255,0.7)',
+                                                        cursor: 'pointer',
+                                                        transition: 'all 0.3s'
+                                                    }}
+                                                    aria-label={`Go to image ${index + 1}`}
+                                                />
+                                            ))}
+                                        </div>
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '1rem',
+                                            left: '1rem',
+                                            background: 'rgba(0,0,0,0.6)',
+                                            color: 'white',
+                                            padding: '0.35rem 0.75rem',
+                                            borderRadius: '4px',
+                                            fontSize: '0.85rem',
+                                            fontWeight: '500',
+                                            zIndex: 5
+                                        }}>
+                                            {currentImageIndex + 1} / {selectedListing.images.length}
+                                        </div>
+                                    </>
+                                )}
                             </div>
 
                             <div className="modal-info-col">
@@ -1295,7 +1415,7 @@ function App() {
                                             <p>{selectedListing.description}</p>
                                         </div>
 
-                                        <div className="modal-details-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem', marginTop: '1rem', fontSize: '0.9rem' }}>
+                                        <div className="modal-details-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.5rem', marginTop: '1rem', fontSize: '0.85rem' }}>
                                             <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', background: 'var(--bg-light)', borderRadius: '4px' }}>
                                                 <span style={{ color: 'var(--text-light)' }}>Type:</span>
                                                 <span style={{ fontWeight: '500' }}>{selectedListing.propertyType} {selectedListing.style}</span>

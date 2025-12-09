@@ -16,150 +16,944 @@
   "listings": [
     {
       "id": 1,
-      "title": "Luxury Modern Home",
-      "address": "456 Oak Avenue, Downtown",
-      "price": 850000,
-      "bedrooms": 4,
-      "bathrooms": 3,
-      "sqft": 3200,
-      "type": "House",
-      "yearBuilt": 2020,
-      "description": "Stunning modern home with open floor plan, high-end finishes, and beautiful landscaping. Features a gourmet kitchen, spacious master suite, and outdoor entertainment area.",
-      "image": "https://images.unsplash.com/photo-1600591367940-9c0c0dfd9ab6?w=800",
+      "address": "22 Sassafras St, Kitchener, ON N2N 3S1",
+      "price": 855000,
+      "status": "Sold",
+      "soldDate": "03/12/2021",
+      "taxes": 3815.26,
+      "taxYear": 2020,
+      "legalDescription": "Lot 73, Plan 58M474, Kitchener",
+      "possessionRemarks": "30/60/Tbd",
+      "propertyType": "Detached",
+      "style": "2-Storey",
+      "approxAge": "6-15",
+      "frontingOn": "East",
+      "lotSize": "30 x 105 Feet",
+      "acres": "< .50",
+      "sqft": "1500-2000",
+      "crossStreet": "Countrystone Dr/ University Dr",
+      "bedrooms": "3+2",
+      "bathrooms": 4,
+      "rooms": "7+1",
+      "kitchens": 1,
+      "parkingDriveSpaces": 2,
+      "totalParkingSpaces": 4,
+      "garageType": "Attached",
+      "garageParkingSpaces": 1.5,
+      "pool": "None",
+      "ac": "Central Air",
+      "laundryLevel": "Main",
+      "basement": "Finished",
+      "heatingSource": "Gas",
+      "heatingType": "Forced Air",
+      "water": "Municipal",
+      "sewers": "Sewers",
+      "exterior": "Brick, Stone",
+      "area": "Waterloo",
+      "municipality": "Kitchener",
+      "centralVac": true,
+      "familyRoom": true,
+      "fireplace": false,
+      "description": "Great Detached Home Available In High Demand Area, House 3 Bedrooms, Finished Basement With Inside Garage Access, Many Pot Lights Installed On The Main Floor, No Carpet On Main Floor, House Has Large Windows With Lot Of Natural Light, Friendly Neighborhood, Walking Distance To Schools/Parks/Trails, Boardwalk Shopping, Public Transit, Go Station, Many More Amenities And Convenience, Child Friendly Street Have Public And Catholic Schools In The Area.",
+      "extras": "Over The Range Microwave Range, Stove, Dishwasher And Brand New Fridge, Hrv System And Water Softener Is Installed",
       "features": [
-        "Garage",
-        "Fireplace",
-        "Hardwood Floors",
-        "Granite Countertops",
-        "Walk-in Closet"
+        "Central Vacuum",
+        "Family Room"
       ],
-      "status": "For Sale"
+      "rooms_info": [
+        {
+          "room": "Living",
+          "level": "Main",
+          "dimensions": "4.88 m x 3.66 m (16.01 ft x 12.01 ft)",
+          "notes": "Laminate, Open Concept, Large Window"
+        },
+        {
+          "room": "Kitchen",
+          "level": "Main",
+          "dimensions": "2.74 m x 2.13 m (8.99 ft x 6.99 ft)",
+          "notes": "Stainless Steel Appl, Ceramic Floor"
+        },
+        {
+          "room": "Dining",
+          "level": "2nd",
+          "dimensions": "3.05 m x 2.13 m (10.01 ft x 6.99 ft)",
+          "notes": "Open Concept"
+        },
+        {
+          "room": "Prim Bdrm",
+          "level": "2nd",
+          "dimensions": "4.27 m x 3.35 m (14.01 ft x 10.99 ft)",
+          "notes": "4 Pc Ensuite"
+        },
+        {
+          "room": "2nd Br",
+          "level": "2nd",
+          "dimensions": "3.35 m x 3.05 m (10.99 ft x 10.01 ft)",
+          "notes": ""
+        },
+        {
+          "room": "3rd Br",
+          "level": "2nd",
+          "dimensions": "3.05 m x 2.74 m (10.01 ft x 8.99 ft)",
+          "notes": ""
+        }
+      ],
+      "washrooms_info": [
+        {
+          "pieces": 2,
+          "level": "Main"
+        },
+        {
+          "pieces": 3,
+          "level": "2nd"
+        },
+        {
+          "pieces": 4,
+          "level": "Bsmt"
+        },
+        {
+          "pieces": 4,
+          "level": "Bsmt"
+        }
+      ],
+      "image": "/images/listings/22-sassafras/1.png",
+      "images": [
+        "/images/listings/22-sassafras/1.png",
+        "/images/listings/22-sassafras/2.png",
+        "/images/listings/22-sassafras/3.png"
+      ]
     },
     {
       "id": 2,
-      "title": "Downtown Condo with City Views",
-      "address": "789 Urban Plaza, City Center",
-      "price": 425000,
-      "bedrooms": 2,
+      "address": "105 Brentwood Dr, Brampton, ON L6T 1R1",
+      "price": 820000,
+      "status": "Sold",
+      "soldDate": "07/02/2021",
+      "taxes": 3613,
+      "taxYear": 2021,
+      "legalDescription": "Pt Lt 62, Pl 651 As In Ro1072862; S/T Ch29878, Ch",
+      "possessionRemarks": "Tbd",
+      "propertyType": "Semi-Detached",
+      "style": "Backsplit 3",
+      "frontingOn": "North",
+      "lotSize": "35 x 110 Feet",
+      "sqft": "N/A",
+      "crossStreet": "Dixie Rd/Balmoral",
+      "bedrooms": "3+1",
       "bathrooms": 2,
-      "sqft": 1450,
-      "type": "Condo",
-      "yearBuilt": 2018,
-      "description": "Beautiful downtown condo with panoramic city views. Modern amenities, secure building, and walking distance to restaurants and shopping.",
-      "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800",
+      "rooms": "9",
+      "kitchens": "1+1",
+      "parkingDriveSpaces": 5,
+      "totalParkingSpaces": 5,
+      "garageType": "Carport",
+      "garageParkingSpaces": 5,
+      "pool": "None",
+      "ac": "Central Air",
+      "laundryLevel": "Lower",
+      "basement": "Finished / Sep Entrance",
+      "heatingSource": "Gas",
+      "heatingType": "Forced Air",
+      "water": "Municipal",
+      "sewers": "Sewers",
+      "exterior": "Brick",
+      "area": "Peel",
+      "municipality": "Brampton",
+      "community": "Avondale",
+      "familyRoom": true,
+      "fireplace": false,
+      "otherStructures": "Garden Shed",
+      "description": "This Beautiful Home 3 Good Size Bdrm W/1 Bdrm Bsmt Apt. Is Situated On 110 Ft Deep Lot With No Homes Behind. Fully Renovated With Brand New Stainless Steel Appliances. Open Concept Main Floor. Large Living And Dining Room W/ Pot Lights. Skylight In Bath. House Is Full Of Natural Light. Tons Of Storage Space. Driveway For 5 Cars. No Side Walk. Close To Bcc, Rogers, Go Station, 410/407.",
+      "extras": "All Existing Light Fixtures. The Seller Nor The Agent Warrant The Retrofit Status Of The Basement Apartment.",
       "features": [
-        "City View",
-        "Balcony",
-        "Modern Appliances",
-        "Concierge",
-        "Gym Access"
+        "Family Room",
+        "Park",
+        "Place Of Worship",
+        "Public Transit",
+        "Ravine",
+        "Rec Centre",
+        "School"
       ],
-      "status": "Sold"
+      "rooms_info": [
+        {
+          "room": "Living",
+          "level": "Main",
+          "dimensions": "4.8 m x 3.66 m (15.75 ft x 12.01 ft)",
+          "notes": "Renovated"
+        },
+        {
+          "room": "Dining",
+          "level": "Main",
+          "dimensions": "3.35 m x 3.66 m (10.99 ft x 12.01 ft)",
+          "notes": "Renovated"
+        },
+        {
+          "room": "Kitchen",
+          "level": "Main",
+          "dimensions": "3.5 m x 3.66 m (11.48 ft x 12.01 ft)",
+          "notes": "Open Concept, Stainless Steel Appl"
+        },
+        {
+          "room": "Prim Bdrm",
+          "level": "Upper",
+          "dimensions": "4.42 m x 3.35 m (14.5 ft x 10.99 ft)",
+          "notes": "Renovated"
+        },
+        {
+          "room": "2nd Br",
+          "level": "Upper",
+          "dimensions": "3.35 m x 4.26 m (10.99 ft x 13.98 ft)",
+          "notes": "Renovated"
+        },
+        {
+          "room": "3rd Br",
+          "level": "Upper",
+          "dimensions": "2.44 m x 3.66 m (8.01 ft x 12.01 ft)",
+          "notes": "Renovated"
+        },
+        {
+          "room": "Family",
+          "level": "Lower",
+          "dimensions": "4.88 m x 4.42 m (16.01 ft x 14.5 ft)",
+          "notes": "Open Concept"
+        },
+        {
+          "room": "Kitchen",
+          "level": "Lower",
+          "dimensions": "3.35 m x 4.42 m (10.99 ft x 14.5 ft)",
+          "notes": "Renovated"
+        },
+        {
+          "room": "Br",
+          "level": "Lower",
+          "dimensions": "4.26 m x 2.44 m (13.98 ft x 8.01 ft)",
+          "notes": "Renovated"
+        }
+      ],
+      "washrooms_info": [
+        {
+          "pieces": 3,
+          "level": ""
+        },
+        {
+          "pieces": 3,
+          "level": ""
+        }
+      ],
+      "image": "/images/listings/105-brentwood/1.jpg",
+      "images": [
+        "/images/listings/105-brentwood/1.jpg",
+        "/images/listings/105-brentwood/2.jpg",
+        "/images/listings/105-brentwood/3.png",
+        "/images/listings/105-brentwood/4.png",
+        "/images/listings/105-brentwood/5.png"
+      ]
     },
     {
       "id": 3,
-      "title": "Family-Friendly Suburban Home",
-      "address": "321 Maple Drive, Suburbia",
-      "price": 625000,
-      "bedrooms": 5,
-      "bathrooms": 4,
-      "sqft": 3800,
-      "type": "House",
-      "yearBuilt": 2015,
-      "description": "Perfect family home in a quiet neighborhood. Large backyard, finished basement, and excellent schools nearby.",
-      "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
+      "address": "700 Humberwood Blvd 2219A, Toronto, ON M9W 7J4",
+      "price": 711000,
+      "status": "Sold",
+      "soldDate": "02/22/2022",
+      "taxes": 1655.85,
+      "taxYear": 2021,
+      "possessionRemarks": "30/45/Tbd",
+      "propertyType": "Condo Apt",
+      "style": "Apartment",
+      "level": "22",
+      "sqft": "800-899",
+      "crossStreet": "Humberwood/Hwy427/Rexdale",
+      "bedrooms": "2",
+      "bathrooms": 1,
+      "rooms": "4",
+      "kitchens": 1,
+      "parkingDriveSpaces": 1,
+      "totalParkingSpaces": 1,
+      "garageType": "Underground",
+      "garageParkingSpaces": 0,
+      "pool": "None",
+      "ac": "Central Air",
+      "laundryLevel": "Main",
+      "basement": "None",
+      "heatingSource": "Gas",
+      "heatingType": "Forced Air",
+      "exterior": "Concrete",
+      "area": "Toronto",
+      "municipality": "Toronto W10",
+      "community": "West Humber-Clairville",
+      "maintenance": 485,
+      "locker": "Owned",
+      "balcony": "Open",
+      "exposure": "SW",
+      "elevator": true,
+      "condoCorp": "1905",
+      "familyRoom": true,
+      "fireplace": false,
+      "description": "Absolutely Spectacular Condo In The Mansions Of Humberwood. This Spacious Suite Features 2 Br & 1 Washroom. Very Bright Suite With Amazing View. Open Concept Living & Dining Areas. Amazing Amenities Like 24 Hrs. Security, Indoor Pool, Sauna, Guest Suite, Meeting Rm, Billiard Rm, Gym, Party Rooms, Car Wash, Outdoor Barbecue & Tennis Court. Ttc At Doorsteps, Easy Access To Pearson Airport, Hwy 427, 401, 407. Just Move In & Experience The Luxury Living!",
+      "extras": "All Elfs, Window Blinds, Appliances Including Fridge, Stove, Microwave, B/I Dishwasher. Washer & Dryer. One Parking & One Locker.",
       "features": [
-        "Large Yard",
-        "Finished Basement",
-        "2-Car Garage",
-        "Updated Kitchen",
-        "Master Suite"
+        "Ensuite Laundry",
+        "Family Room",
+        "Pets Allowed with Restrictions"
       ],
-      "status": "For Sale"
+      "buildingFeatures": [
+        "Car Wash",
+        "Guest Suites",
+        "Gym",
+        "Indoor Pool",
+        "Party/Meeting Room"
+      ],
+      "included": [
+        "Building Insurance",
+        "Common Elements",
+        "Central AC",
+        "Heat",
+        "Parking",
+        "Water",
+        "Condo Taxes",
+        "Cable TV",
+        "Hydro"
+      ],
+      "rooms_info": [
+        {
+          "room": "Prim Bdrm",
+          "level": "Main",
+          "dimensions": "3.8 m x 2.74 m (12.47 ft x 8.99 ft)",
+          "notes": "Broadloom, Closet"
+        },
+        {
+          "room": "2nd Br",
+          "level": "Main",
+          "dimensions": "3.05 m x 2.81 m (10.01 ft x 9.22 ft)",
+          "notes": "Broadloom, Closet"
+        },
+        {
+          "room": "Living",
+          "level": "Main",
+          "dimensions": "4.87 m x 3.5 m (15.98 ft x 11.48 ft)",
+          "notes": "Laminate"
+        },
+        {
+          "room": "Kitchen",
+          "level": "Main",
+          "dimensions": "2.44 m x 2.44 m (8.01 ft x 8.01 ft)",
+          "notes": "Ceramic Floor"
+        }
+      ],
+      "washrooms_info": [
+        {
+          "pieces": 3,
+          "level": ""
+        }
+      ],
+      "image": "/images/listings/700-humberwood-2219a/1.png",
+      "images": [
+        "/images/listings/700-humberwood-2219a/1.png",
+        "/images/listings/700-humberwood-2219a/2.png",
+        "/images/listings/700-humberwood-2219a/3.png",
+        "/images/listings/700-humberwood-2219a/4.png"
+      ]
     },
     {
       "id": 4,
-      "title": "Charming Victorian Home",
-      "address": "654 Heritage Lane, Historic District",
-      "price": 575000,
-      "bedrooms": 3,
-      "bathrooms": 2.5,
-      "sqft": 2400,
-      "type": "House",
-      "yearBuilt": 1895,
-      "description": "Beautifully restored Victorian home with original character and modern updates. Stunning architectural details throughout.",
-      "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800",
+      "address": "710 Humberwood Blvd 704, Toronto, ON M9W 7J5",
+      "price": 740000,
+      "status": "Sold",
+      "soldDate": "01/18/2022",
+      "taxes": 1751.13,
+      "taxYear": 2021,
+      "possessionRemarks": "30/60/Tbd",
+      "propertyType": "Condo Apt",
+      "style": "Apartment",
+      "level": "7",
+      "sqft": "900-999",
+      "crossStreet": "Humberwood/Hwy 427/Rexdale",
+      "bedrooms": "2",
+      "bathrooms": 2,
+      "rooms": "6",
+      "kitchens": 1,
+      "parkingDriveSpaces": 1,
+      "totalParkingSpaces": 1,
+      "garageType": "Underground",
+      "garageParkingSpaces": 1,
+      "pool": "None",
+      "ac": "Central Air",
+      "laundryLevel": "Main",
+      "basement": "None",
+      "heatingSource": "Gas",
+      "heatingType": "Forced Air",
+      "exterior": "Concrete",
+      "area": "Toronto",
+      "municipality": "Toronto W10",
+      "community": "West Humber-Clairville",
+      "maintenance": 567.09,
+      "locker": "Owned",
+      "balcony": "Open",
+      "exposure": "North",
+      "condoCorp": "1761",
+      "familyRoom": true,
+      "fireplace": false,
+      "description": "Amazing Condo In The Mansions Of Humberwood. This Spacious Suite Features 2 Br, 1 Dn & 2 Wr. Oversized Balcony Overlooking Humberwood Trails, River & Conservation Area. Bright Master Br With W/I Closet. Amazing Amenities Like 24 Hrs Security, Indoor Pool, Guest Suite, Billiard Rm, Gym, Sauna, Party Rms, Car Wash, Outdoor Barbecue And Tennis Court. Easy Access To Pearson Airport, Hwy 427, 401, 407. Close To Woodbine Casino, Transit. Experience The Luxury!",
+      "extras": "Fridge, Stove, Built-In Dishwasher, Washer & Dryer, Light Fixtures, Locker & 1 Parking Spot.",
       "features": [
-        "Historic Character",
-        "Original Hardwood",
-        "Updated Systems",
-        "Large Porch",
-        "Garden"
+        "Ensuite Laundry",
+        "Family Room",
+        "Pets Allowed with Restrictions"
       ],
-      "status": "Sold"
+      "buildingFeatures": [
+        "Car Wash",
+        "Guest Suites",
+        "Gym",
+        "Indoor Pool",
+        "Party/Meeting Room",
+        "Tennis Court"
+      ],
+      "included": [
+        "Building Insurance",
+        "Common Elements",
+        "Central AC",
+        "Heat",
+        "Parking",
+        "Water",
+        "Condo Taxes",
+        "Cable TV",
+        "Hydro"
+      ],
+      "rooms_info": [
+        {
+          "room": "Living",
+          "level": "Flat",
+          "dimensions": "5.49 m x 3.36 m (18.01 ft x 11.02 ft)",
+          "notes": "Laminate, W/O To Balcony"
+        },
+        {
+          "room": "Kitchen",
+          "level": "Flat",
+          "dimensions": "2.44 m x 2.44 m (8.01 ft x 8.01 ft)",
+          "notes": "Ceramic Floor, Breakfast Bar"
+        },
+        {
+          "room": "Br",
+          "level": "Flat",
+          "dimensions": "3.66 m x 3.05 m (12.01 ft x 10.01 ft)",
+          "notes": "Laminate, 4 Pc Ensuite"
+        },
+        {
+          "room": "2nd Br",
+          "level": "Flat",
+          "dimensions": "3.05 m x 3.05 m (10.01 ft x 10.01 ft)",
+          "notes": "Laminate, B/I Closet"
+        },
+        {
+          "room": "Den",
+          "level": "Flat",
+          "dimensions": "2.44 m x 2.44 m (8.01 ft x 8.01 ft)",
+          "notes": "Laminate, Separate Rm"
+        }
+      ],
+      "washrooms_info": [
+        {
+          "pieces": 3,
+          "level": ""
+        },
+        {
+          "pieces": 3,
+          "level": ""
+        }
+      ],
+      "image": "/images/listings/710-humberwood-704/1.jpg",
+      "images": [
+        "/images/listings/710-humberwood-704/1.jpg",
+        "/images/listings/710-humberwood-704/2.png",
+        "/images/listings/710-humberwood-704/3.jpg",
+        "/images/listings/710-humberwood-704/4.jpg",
+        "/images/listings/710-humberwood-704/5.png"
+      ]
     },
     {
       "id": 5,
-      "title": "Waterfront Property",
-      "address": "987 Lakeview Road, Lakeside",
-      "price": 1200000,
-      "bedrooms": 4,
-      "bathrooms": 3.5,
-      "sqft": 4200,
-      "type": "House",
-      "yearBuilt": 2019,
-      "description": "Exclusive waterfront property with private dock and stunning lake views. Luxury finishes and outdoor living spaces.",
-      "image": "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800",
+      "address": "3122 Churchill Ave, Mississauga, ON L4T 1R5",
+      "price": 800000,
+      "status": "Sold",
+      "soldDate": "12/04/2021",
+      "taxes": 3035,
+      "taxYear": 2021,
+      "legalDescription": "Lt 154, Pl 436; S/T Interest In Ro1057346",
+      "possessionRemarks": "30/Tbd",
+      "propertyType": "Detached",
+      "style": "Bungalow",
+      "frontingOn": "South",
+      "lotSize": "40 x 100 Feet",
+      "acres": "< .50",
+      "sqft": "N/A",
+      "crossStreet": "Churchill Ave/Airport Rd",
+      "bedrooms": "2+2",
+      "bathrooms": 2,
+      "rooms": "6",
+      "kitchens": "1+1",
+      "parkingDriveSpaces": 6,
+      "totalParkingSpaces": 7,
+      "garageType": "Detached",
+      "garageParkingSpaces": 1,
+      "pool": "None",
+      "ac": "Central Air",
+      "laundryLevel": "Lower",
+      "basement": "Finished",
+      "heatingSource": "Gas",
+      "heatingType": "Forced Air",
+      "water": "Municipal",
+      "sewers": "Sewers",
+      "exterior": "Vinyl Siding",
+      "area": "Peel",
+      "municipality": "Mississauga",
+      "community": "Malton",
+      "familyRoom": true,
+      "fireplace": false,
+      "centralVac": false,
+      "description": "Great Location. Best For Investors, Handymen, Fixer Upper And First Time Home Buyers. This Property Has A Lot Of Potential. Big Lot With Separate Entrance To The Basement. Mississauga Transit At Your Door Steps, Close To Go Terminal, Airport, Minutes To Highways, Place Of Worship. You Can Make Your Dream Home. Not To Be Missed.",
+      "extras": "2 Fridge, Stove, Washer And Dryer And All Elf's, All Window Coverings, Water Heating Tank, Furnace.",
       "features": [
-        "Waterfront",
-        "Private Dock",
-        "Lake View",
-        "Outdoor Kitchen",
-        "Home Theater"
+        "Family Room"
       ],
-      "status": "For Sale"
+      "rooms_info": [
+        {
+          "room": "Living",
+          "level": "Main",
+          "dimensions": "4.72 m x 3.61 m (15.49 ft x 11.84 ft)",
+          "notes": "Window"
+        },
+        {
+          "room": "Dining",
+          "level": "Main",
+          "dimensions": "2.34 m x 2.03 m (7.68 ft x 6.66 ft)",
+          "notes": "Window"
+        },
+        {
+          "room": "Br",
+          "level": "Main",
+          "dimensions": "3.59 m x 3.03 m (11.78 ft x 9.94 ft)",
+          "notes": "Closet"
+        },
+        {
+          "room": "2nd Br",
+          "level": "Main",
+          "dimensions": "3.01 m x 2.48 m (9.88 ft x 8.14 ft)",
+          "notes": "Closet"
+        },
+        {
+          "room": "Kitchen",
+          "level": "Main",
+          "dimensions": "4.04 m x 2.38 m (13.25 ft x 7.81 ft)",
+          "notes": "W/O To Yard"
+        }
+      ],
+      "washrooms_info": [
+        {
+          "pieces": 3,
+          "level": "Main"
+        },
+        {
+          "pieces": 3,
+          "level": "Bsmt"
+        }
+      ],
+      "image": "/images/listings/3122-churchill/1.png",
+      "images": [
+        "/images/listings/3122-churchill/1.png",
+        "/images/listings/3122-churchill/2.png",
+        "/images/listings/3122-churchill/3.png"
+      ]
     },
     {
       "id": 6,
-      "title": "Modern Loft Apartment",
-      "address": "147 Industrial Way, Arts District",
-      "price": 350000,
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "sqft": 1100,
-      "type": "Loft",
-      "yearBuilt": 2021,
-      "description": "Stylish converted loft with exposed brick, high ceilings, and modern amenities. Perfect for urban professionals.",
-      "image": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800",
+      "address": "755 Linden Dr 43, Cambridge, ON N3H 0E4",
+      "price": 799000,
+      "status": "Sold",
+      "soldDate": "04/06/2023",
+      "taxes": 2650.04,
+      "taxYear": 2022,
+      "legalDescription": "Plan 58M582 Pt Blk 82Rp 58R20970 Parts 129 And 130",
+      "possessionRemarks": "30/60/Tbd",
+      "potlMonthlyFee": 142.45,
+      "propertyType": "Att/Row/Twnhouse",
+      "style": "2-Storey",
+      "approxAge": "0-5",
+      "frontingOn": "North",
+      "lotSize": "43 x 102.56 Feet",
+      "acres": "< .50",
+      "sqft": "1500-2000",
+      "crossStreet": "Linden Dr. / Fountain St. S.",
+      "bedrooms": "3",
+      "bathrooms": 3,
+      "rooms": "7",
+      "kitchens": 1,
+      "parkingDriveSpaces": 2,
+      "totalParkingSpaces": 3,
+      "garageType": "Attached",
+      "garageParkingSpaces": 1,
+      "pool": "None",
+      "ac": "Central Air",
+      "laundryLevel": "Upper",
+      "basement": "Unfinished / W/O",
+      "heatingSource": "Gas",
+      "heatingType": "Forced Air",
+      "water": "Municipal",
+      "sewers": "Sewers",
+      "exterior": "Alum Siding, Brick",
+      "area": "Waterloo",
+      "municipality": "Cambridge",
+      "familyRoom": true,
+      "fireplace": false,
+      "description": "Very Bright And Spacious 3 Bed 3 Bath End-Unit Backing To Ravine W/ Walkout Basement! Perfect For A Growing Family Or Investor. Lots Of Natural Light 2Mn To Hwy 401, Close To Conestoga College, Trails, Grand River, Schools, Collage, Parks, Golf Course And All Amenities. Ss Appliances, Kitchen Island, Dining Area Walkout To Balcony. Laundry On The Second Level. High Demand Area For Rentals. Not To Be Missed!",
+      "extras": "S/S Appliances, All Elfs, Window Coverings, A/C, Hrv System.",
       "features": [
-        "Exposed Brick",
-        "High Ceilings",
-        "Open Layout",
-        "Modern Design",
-        "Pet Friendly"
+        "Family Room",
+        "Hospital",
+        "Park",
+        "Ravine",
+        "School"
       ],
-      "status": "For Sale"
+      "rooms_info": [
+        {
+          "room": "Great Rm",
+          "level": "Main",
+          "dimensions": "4.27 m x 3.05 m (14.01 ft x 10.01 ft)",
+          "notes": ""
+        },
+        {
+          "room": "Dining",
+          "level": "Main",
+          "dimensions": "4.27 m x 3.05 m (14.01 ft x 10.01 ft)",
+          "notes": ""
+        },
+        {
+          "room": "Kitchen",
+          "level": "Main",
+          "dimensions": "3.5 m x 2.5 m (11.48 ft x 8.2 ft)",
+          "notes": ""
+        },
+        {
+          "room": "Breakfast",
+          "level": "Main",
+          "dimensions": "2.74 m x 2.5 m (8.99 ft x 8.2 ft)",
+          "notes": ""
+        },
+        {
+          "room": "Br",
+          "level": "2nd",
+          "dimensions": "5.06 m x 3.75 m (16.6 ft x 12.3 ft)",
+          "notes": "W/I Closet, 3 Pc Ensuite"
+        },
+        {
+          "room": "2nd Br",
+          "level": "2nd",
+          "dimensions": "3.67 m x 2.8 m (12.04 ft x 9.19 ft)",
+          "notes": "Closet"
+        },
+        {
+          "room": "3rd Br",
+          "level": "2nd",
+          "dimensions": "3.35 m x 2.9 m (10.99 ft x 9.51 ft)",
+          "notes": "Closet"
+        },
+        {
+          "room": "Laundry",
+          "level": "2nd",
+          "dimensions": "2.4 m x 2 m (7.87 ft x 6.56 ft)",
+          "notes": ""
+        }
+      ],
+      "washrooms_info": [
+        {
+          "pieces": 2,
+          "level": ""
+        },
+        {
+          "pieces": 4,
+          "level": ""
+        },
+        {
+          "pieces": 4,
+          "level": ""
+        }
+      ],
+      "image": "/images/listings/755-linden-43/1.png",
+      "images": [
+        "/images/listings/755-linden-43/1.png",
+        "/images/listings/755-linden-43/2.png",
+        "/images/listings/755-linden-43/3.png",
+        "/images/listings/755-linden-43/4.png",
+        "/images/listings/755-linden-43/5.png"
+      ]
     },
     {
       "id": 7,
-      "title": "Elegant Penthouse Suite",
-      "address": "888 Skyline Tower, Financial District",
-      "price": 2500000,
-      "bedrooms": 3,
-      "bathrooms": 3.5,
-      "sqft": 4500,
-      "type": "Penthouse",
-      "yearBuilt": 2022,
-      "description": "Ultra-luxury penthouse with breathtaking city views from every room. Features include private elevator access, rooftop terrace, and premium finishes throughout.",
-      "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800",
+      "address": "16 Nemo Cres, Brampton, ON L6S 4A5",
+      "price": 999000,
+      "status": "Sold",
+      "soldDate": "10/01/2024",
+      "taxes": 5788.83,
+      "taxYear": 2024,
+      "legalDescription": "PLC 124-2 SEC M403; LT 124, PL M403, T/W ROW PT",
+      "possessionRemarks": "45/60 TBD",
+      "propertyType": "Detached",
+      "style": "2-Storey",
+      "approxAge": "31-50",
+      "frontingOn": "West",
+      "lotSize": "30 x 93.9 Feet",
+      "acres": "< .50",
+      "lotIrregularities": "70 ft wide back yard 133 ft depth aprox",
+      "sqft": "3000",
+      "crossStreet": "Dixie Rd and North Park Dr",
+      "bedrooms": "4+2",
+      "bathrooms": 4,
+      "rooms": "8+2",
+      "kitchens": "1+1",
+      "parkingDriveSpaces": 4,
+      "totalParkingSpaces": 5,
+      "garageType": "Attached",
+      "garageParkingSpaces": 1,
+      "pool": "None",
+      "ac": "Central Air",
+      "laundryLevel": "Lower",
+      "basement": "Finished / Sep Entrance",
+      "heatingSource": "Gas",
+      "heatingType": "Forced Air",
+      "water": "Municipal",
+      "sewers": "Sewers",
+      "exterior": "Brick, Concrete",
+      "roof": "Asphalt Shingle",
+      "foundation": "Concrete",
+      "area": "Peel",
+      "municipality": "Brampton",
+      "community": "Westgate",
+      "familyRoom": true,
+      "fireplace": true,
+      "description": "Must See! This sunny, well-lit 3,000 sq. ft. home is perfectly situated on a large, irregular pie-shaped lot at the corner of a quiet street. Over 150k have been spent in upgrades to this 4 bedrooms and 3 baths home which offers plenty of room for a growing family. Additionally, a two-bed basement apartment provides excellent potential for rental income. The main floor welcomes you with a bright, inviting atmosphere, featuring large spaces for living, dining, family and kitchen. The modern kitchen is equipped with stainless steel appliances, including a gas stove a central island, ideal for both cooking and gathering. Upstairs, the large bedrooms offer comfort and privacy, while the master suite includes a walk-in closet and an ensuite bath. Outdoor space is equally impressive, with a beautifully landscaped backyard featuring a spacious deck, perfect for entertaining or unwinding in peace. Close to top-rated schools, parks & shopping, making it a perfect choice for your next home.",
+      "extras": "All Existing Light Fixtures.",
+      "inclusions": "S/S Appliances, All Elfs, Window Coverings, A/C",
       "features": [
-        "Private Elevator",
-        "Rooftop Terrace",
-        "City Views",
-        "Wine Cellar",
-        "Smart Home"
+        "Family Room",
+        "Fireplace/Stove",
+        "Auto Garage Door Remote",
+        "Carpet Free"
       ],
-      "status": "For Sale"
+      "rooms_info": [
+        {
+          "room": "Kitchen",
+          "level": "Main",
+          "dimensions": "4.9 m x 3.09 m (16.08 ft x 10.14 ft)",
+          "notes": "W/O To Deck, Renovated, Stainless Steel Appl"
+        },
+        {
+          "room": "Dining",
+          "level": "Main",
+          "dimensions": "3.17 m x 3.04 m (10.4 ft x 9.97 ft)",
+          "notes": "Hardwood Floor"
+        },
+        {
+          "room": "Living",
+          "level": "Main",
+          "dimensions": "4.87 m x 3.17 m (15.98 ft x 10.4 ft)",
+          "notes": "Hardwood Floor, Pot Lights"
+        },
+        {
+          "room": "Family",
+          "level": "Main",
+          "dimensions": "5.33 m x 3.35 m (17.49 ft x 10.99 ft)",
+          "notes": "Hardwood Floor, Gas Fireplace"
+        },
+        {
+          "room": "Prim Bdrm",
+          "level": "Upper",
+          "dimensions": "5.48 m x 3.42 m (17.98 ft x 11.22 ft)",
+          "notes": "Laminate, Bay Window, Ensuite Bath"
+        },
+        {
+          "room": "2nd Br",
+          "level": "Upper",
+          "dimensions": "4.14 m x 2.87 m (13.58 ft x 9.42 ft)",
+          "notes": "Laminate"
+        },
+        {
+          "room": "3rd Br",
+          "level": "Upper",
+          "dimensions": "3.86 m x 3.17 m (12.66 ft x 10.4 ft)",
+          "notes": "Laminate"
+        },
+        {
+          "room": "4th Br",
+          "level": "Upper",
+          "dimensions": "3.04 m x 2.74 m (9.97 ft x 8.99 ft)",
+          "notes": "Laminate"
+        },
+        {
+          "room": "Br",
+          "level": "Bsmt",
+          "dimensions": "3.3 m x 3 m (10.83 ft x 9.84 ft)",
+          "notes": ""
+        },
+        {
+          "room": "Br",
+          "level": "Bsmt",
+          "dimensions": "3.2 m x 2.75 m (10.5 ft x 9.02 ft)",
+          "notes": ""
+        },
+        {
+          "room": "Kitchen",
+          "level": "Bsmt",
+          "dimensions": "5.2 m x 3.2 m (17.06 ft x 10.5 ft)",
+          "notes": ""
+        },
+        {
+          "room": "Living",
+          "level": "Bsmt",
+          "dimensions": "4.8 m x 3.2 m (15.75 ft x 10.5 ft)",
+          "notes": ""
+        }
+      ],
+      "washrooms_info": [
+        {
+          "pieces": 2,
+          "level": ""
+        },
+        {
+          "pieces": 3,
+          "level": ""
+        },
+        {
+          "pieces": 3,
+          "level": ""
+        },
+        {
+          "pieces": 3,
+          "level": ""
+        }
+      ],
+      "image": "/images/listings/16-nemo/1.png",
+      "images": [
+        "/images/listings/16-nemo/1.png",
+        "/images/listings/16-nemo/2.png",
+        "/images/listings/16-nemo/3.jpg",
+        "/images/listings/16-nemo/4.png",
+        "/images/listings/16-nemo/5.png"
+      ]
+    },
+    {
+      "id": 8,
+      "address": "755 Linden Dr 28, Cambridge, ON N3H 0E4",
+      "price": 750000,
+      "status": "Sold",
+      "soldDate": "10/28/2025",
+      "taxes": 6808,
+      "taxYear": 2025,
+      "legalDescription": "PLAN 58M582 PT BLK 82 RP 58R20970 PARTS 92 AND 93",
+      "possessionRemarks": "30/60/TBD",
+      "propertyType": "Att/Row/Twnhouse",
+      "style": "2-Storey",
+      "approxAge": "0-5",
+      "frontingOn": "North",
+      "lotSize": "25 x 125 Feet",
+      "acres": "< .50",
+      "lotIrregularities": "20ft * 85ft * 115ft *125ft",
+      "sqft": "1500-2000",
+      "crossStreet": "Linden Dr. / Fountain St. S.",
+      "bedrooms": "3",
+      "bathrooms": 3,
+      "rooms": "7",
+      "kitchens": 1,
+      "parkingDriveSpaces": 1,
+      "totalParkingSpaces": 2,
+      "garageType": "Attached",
+      "garageParkingSpaces": 1,
+      "pool": "None",
+      "ac": "Central Air",
+      "laundryLevel": "Upper",
+      "basement": "Unfinished / W/O",
+      "heatingSource": "Gas",
+      "heatingType": "Forced Air",
+      "water": "Municipal",
+      "sewers": "Sewers",
+      "exterior": "Brick, Concrete",
+      "area": "Waterloo",
+      "municipality": "Cambridge",
+      "familyRoom": true,
+      "fireplace": false,
+      "centralVac": false,
+      "description": "Stunning & Spacious 3-Bedroom, 3-Bathroom Corner Unit on Premium Ravine Lot! Welcome to this bright and modern corner unit nestled on a large premium lot backing onto a peaceful ravine. With a walkout basement offering incredible potential, this home is perfect for families or investors alike. Main floor welcomes you with an open and airy layout, featuring a spacious living room and a modern kitchen. Oversized windows fill the space with natural light, creating a warm and inviting atmosphere. The dining area flows seamlessly onto a private balcony, offering the perfect spot to relax and enjoy the view. Upstairs, the home boasts a highly practical layout with a convenient second-floor laundry area. With quick access to Hwy 401, Conestoga College, and a variety of scenic trails and parks, the location is truly unbeatable. Plus, being in a high rental demand area, this property doubles as an excellent investment opportunity. Don't miss out on this exceptional home!",
+      "extras": "S/S Appliances, All Elfs, A/C, HRV System.",
+      "features": [
+        "Family Room",
+        "Grnbelt/Conserv",
+        "Hospital",
+        "Library",
+        "Park",
+        "Public Transit",
+        "Ravine"
+      ],
+      "rooms_info": [
+        {
+          "room": "Great Rm",
+          "level": "Main",
+          "dimensions": "8.53 m x 3.06 m (27.99 ft x 10.04 ft)",
+          "notes": "Laminate, Pot Lights"
+        },
+        {
+          "room": "Kitchen",
+          "level": "Main",
+          "dimensions": "3.53 m x 2.75 m (11.58 ft x 9.02 ft)",
+          "notes": "Tile Floor, Stainless Steel Appl"
+        },
+        {
+          "room": "Dining",
+          "level": "Main",
+          "dimensions": "2.75 m x 2.46 m (9.02 ft x 8.07 ft)",
+          "notes": "W/O To Deck, W/O To Ravine"
+        },
+        {
+          "room": "Prim Bdrm",
+          "level": "Upper",
+          "dimensions": "4.9 m x 3.76 m (16.08 ft x 12.34 ft)",
+          "notes": "3 Pc Ensuite, W/I Closet"
+        },
+        {
+          "room": "2nd Br",
+          "level": "Upper",
+          "dimensions": "3.29 m x 2.89 m (10.79 ft x 9.48 ft)",
+          "notes": "Closet"
+        },
+        {
+          "room": "3rd Br",
+          "level": "Upper",
+          "dimensions": "3.63 m x 2.82 m (11.91 ft x 9.25 ft)",
+          "notes": "Closet"
+        },
+        {
+          "room": "Laundry",
+          "level": "Upper",
+          "dimensions": "2.29 m x 1.7 m (7.51 ft x 5.58 ft)",
+          "notes": ""
+        }
+      ],
+      "washrooms_info": [
+        {
+          "pieces": 2,
+          "level": ""
+        },
+        {
+          "pieces": 4,
+          "level": ""
+        },
+        {
+          "pieces": 4,
+          "level": ""
+        }
+      ],
+      "image": "/images/listings/755-linden-28/1.jpg",
+      "images": [
+        "/images/listings/755-linden-28/1.jpg",
+        "/images/listings/755-linden-28/2.png",
+        "/images/listings/755-linden-28/3.png"
+      ]
     }
   ]
 }
