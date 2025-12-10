@@ -344,7 +344,9 @@ function App() {
     const [priceFilter, setPriceFilter] = useState('')
     const [sortOption, setSortOption] = useState('default')
     const [contactFormStatus, setContactFormStatus] = useState('idle')
+    const [contactFormMessage, setContactFormMessage] = useState('')
     const [listingFormStatus, setListingFormStatus] = useState('idle')
+    const [listingFormMessage, setListingFormMessage] = useState('')
     const [navScrolled, setNavScrolled] = useState(false)
     const [usingFallbackData, setUsingFallbackData] = useState(true)
     const [menuOpen, setMenuOpen] = useState(false)
@@ -510,7 +512,10 @@ function App() {
     const handleContactSubmit = (formType) => async (event) => {
         event.preventDefault()
         const setter = formType === 'listing' ? setListingFormStatus : setContactFormStatus
+        const messageSetter = formType === 'listing' ? setListingFormMessage : setContactFormMessage
         setter('loading')
+        messageSetter('')
+
         const form = event.target
         const formData = new FormData(form)
         const payload = {
@@ -523,13 +528,18 @@ function App() {
         }
 
         try {
-            await sendContactMessage(payload)
+            const response = await sendContactMessage(payload)
             setter('success')
+            messageSetter(response?.detail || 'Message sent successfully!')
             form.reset()
-            setTimeout(() => setter('idle'), 4000)
+            setTimeout(() => {
+                setter('idle')
+                messageSetter('')
+            }, 4000)
         } catch (error) {
             console.error('Contact submission failed', error)
             setter('error')
+            messageSetter(error.message || "We couldn't send your message. Please try again.")
         }
     }
 
@@ -1173,14 +1183,18 @@ function App() {
                                     <button type="submit" className="btn btn-primary" disabled={contactFormStatus === 'loading'}>
                                         Send Message
                                     </button>
-                                            {contactFormStatus === 'loading' && (
-                                                <div className="form-message-loading">Sending your message...</div>
-                                            )}
+                                    {contactFormStatus === 'loading' && (
+                                        <div className="form-message-loading">Sending your message...</div>
+                                    )}
                                     {contactFormStatus === 'success' && (
-                                        <div className="form-message-success">Message sent successfully!</div>
+                                        <div className="form-message-success">
+                                            {contactFormMessage || 'Message sent successfully!'}
+                                        </div>
                                     )}
                                     {contactFormStatus === 'error' && (
-                                        <div className="form-message-error">We couldn't send your message. Please try again.</div>
+                                        <div className="form-message-error">
+                                            {contactFormMessage || "We couldn't send your message. Please try again."}
+                                        </div>
                                     )}
                                 </form>
                             </div>
@@ -1712,10 +1726,14 @@ function App() {
                                                 <div className="form-message-loading">Sending your request...</div>
                                             )}
                                             {listingFormStatus === 'success' && (
-                                                <div className="form-message-success">Thank you! We'll contact you soon.</div>
+                                                <div className="form-message-success">
+                                                    {listingFormMessage || "Thank you! We'll contact you soon."}
+                                                </div>
                                             )}
                                             {listingFormStatus === 'error' && (
-                                                <div className="form-message-error">We couldn't send your request. Please try again.</div>
+                                                <div className="form-message-error">
+                                                    {listingFormMessage || "We couldn't send your request. Please try again."}
+                                                </div>
                                             )}
                                         </form>
 
