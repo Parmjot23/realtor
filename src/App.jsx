@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import fallbackData from './data/listings-fallback.json'
 import { CalculatorModal } from './components/Calculators'
+import { MortgagePreApproval } from './components/MortgagePreApproval'
 import { generatePDF } from './utils/pdfGenerator'
 import './App.css'
 import ListingCard from './ListingCard'
@@ -359,6 +360,7 @@ function App() {
     const logoUrl = realtorDetails.logo || realtorDetails.logoUrl
     const navItems = [
         { href: '#listings', label: 'Properties' },
+        { href: '#preapproval', label: 'Pre-Approval' },
         { href: '#valuation', label: 'Valuation' },
         { href: '#services', label: 'Services' },
         { href: '#about', label: 'About' },
@@ -832,6 +834,18 @@ function App() {
                         </div>
                     </div>
                 </section>
+
+                <section id="preapproval" className="mortgage-preapproval-section fade-in-up">
+                    <div className="container">
+                        <div className="section-header">
+                            <span className="section-tag">Mortgage Pre-Approval</span>
+                            <h2>Get Pre-Approved in Minutes</h2>
+                            <p>Check your mortgage eligibility instantly and take the first step toward your dream home.</p>
+                        </div>
+                        <MortgagePreApproval realtorEmail={realtorDetails.email} />
+                    </div>
+                </section>
+
                 <section id="listings" className="section-bg-light fade-in-up">
                     <div className="container">
                         <div className="section-header">
