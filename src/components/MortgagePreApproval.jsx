@@ -121,7 +121,7 @@ export const MortgagePreApproval = () => {
             <div className="preapproval-success">
                 <div className="success-icon">✓</div>
                 <h3>Thank You!</h3>
-                <p>Your pre-approval request has been sent. We'll be in touch shortly to discuss your mortgage options.</p>
+                <p>Your pre-approval request has been sent directly to Raman. He will follow up with you to discuss your mortgage options.</p>
                 <button
                     className="btn btn-outline-dark"
                     onClick={() => {

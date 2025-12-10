@@ -1,9 +1,9 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import fallbackData from './data/listings-fallback.json'
 import { CalculatorModal } from './components/Calculators'
 import { MortgagePreApproval } from './components/MortgagePreApproval'
 import { generatePDF } from './utils/pdfGenerator'
-import { sendContactMessage } from './realtor_raman/api'
+import { sendContactMessage, fetchListings } from './realtor_raman/api'
 import './App.css'
 import ListingCard from './ListingCard'
 
@@ -257,7 +257,7 @@ const buildListingsUrls = () => {
     return Array.from(urlSet).filter(Boolean)
 }
 
-const fetchListingsData = async () => {
+const fetchStaticListingsData = async () => {
     const candidateUrls = buildListingsUrls()
     let lastError
 
@@ -276,6 +276,40 @@ const fetchListingsData = async () => {
     }
 
     throw lastError ?? new Error('Unable to load listings data')
+}
+
+const normalizeListingData = (listings = []) =>
+    listings.map((listing) => {
+        const images = Array.isArray(listing.images)
+            ? listing.images
+            : (listing.image ? [listing.image] : [])
+        const primaryImage = listing.image || images[0] || ''
+
+        return {
+            ...listing,
+            title: listing.title || listing.address,
+            images,
+            image: primaryImage
+        }
+    })
+
+const mergeListings = (primary = [], staticListings = []) => {
+    const seen = new Set()
+    const combined = []
+
+    const addListing = (listing) => {
+        const key = (listing.address || listing.id || '').toString().toLowerCase()
+        if (key && seen.has(key)) {
+            return
+        }
+        if (key) seen.add(key)
+        combined.push(listing)
+    }
+
+    primary.forEach(addListing)
+    staticListings.forEach(addListing)
+
+    return combined
 }
 
 const calculateLTT = (price, address) => {
@@ -362,6 +396,7 @@ function App() {
     const primaryPhone = realtorDetails.phone || realtorDetails.phonePrimary
     const primaryPhoneLink = formatPhoneLink(primaryPhone)
     const logoUrl = realtorDetails.logo || realtorDetails.logoUrl
+    const baseStaticListings = useMemo(() => normalizeListingData(fallbackData.listings || []), [])
     const navItems = [
         { href: '#listings', label: 'Properties' },
         { href: '#preapproval', label: 'Pre-Approval' },
@@ -371,29 +406,44 @@ function App() {
         { href: '#contact', label: 'Contact' }
     ]
 
-    useEffect(() => {
-        const fetchListings = async () => {
-            try {
-                const data = await fetchListingsData()
-                setRealtor(data.realtor)
-                setListings(data.listings)
+    const loadListings = useCallback(async () => {
+        setLoading(true)
+        try {
+            const apiData = await fetchListings()
+            const apiListings = normalizeListingData(Array.isArray(apiData?.listings) ? apiData.listings : [])
+            if (apiListings.length) {
+                setRealtor(apiData.realtor || fallbackData.realtor)
+                setListings(mergeListings(apiListings, baseStaticListings))
                 setUsingFallbackData(false)
                 setError('')
-            } catch (err) {
-                setError(err.message || 'Error loading listings')
-                console.error('[Listings]', err)
-                if (fallbackData?.listings?.length) {
-                    setRealtor(fallbackData.realtor)
-                    setListings(fallbackData.listings)
-                    setUsingFallbackData(true)
-                }
-            } finally {
-                setLoading(false)
+                return
             }
+        } catch (apiError) {
+            console.error('[Listings API]', apiError)
         }
 
-        fetchListings()
-    }, [])
+        try {
+            const data = await fetchStaticListingsData()
+            setRealtor(data.realtor)
+            setListings(mergeListings(normalizeListingData(data.listings || []), baseStaticListings))
+            setUsingFallbackData(false)
+            setError('')
+        } catch (err) {
+            setError(err.message || 'Error loading listings')
+            console.error('[Listings]', err)
+            if (fallbackData?.listings?.length) {
+                setRealtor(fallbackData.realtor)
+                setListings(baseStaticListings)
+                setUsingFallbackData(true)
+            }
+        } finally {
+            setLoading(false)
+        }
+    }, [baseStaticListings])
+
+    useEffect(() => {
+        loadListings()
+    }, [loadListings])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -529,8 +579,12 @@ function App() {
 
         try {
             const response = await sendContactMessage(payload)
+            const defaultMessage =
+                formType === 'listing'
+                    ? 'Request sent to Raman. He will follow up directly.'
+                    : 'Message sent to Raman. He will reach out directly.'
             setter('success')
-            messageSetter(response?.detail || 'Message sent successfully!')
+            messageSetter(response?.detail || defaultMessage)
             form.reset()
             setTimeout(() => {
                 setter('idle')
