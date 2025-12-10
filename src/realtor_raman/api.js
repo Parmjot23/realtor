@@ -1,4 +1,4 @@
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'http://api.madebyparm.com/api').replace(/\/$/, '')
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'https://api.madebyparm.com/api').replace(/\/$/, '')
 const CLIENT_PATH = `${API_BASE_URL}/realtor-raman`
 
 const CONTACT_ENDPOINT = `${CLIENT_PATH}/contact/`
