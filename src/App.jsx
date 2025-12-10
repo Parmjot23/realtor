@@ -3,6 +3,7 @@ import fallbackData from './data/listings-fallback.json'
 import { CalculatorModal } from './components/Calculators'
 import { MortgagePreApproval } from './components/MortgagePreApproval'
 import { generatePDF } from './utils/pdfGenerator'
+import { sendContactMessage } from './realtor_raman/api'
 import './App.css'
 import ListingCard from './ListingCard'
 
@@ -342,7 +343,8 @@ function App() {
     const [bedroomsFilter, setBedroomsFilter] = useState('')
     const [priceFilter, setPriceFilter] = useState('')
     const [sortOption, setSortOption] = useState('default')
-    const [formStatus, setFormStatus] = useState('idle')
+    const [contactFormStatus, setContactFormStatus] = useState('idle')
+    const [listingFormStatus, setListingFormStatus] = useState('idle')
     const [navScrolled, setNavScrolled] = useState(false)
     const [usingFallbackData, setUsingFallbackData] = useState(true)
     const [menuOpen, setMenuOpen] = useState(false)
@@ -505,11 +507,30 @@ function App() {
         setSortOption('default')
     }
 
-    const handleContactSubmit = (event) => {
+    const handleContactSubmit = (formType) => async (event) => {
         event.preventDefault()
-        setFormStatus('success')
-        event.target.reset()
-        setTimeout(() => setFormStatus('idle'), 4000)
+        const setter = formType === 'listing' ? setListingFormStatus : setContactFormStatus
+        setter('loading')
+        const form = event.target
+        const formData = new FormData(form)
+        const payload = {
+            name: (formData.get('name') || '').trim(),
+            email: (formData.get('email') || '').trim(),
+            phone: (formData.get('phone') || '').trim(),
+            message: (formData.get('message') || '').trim(),
+            source: form.dataset.formType ?? formType,
+            listing: form.dataset.listingAddress ?? ''
+        }
+
+        try {
+            await sendContactMessage(payload)
+            setter('success')
+            form.reset()
+            setTimeout(() => setter('idle'), 4000)
+        } catch (error) {
+            console.error('Contact submission failed', error)
+            setter('error')
+        }
     }
 
     const calculateMortgage = (price) => {
@@ -842,7 +863,7 @@ function App() {
                             <h2>Get Pre-Approved in Minutes</h2>
                             <p>Check your mortgage eligibility instantly and take the first step toward your dream home.</p>
                         </div>
-                        <MortgagePreApproval realtorEmail={realtorDetails.email} />
+                        <MortgagePreApproval />
                     </div>
                 </section>
 
@@ -1130,7 +1151,7 @@ function App() {
                             </div>
 
                             <div className="contact-form-wrapper">
-                                <form className="contact-form" onSubmit={handleContactSubmit}>
+                                <form className="contact-form" onSubmit={handleContactSubmit('contact')} data-form-type="contact">
                                     <div className="form-row">
                                         <div className="form-group">
                                             <label htmlFor="form-name">Name</label>
@@ -1149,11 +1170,17 @@ function App() {
                                         <label htmlFor="form-message">Message</label>
                                         <textarea id="form-message" name="message" rows="4" required />
                                     </div>
-                                    <button type="submit" className="btn btn-primary">
+                                    <button type="submit" className="btn btn-primary" disabled={contactFormStatus === 'loading'}>
                                         Send Message
                                     </button>
-                                    {formStatus === 'success' && (
+                                            {contactFormStatus === 'loading' && (
+                                                <div className="form-message-loading">Sending your message...</div>
+                                            )}
+                                    {contactFormStatus === 'success' && (
                                         <div className="form-message-success">Message sent successfully!</div>
+                                    )}
+                                    {contactFormStatus === 'error' && (
+                                        <div className="form-message-error">We couldn't send your message. Please try again.</div>
                                     )}
                                 </form>
                             </div>
@@ -1633,21 +1660,62 @@ function App() {
                                 {activeTab === 'contact' && (
                                     <div className="modal-form-container">
                                         <h4>Interested in this property?</h4>
-                                        <form onSubmit={handleContactSubmit} className="contact-form" style={{ gap: '1rem' }}>
+                                        <form
+                                            onSubmit={handleContactSubmit('listing')}
+                                            className="contact-form"
+                                            style={{ gap: '1rem' }}
+                                            data-form-type="listing"
+                                            data-listing-address={selectedListing?.address ?? ''}
+                                        >
                                             <div className="form-row" style={{ gap: '1rem' }}>
-                                                <input type="text" placeholder="Name" className="form-input" style={{ margin: 0, padding: '0.75rem' }} required />
-                                                <input type="tel" placeholder="Phone" className="form-input" style={{ margin: 0, padding: '0.75rem' }} required />
+                                                <input
+                                                    type="text"
+                                                    name="name"
+                                                    placeholder="Name"
+                                                    className="form-input"
+                                                    style={{ margin: 0, padding: '0.75rem' }}
+                                                    required
+                                                />
+                                                <input
+                                                    type="tel"
+                                                    name="phone"
+                                                    placeholder="Phone"
+                                                    className="form-input"
+                                                    style={{ margin: 0, padding: '0.75rem' }}
+                                                    required
+                                                />
                                             </div>
+                                            <input
+                                                type="email"
+                                                name="email"
+                                                placeholder="Email (optional)"
+                                                className="form-input"
+                                                style={{ margin: 0, padding: '0.75rem' }}
+                                            />
                                             <textarea
+                                                name="message"
                                                 className="form-input"
                                                 placeholder="I'm interested in this property..."
                                                 rows="3"
                                                 style={{ margin: 0, padding: '0.75rem' }}
-                                                defaultValue={`Hi, I'm interested in ${selectedListing.address}. Please contact me.`}
+                                                defaultValue={`Hi, I'm interested in ${selectedListing?.address ?? 'this property'}. Please contact me.`}
                                             />
-                                            <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Schedule Viewing</button>
-                                            {formStatus === 'success' && (
+                                            <button
+                                                type="submit"
+                                                className="btn btn-primary"
+                                                style={{ width: '100%' }}
+                                                disabled={listingFormStatus === 'loading'}
+                                            >
+                                                Schedule Viewing
+                                            </button>
+                                            {listingFormStatus === 'loading' && (
+                                                <div className="form-message-loading">Sending your request...</div>
+                                            )}
+                                            {listingFormStatus === 'success' && (
                                                 <div className="form-message-success">Thank you! We'll contact you soon.</div>
+                                            )}
+                                            {listingFormStatus === 'error' && (
+                                                <div className="form-message-error">We couldn't send your request. Please try again.</div>
                                             )}
                                         </form>
 

@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import { submitPreapprovalLead } from '../realtor_raman/api';
 
 const formatCurrency = (value) =>
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value);
 
-export const MortgagePreApproval = ({ realtorEmail }) => {
+export const MortgagePreApproval = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -15,6 +16,8 @@ export const MortgagePreApproval = ({ realtorEmail }) => {
     });
     const [submitted, setSubmitted] = useState(false);
     const [showResult, setShowResult] = useState(false);
+    const [submissionStatus, setSubmissionStatus] = useState('idle');
+    const [submissionError, setSubmissionError] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -79,32 +82,38 @@ export const MortgagePreApproval = ({ realtorEmail }) => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!qualification) {
+            return;
+        }
 
-        // Create mailto link with lead details
-        const subject = encodeURIComponent(`Mortgage Pre-Approval Lead: ${formData.name}`);
-        const body = encodeURIComponent(
-            `New Mortgage Pre-Approval Lead
+        setSubmissionStatus('loading');
+        setSubmissionError('');
 
-Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${formData.phone}
+        const payload = {
+            name: formData.name.trim(),
+            email: formData.email.trim(),
+            phone: formData.phone.trim(),
+            annualIncome: formData.annualIncome.trim(),
+            desiredPrice: formData.desiredPrice.trim(),
+            downPayment: formData.downPayment.trim(),
+            creditScore: formData.creditScore,
+            qualificationStatus: qualification.status,
+            monthlyPayment: qualification.monthlyPayment ?? '',
+            qualificationMessage: qualification.message ?? '',
+            source: 'mortgage pre-approval form'
+        };
 
-Financial Details:
-- Annual Income: ${formatCurrency(Number(formData.annualIncome))}
-- Desired Property Price: ${formatCurrency(Number(formData.desiredPrice))}
-- Down Payment: ${formatCurrency(Number(formData.downPayment))}
-- Credit Score: ${formData.creditScore === 'excellent' ? 'Excellent (750+)' : formData.creditScore === 'good' ? 'Good (680-749)' : formData.creditScore === 'fair' ? 'Fair (620-679)' : 'Needs Improvement (<620)'}
-
-Qualification Status: ${qualification?.status === 'qualified' ? 'Likely Qualified' : qualification?.status === 'adjustment' ? 'May Need Adjustment' : 'Needs Review'}
-Estimated Monthly Payment: ${qualification?.monthlyPayment ? formatCurrency(qualification.monthlyPayment) : 'N/A'}
-
-Please follow up with this lead.`
-        );
-
-        window.location.href = `mailto:${realtorEmail}?subject=${subject}&body=${body}`;
-        setSubmitted(true);
+        try {
+            await submitPreapprovalLead(payload);
+            setSubmissionStatus('success');
+            setSubmitted(true);
+        } catch (error) {
+            console.error('Pre-approval submission failed', error);
+            setSubmissionError(error.message || 'Unable to submit your request. Please try again.');
+            setSubmissionStatus('error');
+        }
     };
 
     if (submitted) {
@@ -127,6 +136,8 @@ Please follow up with this lead.`
                             downPayment: '',
                             creditScore: 'good'
                         });
+                        setSubmissionStatus('idle');
+                        setSubmissionError('');
                     }}
                 >
                     Start New Application
@@ -288,9 +299,17 @@ Please follow up with this lead.`
                             </div>
                         </div>
 
-                        <button type="submit" className="btn btn-primary btn-full">
+                        <button type="submit" className="btn btn-primary btn-full" disabled={submissionStatus === 'loading'}>
                             Send My Pre-Approval Request
                         </button>
+                        {submissionStatus === 'loading' && (
+                            <div className="form-message-loading">Sending your pre-approval request...</div>
+                        )}
+                        {submissionStatus === 'error' && (
+                            <div className="form-message-error">
+                                {submissionError || 'Unable to submit your request. Please try again.'}
+                            </div>
+                        )}
                     </>
                 )}
             </form>
