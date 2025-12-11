@@ -5,6 +5,16 @@ const ListingCard = ({ listing, onClick }) => {
     const [touchStart, setTouchStart] = useState(null)
     const [touchEnd, setTouchEnd] = useState(null)
 
+    const resolveImage = (src) => {
+        if (!src) return ''
+        const clean = src.trim()
+        if (/^https?:\/\//i.test(clean) || clean.startsWith('data:')) return clean
+        if (clean.startsWith('/media/')) {
+            return `https://api.madebyparm.com${clean}`
+        }
+        return clean
+    }
+
     const handleTouchStart = (e) => {
         setTouchStart(e.touches[0].clientX)
     }
@@ -22,7 +32,7 @@ const ListingCard = ({ listing, onClick }) => {
 
         if (isLeftSwipe || isRightSwipe) {
             e.stopPropagation() // Prevent opening modal on swipe
-            const images = listing.images || [listing.image]
+            const images = (listing.images || [listing.image]).map(resolveImage)
 
             if (isLeftSwipe && currentImageIndex < images.length - 1) {
                 setCurrentImageIndex(prev => prev + 1)
@@ -39,7 +49,7 @@ const ListingCard = ({ listing, onClick }) => {
     // Manual navigation for desktop (optional but good for testing)
     const nextImage = (e) => {
         e.stopPropagation()
-        const images = listing.images || [listing.image]
+        const images = (listing.images || [listing.image]).map(resolveImage)
         if (currentImageIndex < images.length - 1) {
             setCurrentImageIndex(prev => prev + 1)
         } else {
@@ -49,7 +59,7 @@ const ListingCard = ({ listing, onClick }) => {
 
     const prevImage = (e) => {
         e.stopPropagation()
-        const images = listing.images || [listing.image]
+        const images = (listing.images || [listing.image]).map(resolveImage)
         if (currentImageIndex > 0) {
             setCurrentImageIndex(prev => prev - 1)
         } else {
@@ -59,7 +69,7 @@ const ListingCard = ({ listing, onClick }) => {
 
 
     const status = listing.status || 'For Sale'
-    const images = listing.images || [listing.image]
+    const images = (listing.images || [listing.image]).map(resolveImage)
     const currentImage = images[currentImageIndex]
 
     return (
