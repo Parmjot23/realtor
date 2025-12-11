@@ -1,4 +1,5 @@
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'https://api.madebyparm.com/api').replace(/\/$/, '')
+// Hard-coded backend base to avoid env mismatches on Netlify
+const API_BASE_URL = 'https://api.madebyparm.com/api'
 const CLIENT_PATH = `${API_BASE_URL}/realtor-raman`
 
 const CONTACT_ENDPOINT = `${CLIENT_PATH}/contact/`

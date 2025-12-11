@@ -224,10 +224,10 @@ const agentProfile = {
 }
 
 const API_MEDIA_BASE = (() => {
+    // Keep media in sync with hard-coded API base
+    const apiBase = 'https://api.madebyparm.com/api'.replace(/\/$/, '')
     const explicit = import.meta.env.VITE_MEDIA_BASE_URL
     if (explicit) return explicit.replace(/\/$/, '')
-    const apiBase = (import.meta.env.VITE_API_BASE_URL ?? '').replace(/\/$/, '')
-    if (!apiBase) return ''
     return apiBase.replace(/\/api$/, '')
 })()
 
