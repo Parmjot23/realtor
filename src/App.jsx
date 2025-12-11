@@ -223,6 +223,24 @@ const agentProfile = {
     photo: '/realtor-profile.png'
 }
 
+const API_MEDIA_BASE = (() => {
+    const explicit = import.meta.env.VITE_MEDIA_BASE_URL
+    if (explicit) return explicit.replace(/\/$/, '')
+    const apiBase = (import.meta.env.VITE_API_BASE_URL ?? '').replace(/\/$/, '')
+    if (!apiBase) return ''
+    return apiBase.replace(/\/api$/, '')
+})()
+
+const normalizeImagePath = (src) => {
+    if (!src) return ''
+    if (/^https?:\/\//i.test(src) || src.startsWith('data:')) return src
+    if (src.startsWith('/media/') || src.startsWith('media/')) {
+        const path = src.startsWith('/') ? src : `/${src}`
+        return API_MEDIA_BASE ? `${API_MEDIA_BASE}${path}` : path
+    }
+    return src
+}
+
 const formatPhoneLink = (value) => (value ? `tel:${value.replace(/\D/g, '')}` : undefined)
 
 const formatPrice = (value) =>
@@ -281,10 +299,11 @@ const fetchStaticListingsData = async () => {
 
 const normalizeListingData = (listings = []) =>
     listings.map((listing) => {
-        const images = Array.isArray(listing.images)
+        const rawImages = Array.isArray(listing.images)
             ? listing.images
             : (listing.image ? [listing.image] : [])
-        const primaryImage = listing.image || images[0] || ''
+        const images = rawImages.map(normalizeImagePath)
+        const primaryImage = normalizeImagePath(listing.image || rawImages[0] || '')
 
         return {
             ...listing,
