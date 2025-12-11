@@ -233,12 +233,17 @@ const API_MEDIA_BASE = (() => {
 
 const normalizeImagePath = (src) => {
     if (!src) return ''
-    if (/^https?:\/\//i.test(src) || src.startsWith('data:')) return src
-    if (src.startsWith('/media/') || src.startsWith('media/')) {
-        const path = src.startsWith('/') ? src : `/${src}`
+    const cleanSrc = src.trim()
+    if (/^https?:\/\//i.test(cleanSrc) || cleanSrc.startsWith('data:')) return cleanSrc
+
+    // Uploaded media from the backend (Django)
+    if (cleanSrc.startsWith('/media/') || cleanSrc.startsWith('media/')) {
+        const path = cleanSrc.startsWith('/') ? cleanSrc : `/${cleanSrc}`
         return API_MEDIA_BASE ? `${API_MEDIA_BASE}${path}` : path
     }
-    return src
+
+    // Leave static site assets (/images/...) as-is so Netlify serves them
+    return cleanSrc
 }
 
 const formatPhoneLink = (value) => (value ? `tel:${value.replace(/\D/g, '')}` : undefined)
