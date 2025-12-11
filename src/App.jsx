@@ -218,6 +218,7 @@ const agentProfile = {
     officePhone: '905-456-1010',
     officePhoneAlt: '905-673-8900',
     email: 'realtor.rdhiman@gmail.com',
+    logo: '/remax-gold-logo.jpg',
     address: '2720 N Park Dr Unit# 50, Brampton, ON L6S 0E9',
     photo: '/realtor-profile.png'
 }
