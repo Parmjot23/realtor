@@ -104,6 +104,25 @@ h6 {
   color: var(--primary-color);
 }
 
+.nav-brokerage {
+  display: flex;
+  align-items: center;
+}
+
+.nav-brokerage img {
+  border-radius: 4px;
+  opacity: 0.95;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.nav-brokerage img:hover {
+  opacity: 1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+
 .navbar {
   position: sticky;
   top: 0;

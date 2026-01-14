@@ -654,7 +654,10 @@ function App() {
         <div className="app">
             <div className="nav-top-bar">
                 <div className="container">
-                    <div className="nav-brokerage">{realtorDetails.brokerage}</div>
+                    <div className="nav-brokerage">
+                        <img src="/remax-gold-logo.jpg" alt="RE/MAX Gold Logo" style={{ height: '24px', marginRight: '0.5rem', verticalAlign: 'middle' }} />
+                        {realtorDetails.brokerage}
+                    </div>
                     <div className="nav-top-links">
                         {primaryPhone && (
                             <a href={primaryPhoneLink} aria-label="Call Raman Dhiman">
