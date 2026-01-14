@@ -1327,6 +1327,12 @@ function App() {
                     </div>
                     <div className="footer-bottom">
                         <p>&copy; {new Date().getFullYear()} {realtorDetails.name}. {realtorDetails.licenseNote} All rights reserved.</p>
+                        <div className="created-by">
+                            <a href="https://www.madebyparm.com" target="_blank" rel="noopener noreferrer">
+                                <span>Created by</span>
+                                <img src="/mp-studio-logo.png" alt="MP Studio" className="mp-studio-logo" />
+                            </a>
+                        </div>
                     </div>
                 </div>
             </footer>
