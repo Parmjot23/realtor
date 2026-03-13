@@ -79,11 +79,14 @@ const testimonials = [
     }
 ]
 
+const RESIDENTIAL_TYPES = ['Detached', 'Semi-Detached', 'Att/Row/Twnhouse']
+const CONDO_TYPES = ['Condo Apt']
+
 const propertyCategories = [
-    { label: 'Residential', description: 'Detached, Semi, and Townhomes', anchor: '#listings', image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800' },
-    { label: 'Commercial', description: 'Retail, Office & Industrial', anchor: '#listings', image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800' },
+    { label: 'Residential', description: 'Detached, Semi, and Townhomes', anchor: '#listings', image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800', filterValue: 'Residential' },
+    { label: 'Commercial', description: 'Retail, Office & Industrial', anchor: '#listings', image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800', filterValue: 'Commercial' },
     { label: 'Pre-Construction', description: 'VIP Access & Incentives', anchor: '#preconstruction', image: '/pre-construction.png' },
-    { label: 'Condos', description: 'High-rise & Boutique living', anchor: '#listings', image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800' }
+    { label: 'Condos', description: 'High-rise & Boutique living', anchor: '#listings', image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800', filterValue: 'Condos' }
 ]
 
 const calculatorTools = [
@@ -538,7 +541,13 @@ function App() {
         }
 
         if (typeFilter) {
-            data = data.filter((listing) => listing.propertyType === typeFilter)
+            if (typeFilter === 'Residential') {
+                data = data.filter((listing) => RESIDENTIAL_TYPES.includes(listing.propertyType))
+            } else if (typeFilter === 'Condos') {
+                data = data.filter((listing) => CONDO_TYPES.includes(listing.propertyType))
+            } else {
+                data = data.filter((listing) => listing.propertyType === typeFilter)
+            }
         }
 
         if (bedroomsFilter !== '') {
@@ -648,7 +657,9 @@ function App() {
     const resultsText =
         filteredListings.length > 0
             ? `Showing ${filteredListings.length} ${filteredListings.length === 1 ? 'property' : 'properties'}`
-            : 'No properties match your filters – try adjusting search criteria.'
+            : listings.length === 0
+                ? 'No properties available at this time. Please check back later.'
+                : 'No properties match your filters – try adjusting search criteria.'
 
     return (
         <div className="app">
@@ -774,12 +785,11 @@ function App() {
                                     className="discovery-card"
                                     onClick={(e) => {
                                         e.preventDefault()
-                                        const filterValue = category.label === 'Residential' ? 'House' : category.label === 'Condos' ? 'Condo' : category.label
-                                        if (category.label !== 'Pre-Construction') {
-                                            setTypeFilter(filterValue)
-                                            document.getElementById('listings').scrollIntoView({ behavior: 'smooth' })
-                                        } else {
+                                        if (category.label === 'Pre-Construction') {
                                             document.getElementById('preconstruction').scrollIntoView({ behavior: 'smooth' })
+                                        } else {
+                                            setTypeFilter(category.filterValue || '')
+                                            document.getElementById('listings').scrollIntoView({ behavior: 'smooth' })
                                         }
                                     }}
                                     style={{
