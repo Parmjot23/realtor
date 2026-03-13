@@ -9,8 +9,10 @@ const ListingCard = ({ listing, onClick }) => {
         if (!src) return ''
         const clean = src.trim()
         if (/^https?:\/\//i.test(clean) || clean.startsWith('data:')) return clean
-        if (clean.startsWith('/media/')) {
-            return `https://api.madebyparm.com${clean}`
+        if (clean.startsWith('/media/') || clean.startsWith('media/')) {
+            const mediaBase = import.meta.env.VITE_MEDIA_BASE_URL || 'https://api.madebyparm.com'
+            const path = clean.startsWith('/') ? clean : `/${clean}`
+            return `${mediaBase.replace(/\/$/, '')}${path}`
         }
         return clean
     }
